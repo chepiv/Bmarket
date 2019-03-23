@@ -36,7 +36,9 @@ public class Book {
     @Column(length = 50)
     @Enumerated(EnumType.STRING)
     private Category category;
+
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
 

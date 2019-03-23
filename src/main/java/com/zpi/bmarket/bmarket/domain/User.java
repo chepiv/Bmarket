@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chepiv on 18/03/2019.
@@ -37,5 +38,7 @@ public class User {
     private String avatarUrl;
     @ManyToOne
     private Address address;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Book> books;
 
 }
