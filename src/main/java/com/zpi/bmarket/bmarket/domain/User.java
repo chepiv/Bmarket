@@ -23,11 +23,11 @@ public class User {
     private String name;
     @Column
     private String surname;
-    @Column
+    @Column(nullable = false,unique = true)
     private String login;
-    @Column
+    @Column(nullable = false)
     private String password;
-    @Column
+    @Column(nullable = false,unique = true)
     private String email;
     @Column
     private String phoneNumber;
@@ -35,5 +35,8 @@ public class User {
     private Date birthDate;
     @Column
     private String avatarUrl;
+    @Column
+    @ManyToOne
+    private Address address;
 
 }
