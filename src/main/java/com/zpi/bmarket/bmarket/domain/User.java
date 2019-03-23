@@ -35,7 +35,6 @@ public class User {
     private Date birthDate;
     @Column
     private String avatarUrl;
-    @Column
     @ManyToOne
     private Address address;
 
