@@ -1,6 +1,11 @@
 package com.zpi.bmarket.bmarket.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chepiv on 18/03/2019.
@@ -8,6 +13,8 @@ import javax.persistence.*;
  * Github:chepiv
  */
 @Entity
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -17,29 +24,21 @@ public class User {
     private String name;
     @Column
     private String surname;
+    @Column(nullable = false,unique = true)
+    private String login;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false,unique = true)
+    private String email;
+    @Column
+    private String phoneNumber;
+    @Column
+    private Date birthDate;
+    @Column
+    private String avatarUrl;
+    @ManyToOne
+    private Address address;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Book> books;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 }
