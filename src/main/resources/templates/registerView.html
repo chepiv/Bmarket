@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Bmarket</title>
+<head>
+    <title>BMarket</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
+</head>
+<body>
+        <meta charset="UTF-8">
+        <!--/*@thymesVar id="user" type="com.zpi.bmarket.bmarket.domain.User"*/-->
+        <h1>Register</h1>
+    <form th:action="@{/postRegister}" th:object="${user}" method="post">
+        <p>Imię <input type="text" th:field="*{name}"></p>
+        <p>Nazwisko <input type="text" th:field="*{surname}"></p>
+        <p>Login* <input type="text" th:field="*{login}"></p>
+        <p>Hasło* <input type="password" th:field="*{password}"></p>
+        <!--<p>Repeat Password* <input type="password" th:field="*{password}"></p>-->
+        <p>E-mail* <input type="email" th:field="*{email}"></p>
+        <p>Numer telefonu <input type="tel" th:field="*{phoneNumber}"></p>
+        <p>Data urodzenia<input type="date" th:field="*{birthDate}"></p>
+        <p>* - obligatoryjne</p>
+
+        <button  class="btn btn-primary" type="submit" value="registerSubmit">Register User</button>
+
+    </form>
+
+
+</body>
+</html>
