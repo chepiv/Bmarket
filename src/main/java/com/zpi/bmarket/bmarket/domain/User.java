@@ -38,7 +38,7 @@ public class User {
     private String avatarUrl;
     @ManyToOne
     private Address address;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL) //TODO think about cascade
+    @OneToMany(mappedBy = "user")
     private List<Book> books;
     @OneToMany(mappedBy = "buyerUser")
     private List<Offer> offers;
