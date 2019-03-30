@@ -40,21 +40,24 @@ public class RegisterController {
     @RequestMapping(value = "/postRegister" ,method = RequestMethod.POST)
     public String postRegister(@ModelAttribute UserDTO userDTO,Model model) {
         // TODO: 30.03.2019 in case of error do not redirect to post register view
+        PostRegisterStatus status;
         //check for password matching
         if(!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
-            model.addAttribute("status", PostRegisterStatus.PASSWORDS_NOT_MATCH);
-            return "postRegisterView";
+            status = PostRegisterStatus.PASSWORDS_NOT_MATCH;
         }
-        //create user from user DTO
-        User user = new User();
-        user.setLogin(userDTO.getLogin());
-        user.setPassword(Encryption.encrypt(userDTO.getPassword()));
-        user.setEmail(userDTO.getEmail());
-        //add user to database
-        User s = userRepository.save(user);
-
-        model.addAttribute("user",user);
-        model.addAttribute("status", PostRegisterStatus.SUCCESS);
+        else {
+            User user = userDTO.getUser();
+            //add user to database
+            try {
+                userRepository.save(user);
+                model.addAttribute("user", user);
+                status = PostRegisterStatus.SUCCESS;
+            } catch (Exception e) {
+                // TODO: 30.03.2019 make two errors, for login and email
+                status = PostRegisterStatus.DATABASE_ERROR;
+            }
+        }
+        model.addAttribute("status", status);
         return "postRegisterView";
     }
 

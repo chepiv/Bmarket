@@ -6,6 +6,7 @@ public enum PostRegisterStatus {
     EMAIL_DUP,
     PASSWORDS_NOT_MATCH,
     PASSWORD_WEAK,
-    EMAIL_NOT_VALID;
+    EMAIL_NOT_VALID,
+    DATABASE_ERROR
     // TODO: 30.03.2019 other cases?
 }

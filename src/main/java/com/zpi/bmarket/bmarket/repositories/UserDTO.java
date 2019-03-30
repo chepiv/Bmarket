@@ -1,6 +1,7 @@
 package com.zpi.bmarket.bmarket.repositories;
 
 import com.zpi.bmarket.bmarket.domain.User;
+import com.zpi.bmarket.bmarket.services.Encryption;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +24,11 @@ public class UserDTO {
     @NotEmpty
     private String email;
 
+    //implements password encryption
     public User getUser(){
         User u = new User();
         u.setLogin(login);
-        u.setPassword(password);
+        u.setPassword(Encryption.encrypt(password));
         u.setEmail(email);
         return u;
     }

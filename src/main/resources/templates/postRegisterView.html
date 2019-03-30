@@ -14,8 +14,9 @@
     <div th:switch="${status}">
         <p th:case="${status.SUCCESS}" th:text="'Użytkownik '+${user.getLogin()}+' zarejestrowany pomyślnie'"></p>
         <p th:case="${status.PASSWORDS_NOT_MATCH}">Hasła się nie zgadzają</p>
+        <p th:case="${status.DATABASE_ERROR}">Konto znajduje się już w bazie danych</p>
         <!--TODO add other cases-->
-        <p th:case="*">OTHER ERROR</p>
+        <p th:case="*">Wystąpił nieznany błąd</p>
     </div>
     <a href="/">Powrót do strony głównej</a>
 </body>
