@@ -10,7 +10,13 @@
 
 </head>
 <body>
-    <h1>Użytkownik zarejestrowany pomyślnie</h1>
+    <!--/*@thymesVar id="status" type="com.zpi.bmarket.bmarket.PostRegisterStatus"*/-->
+    <div th:switch="${status}">
+        <p th:case="${status.SUCCESS}" th:text="'Użytkownik '+${user.getLogin()}+' zarejestrowany pomyślnie'"></p>
+        <p th:case="${status.PASSWORDS_NOT_MATCH}">Hasła się nie zgadzają</p>
+        <!--TODO add other cases-->
+        <p th:case="*">OTHER ERROR</p>
+    </div>
     <a href="/">Powrót do strony głównej</a>
 </body>
 </html>
