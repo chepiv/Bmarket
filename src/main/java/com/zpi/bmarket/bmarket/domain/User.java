@@ -20,17 +20,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(length = 30)
     private String name;
-    @Column
+    @Column(length = 40)
     private String surname;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false,unique = true,length = 30)
     private String login;
-    @Column(nullable = false)
+    @Column(nullable = false,length = 50)
     private String password;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false,unique = true,length = 100)
     private String email;
-    @Column
+    @Column(length = 15)
     private String phoneNumber;
     @Column
     private Date birthDate;
@@ -38,6 +38,9 @@ public class User {
     private String avatarUrl;
     @ManyToOne
     private Address address;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Book> books;
+    @OneToMany(mappedBy = "buyerUser")
+    private List<Offer> offers;
+
 }
