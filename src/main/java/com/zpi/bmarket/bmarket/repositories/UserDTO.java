@@ -25,7 +25,7 @@ public class UserDTO {
     private String email;
 
     //implements password encryption
-    public User getUser(){
+    public User getUser() {
         User u = new User();
         u.setLogin(login);
         u.setPassword(Encryption.encrypt(password));

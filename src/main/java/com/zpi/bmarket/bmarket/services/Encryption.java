@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 public class Encryption {
 
     public static String encrypt(String data) {
-
         byte[] s = Base64.encodeBase64(data.getBytes());
         return new String(s);
-
     }
 
     public static String decrypt(String value) {
