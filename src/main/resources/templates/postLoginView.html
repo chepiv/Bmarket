@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+</head>
+
+<body>
+<div th:switch="${status}">
+    <p th:case="${status.SUCCESS}" th:text="'Użytkownik '+${user.getLogin()}+' zalogowany pomyślnie'"></p>
+    <p th:case="${status.WRONG_PASSWORD_OR_LOGIN}">Nieprawidłowy login i/lub hasło</p>
+    <p th:case="*">Wystąpił nieznany błąd</p>
+</div>
+</body>
+</html>
