@@ -6,58 +6,61 @@
 </head>
 <body>
     <h1>Użytkownik</h1>
-    <!-- TODO: FILL FORMS WITH USER DATA --><!--
+    <p th:text="${sid}"></p>
+    <p th:text="${user.getEmail()}"></p>
+    <!--TODO: FILL FORMS WITH USER DATA -->
     <section>
         <h2>Informacje osobiste</h2>
-        <p th:text="${sid}"></p>
+
         <form method="post" th:action="@{/postUserEdit}" th:object="${user}">
+            <div th:object="${user}"></div>
             <div class="form-group">
-                <label>Imię: </label><input type="text" id="name" th:field="*{name}" placeholder="Imię"><br>
-                <label>Nazwisko: </label><input type="text" id="surname" th:field="*{surname}" placeholder="Nazwisko"><br>
-                <label>Data urodzenia: </label><input type="date" id="birthDate" th:field="*{birthDate}" placeholder="Data urodzenia">
+                <label>Imię: </label><input th:value="${user.getName()}" type="text" id="name" th:field="*{name}" placeholder="Imię"><br>
+                <label>Nazwisko: </label><input th:value="${user.getSurname()}" type="text" id="surname" th:field="*{surname}" placeholder="Nazwisko"><br>
+                <!--<label>Data urodzenia: </label><input th:value="${user.getBirthDate()}" type="date" id="birthDate" th:field="*{birthDate}" placeholder="Data urodzenia">-->
             </div>
             <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
         </form>
     </section>
+    <!--
+        <section>
+            <h2>Adres</h2>
+            <form method="post" th:action="@{/postAddressEdit}" th:object="${user}">
+                <div class="form-group">
+                    <input type="text" id="street" th:field="*{street}" placeholder="Ulica">
+                    <input type="text" id="houseNumber" th:field="*{houseNumber}" placeholder="Nr domu" style="width: 25px;">
+                    <input type="text" id="apartmentNumber" th:field="*{apartmentNumber}" placeholder="Nr mieszkania" style="width: 25px;"><br>
+                    <input type="text" id="zipCode" th:field="*{zipCode}" placeholder="Kod pocztowy" style="width: 50px;">
+                    <input type="text" id="city" th:field="*{city}" placeholder="Miasto"><br>
+                    <input type="text" id="state" th:field="*{state}" placeholder="Województwo"><br>
+                    <input type="text" id="country" th:field="*{country}" placeholder="Państwo"><br>
+                </div>
+                <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
+            </form>
+        </section>
 
-    <section>
-        <h2>Adres</h2>
-        <form method="post" th:action="@{/postAddressEdit}" th:object="${user}">
-            <div class="form-group">
-                <input type="text" id="street" th:field="*{street}" placeholder="Ulica">
-                <input type="text" id="houseNumber" th:field="*{houseNumber}" placeholder="Nr domu" style="width: 25px;">
-                <input type="text" id="apartmentNumber" th:field="*{apartmentNumber}" placeholder="Nr mieszkania" style="width: 25px;"><br>
-                <input type="text" id="zipCode" th:field="*{zipCode}" placeholder="Kod pocztowy" style="width: 50px;">
-                <input type="text" id="city" th:field="*{city}" placeholder="Miasto"><br>
-                <input type="text" id="state" th:field="*{state}" placeholder="Województwo"><br>
-                <input type="text" id="country" th:field="*{country}" placeholder="Państwo"><br>
-            </div>
-            <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
-        </form>
-    </section>
+        <section>
+            <h2>Dane kontaktowe</h2>
+            <form method="post" th:action="@{/postContactEdit}" th:object="${user}">
+                <div class="form-group">
+                    <label>Email: </label><input type="text" id="email" th:field="*{email}"  placeholder="Email"><br>
+                    <label>Nr telefonu: </label><input type="text" id="phoneNumber" th:field="*{phoneNumber}"  placeholder="Nr telefonu"><br>
+                </div>
+                <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
+            </form>
+        </section>
 
-    <section>
-        <h2>Dane kontaktowe</h2>
-        <form method="post" th:action="@{/postContactEdit}" th:object="${user}">
-            <div class="form-group">
-                <label>Email: </label><input type="text" id="email" th:field="*{email}"  placeholder="Email"><br>
-                <label>Nr telefonu: </label><input type="text" id="phoneNumber" th:field="*{phoneNumber}"  placeholder="Nr telefonu"><br>
-            </div>
-            <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
-        </form>
-    </section>
-
-    <section>
-        <h2>Hasło</h2>
-        <form method="post" th:action="@{/postPasswordEdit}" th:object="${user}">
-            <div class="form-group">
-                <label>Stare hasło: </label><input type="text" id="oldPassword" th:field="*{oldPassword}" placeholder="Stare hasło"><br>
-                <label>Nowe hasło: </label><input type="text" id="password" th:field="*{password}"  placeholder="Nowe hasło"><br>
-                <label>Powtórz hasło: </label><input type="text" id="matchingPassword" th:field="*{matchingPassword}"  placeholder="Powtórz hasło"><br>
-            </div>
-            <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
-        </form>
-    </section>
--->
+        <section>
+            <h2>Hasło</h2>
+            <form method="post" th:action="@{/postPasswordEdit}" th:object="${user}">
+                <div class="form-group">
+                    <label>Stare hasło: </label><input type="text" id="oldPassword" th:field="*{oldPassword}" placeholder="Stare hasło"><br>
+                    <label>Nowe hasło: </label><input type="text" id="password" th:field="*{password}"  placeholder="Nowe hasło"><br>
+                    <label>Powtórz hasło: </label><input type="text" id="matchingPassword" th:field="*{matchingPassword}"  placeholder="Powtórz hasło"><br>
+                </div>
+                <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
+            </form>
+        </section>
+    -->
 </body>
 </html>
