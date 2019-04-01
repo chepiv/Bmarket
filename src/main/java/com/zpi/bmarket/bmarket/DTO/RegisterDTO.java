@@ -1,4 +1,4 @@
-package com.zpi.bmarket.bmarket.repositories;
+package com.zpi.bmarket.bmarket.DTO;
 
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.services.Encryption;
@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class UserDTO {
+public class RegisterDTO {
+
     @NotNull
     @NotEmpty
     private String login;

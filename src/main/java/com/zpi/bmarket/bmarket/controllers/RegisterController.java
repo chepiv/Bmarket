@@ -1,8 +1,8 @@
 package com.zpi.bmarket.bmarket.controllers;
 
-import com.zpi.bmarket.bmarket.PostRegisterStatus;
+import com.zpi.bmarket.bmarket.DTO.RegisterDTO;
+import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
-import com.zpi.bmarket.bmarket.repositories.UserDTO;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,28 +21,28 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String register(WebRequest request, Model model) {
-        UserDTO user = new UserDTO();
+        RegisterDTO user = new RegisterDTO();
         model.addAttribute("user", user);
         return "registerView";
     }
 
     @RequestMapping(value = "/postRegister", method = RequestMethod.POST)
-    public String postRegister(@ModelAttribute UserDTO userDTO, Model model) {
+    public String postRegister(@ModelAttribute RegisterDTO registerDTO, Model model) {
         // TODO: 30.03.2019 in case of error do not redirect to post register view
-        PostRegisterStatus status;
+        PostStatus status;
         //check for password matching
-        if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
-            status = PostRegisterStatus.PASSWORDS_NOT_MATCH;
+        if (!registerDTO.getPassword().equals(registerDTO.getMatchingPassword())) {
+            status = PostStatus.PASSWORDS_NOT_MATCH;
         } else {
-            User user = userDTO.getUser();
+            User user = registerDTO.getUser();
             //add user to database
             try {
                 userRepository.save(user);
                 model.addAttribute("user", user);
-                status = PostRegisterStatus.SUCCESS;
+                status = PostStatus.SUCCESS;
             } catch (Exception e) {
                 // TODO: 30.03.2019 make two errors, for login and email
-                status = PostRegisterStatus.DATABASE_ERROR;
+                status = PostStatus.DATABASE_ERROR;
             }
         }
         model.addAttribute("status", status);
