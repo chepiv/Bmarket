@@ -1,0 +1,83 @@
+html,
+body,
+.view {
+    height: 100%;
+}
+
+header{
+    height: 88%;
+}
+
+.btn .fa {
+    margin-left: 3px;
+}
+
+.btn-white {
+    color: black !important;
+}
+
+h6 {
+    line-height: 1.7;
+}
+
+.ad-text{
+    text-shadow: 2px 2px black;
+}
+
+.desc-bottom{
+    position: absolute;
+    bottom: 100px;
+}
+
+.text-large{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.ml-20{
+    margin-left: 20px;
+}
+
+.rounded-corners{
+    border: 1px solid transparent;
+    border-radius: 2rem;
+}
+
+.search-border{
+    border: 2px solid #3723C4;
+}
+
+.search-border:focus{
+    border: 2px solid #3723C4;
+    box-shadow: 0 0 5px #3723C4;
+}
+
+.text-purple{
+    color: #3723C4 !important;
+}
+
+.text-red{
+    color: #F41C31 !important;
+}
+
+.text-bold{
+    font-weight: bold !important;
+}
+
+ul.bottom-nav > li > a {
+    color: #F21C32;
+    font-weight: bold;
+}
+
+.view{
+    background-image: url('../img/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.bmarket-gradient{
+    background: -webkit-linear-gradient(50deg, #3823C3, #F21C32) !important;
+    background: -o-linear-gradient(50deg, #3823C3, #F21C32) !important;
+    background: linear-gradient(40deg, #3823C3, #F21C32)!important;
+}
