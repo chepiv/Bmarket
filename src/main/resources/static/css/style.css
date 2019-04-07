@@ -6,6 +6,7 @@ body,
 
 header{
     height: 88%;
+    min-height: 800px;
 }
 
 .btn .fa {
@@ -74,6 +75,37 @@ ul.bottom-nav > li > a {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+}
+
+.register-container{
+    margin-top: 200px;
+}
+
+@media (max-width: 992px) {
+    .register-container{
+        margin-top: 100px;
+    }
+    header{
+        min-height: 600px;
+    }
+}
+
+.card-body{
+    padding-top: 60px;
+}
+
+.register-form input:focus{
+    -webkit-box-shadow: 0 1px 0 0 #3723C4 !important;
+    box-shadow: 0 1px 0 0 #3723C4 !important;
+    border-bottom: 1px solid #3723C4 !important;
+}
+
+.register-form input:focus+label{
+    color: #3723C4 !important;
+}
+
+.btn-purple{
+    background-color: #3723C4 !important;
 }
 
 .bmarket-gradient{
