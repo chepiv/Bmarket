@@ -11,10 +11,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpSession;
 
-
+/**
+ * Created by chepiv on 08/04/2019.
+ * Contact: chepurin.ivan@gmail.com
+ * Github:chepiv
+ */
 @Controller
-public class UserEditControllerTemp {
-
+public class EditUserController {
     @Autowired
     UserRepository userRepository;
 
