@@ -1,26 +1,19 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.UserEditDTO;
-//import com.zpi.bmarket.bmarket.PostRegisterStatus;
 import com.zpi.bmarket.bmarket.domain.User;
-//import com.zpi.bmarket.bmarket.repositories.UserDTO;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
-import java.util.logging.Logger;
+
 
 @Controller
-public class UserEditController {
+public class UserEditControllerTemp {
 
     @Autowired
     UserRepository userRepository;
