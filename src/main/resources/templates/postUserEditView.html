@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>BMarket</title>
+<head>
+    <title>BMarket</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
+</head>
+<body>
+<!--/*@thymesVar id="status" type="com.zpi.bmarket.bmarket.PostStatus"*/-->
+<div th:switch="${status}">
+    <p th:case="${status.SUCCESS}" th:text="'Edycja zakończona pomyślnie'"></p>
+    <p th:case="${status.PASSWORDS_NOT_MATCH}">Hasła się nie zgadzają</p>
+    <!--TODO add other cases-->
+    <p th:case="*">Wystąpił nieznany błąd</p>
+</div>
+<a href="/">Powrót do strony głównej</a>
+</body>
+</html>
