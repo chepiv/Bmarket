@@ -24,6 +24,9 @@ public class Book {
     @Column(nullable = false)
     private String title;
 
+    @ManyToMany(mappedBy = "books")
+    List<Author> authors;
+
     @Column(name = "book_condition",length = 50)
     @Enumerated(EnumType.STRING)
     private Condition condition;
