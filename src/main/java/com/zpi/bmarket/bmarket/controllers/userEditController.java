@@ -1,19 +1,18 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.UserEditDTO;
-import com.zpi.bmarket.bmarket.PostRegisterStatus;
 import com.zpi.bmarket.bmarket.domain.User;
-import com.zpi.bmarket.bmarket.repositories.UserDTO;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.WebRequest;
+
+import javax.servlet.http.HttpSession;
+
+//import com.zpi.bmarket.bmarket.PostRegisterStatus;
+//import com.zpi.bmarket.bmarket.repositories.UserDTO;
 
 @Controller
 public class UserEditController {
@@ -22,25 +21,30 @@ public class UserEditController {
     UserRepository userRepository;
 
     @GetMapping("/userEdit")
-    public String userEdit(WebRequest request, Model model) {
+    public String userEdit(HttpSession session, Model model) {
         //TODO: GET SESSION INFO AND IF USER LOGGED IN PASS USER DATA TO VIEW
-        /*
+
         String sid = RequestContextHolder.currentRequestAttributes().getSessionId();
         UserEditDTO user = new UserEditDTO();
+        Long id = ((Long)session.getAttribute("userId")).longValue();
+        User userRep = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
         //user.setFromSessionDB
-        model.addAttribute("user", user);
+        model.addAttribute("user", userRep);
         model.addAttribute("sid", sid);
-        */
         return "userEditView";
     }
     /*
     @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
-    public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, Model model) {
+    public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
         PostRegisterStatus status = PostRegisterStatus.DATABASE_ERROR;
-        User user = userEditDTO.getUser();
+        userRep.setName("abc");
+        System.out.println(userRep.getName());
+        System.out.println(userRep.getSurname());
+        System.out.println(userRep.getEmail());
+        //User user = userEditDTO.getUser();
         //edit user in database
         try {
-            userRepository.save(user);
+            userRepository.save(userRep);
             status = PostRegisterStatus.SUCCESS;
         } catch (Exception e) {
             status = PostRegisterStatus.DATABASE_ERROR;
