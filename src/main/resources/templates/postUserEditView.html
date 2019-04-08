@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<!--/*@thymesVar id="status" type="com.zpi.bmarket.bmarket.PostRegisterStatus"*/-->
+<!--/*@thymesVar id="status" type="com.zpi.bmarket.bmarket.PostStatus"*/-->
 <div th:switch="${status}">
     <p th:case="${status.SUCCESS}" th:text="'Edycja zakończona pomyślnie'"></p>
     <p th:case="${status.PASSWORDS_NOT_MATCH}">Hasła się nie zgadzają</p>
