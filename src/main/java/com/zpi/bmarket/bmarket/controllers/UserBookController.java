@@ -48,9 +48,6 @@ public class UserBookController {
             Optional<User> user = userRepository.findById((long)userSessionId);
             status = PostStatus.SUCCESS;
 
-            List<String> spliterdAuthors = Arrays.asList(bookDTO.getAuthorsAsString().split("\\s*,\\s*"));
-            bookDTO.setAuthors(spliterdAuthors);
-
             Book book = bookDTO.getBook(user);
 
             try {

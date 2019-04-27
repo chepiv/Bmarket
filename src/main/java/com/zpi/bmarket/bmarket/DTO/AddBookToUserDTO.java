@@ -23,7 +23,7 @@ public class AddBookToUserDTO {
 
     @NotNull
     @NotEmpty
-    List<String> authors;
+    private String authors;
 
     @NotNull
     @NotEmpty
@@ -41,7 +41,6 @@ public class AddBookToUserDTO {
     @NotEmpty
     private Category category;
 
-    private String authorsAsString;
 
     //TODO: add author in future
 
