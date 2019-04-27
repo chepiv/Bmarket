@@ -25,8 +25,8 @@ public class Book {
     @Column(nullable = false)
     private String title;
 
-    @ManyToMany(mappedBy = "books")
-    List<Author> authors;
+    @Column
+    private String authors;
 
 
     @ManyToOne
