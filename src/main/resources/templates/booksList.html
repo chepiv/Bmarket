@@ -51,7 +51,7 @@
             </button>
         </div>
     </nav>
-
+</header>
 
 <div th:switch="booksList">
     <h2 th:case="null">Brak książek</h2>
@@ -74,16 +74,11 @@
 
                 <td th:text="${book.id}"></td>
                 <td th:text="${book.title}"></td>
-                <td th:text="${book.condition}"></td>
+                <td th:text="${book.bookCondition}"></td>
                 <td th:text="${book.publisher}"></td>
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.category}"></td>
-                <td>
-                    <ul class="pager" th:each="author : ${book.authors}">
-                        <li th:text="${author.firstName}"></li>
-                        <li th:text="${author.surname}"></li>
-                    </ul>
-                </td>
+                <td th:text="${book.authors}"></td>
             </tr>
             </tbody>
         </table>
