@@ -124,6 +124,26 @@
     </div>
 </footer>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-warning" id="myModalLabel"> TTT </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                MMM
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Central Modal Small -->
+
 <!-- JAVASCRIPT -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -135,6 +155,12 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
 <!-- Bmarket TS script -->
 <script type="text/javascript" src="/js/index.js"></script>
+<!-- Bmarket AlertEngine.js -->
+<div id="alertContainer" th:type="${redirectFrom}" th:data="${status}"></div>
+<script type="text/javascript" src="/js/alertManager.js"></script>
+<script>
+
+</script>
 
 </body>
 </html>

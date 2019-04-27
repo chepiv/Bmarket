@@ -113,3 +113,22 @@ ul.bottom-nav > li > a {
     background: -o-linear-gradient(50deg, #3823C3, #F21C32) !important;
     background: linear-gradient(40deg, #3823C3, #F21C32)!important;
 }
+
+.text-error{
+    color: red !important;
+}
+.btn-error{
+    background-color: red !important;
+}
+.btn-warning{
+    background-color: orange !important;
+}
+.text-warning{
+    color: orange !important;
+}
+.btn-success{
+    background-color: green !important;
+}
+.text-success{
+    color: green !important;
+}
