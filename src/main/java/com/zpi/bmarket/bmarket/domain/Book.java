@@ -27,9 +27,10 @@ public class Book {
     @ManyToMany(mappedBy = "books")
     List<Author> authors;
 
-    @Column(name = "book_condition",length = 50)
-    @Enumerated(EnumType.STRING)
-    private Condition condition;
+
+    @ManyToOne
+    @JoinColumn(name = "book_condition_id")
+    private BookCondition bookCondition;
 
     @Column(length = 100)
     private String publisher;
@@ -37,8 +38,8 @@ public class Book {
     @Column(length = 20)
     private String isbn;
 
-    @Column(length = 50)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne

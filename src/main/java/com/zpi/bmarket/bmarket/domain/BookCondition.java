@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class Category {
+public class BookCondition {
 
     @Id
     @Column
