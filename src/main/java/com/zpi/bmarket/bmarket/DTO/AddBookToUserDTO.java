@@ -44,7 +44,7 @@ public class AddBookToUserDTO {
 
     //TODO: add author in future
 
-    public Book getBook(Optional<User> user){
+    public Book getBook(User user){
 
         Book book = new Book();
 

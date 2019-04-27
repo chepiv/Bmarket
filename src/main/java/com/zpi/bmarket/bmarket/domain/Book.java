@@ -56,6 +56,4 @@ public class Book {
     List<ExchangeOffer> exchangeOffers;
 
 
-    public void setUser(Optional<User> user) {
-    }
 }

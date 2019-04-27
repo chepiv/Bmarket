@@ -7,17 +7,39 @@
 <body>
     <h1>Użytkownik</h1>
     <p th:text="${sid}"></p>
-    <p th:text="${user.getEmail()}"></p>
-    <!--TODO: FILL FORMS WITH USER DATA -->
+    <p th:text="${userEditDTO.getEmail()}"></p>
+    <!--TODO: add addres edit -->
     <section>
         <h2>Informacje osobiste</h2>
 
-        <form method="post" th:action="@{/postUserEdit}" th:object="${user}">
-            <div th:object="${user}"></div>
+        <form method="post" th:action="@{/postUserEdit}" th:object="${userEditDTO}">
+            <div th:object="${userEditDTO}"></div>
             <div class="form-group">
-                <label>Imię: </label><input th:value="${user.getName()}" type="text" id="name" th:field="*{name}" placeholder="Imię"><br>
-                <label>Nazwisko: </label><input th:value="${user.getSurname()}" type="text" id="surname" th:field="*{surname}" placeholder="Nazwisko"><br>
-                <!--<label>Data urodzenia: </label><input th:value="${user.getBirthDate()}" type="date" id="birthDate" th:field="*{birthDate}" placeholder="Data urodzenia">-->
+                <div>
+                    <input th:value="${userEditDTO.getName()}" type="text" id="form1" th:field="*{name}" placeholder="Imię">
+                    <label for="form1">Imię: </label>
+                </div>
+                <div>
+                    <input th:value="${userEditDTO.getSurname()}" type="text" id="form2" th:field="*{surname}" placeholder="Nazwisko">
+                    <label for="form2">Nazwisko: </label>
+                </div>
+                <div class="md-form">
+                    <input th:value="${userEditDTO.getPassword()}" type="password" id="form3" class="black-text form-control input-purple" th:field="*{password}">
+                    <label for="form3" class="label-purple active">Hasło:</label>
+                </div>
+                <div class="md-form">
+                    <input type="password" id="form4" class="black-text form-control input-purple" th:field="*{matchingPassword}">
+                    <label for="form4" class="label-purple active">Potwierdź hasło:</label>
+                </div>
+                <div>
+                    <input th:value="${userEditDTO.getBirthDate()}" type="date" id="form5" th:field="*{birthDate}" placeholder="Data urodzenia">
+                    <label for="form5">Data urodzenia: </label>
+                </div>
+                <div>
+                    <input th:value="${userEditDTO.getAvatarUrl()}" type="text" id="form6" th:field="*{avatarUrl}" placeholder="Data urodzenia">
+                    <label for="form6">Data urodzenia: </label>
+                </div>
+
             </div>
             <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
         </form>

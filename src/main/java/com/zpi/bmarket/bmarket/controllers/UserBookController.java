@@ -27,7 +27,7 @@ public class UserBookController {
 
 
     @GetMapping(value = "/addUserBook")
-    public String getAddUserBook(Model model){
+    public String getAddUserBook(Model model) {
 
         AddBookToUserDTO bookDTO = new AddBookToUserDTO();
         model.addAttribute("bookDTO", bookDTO);
@@ -36,28 +36,23 @@ public class UserBookController {
     }
 
     @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)
-    public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO, Model model, HttpSession session){
+    public String postAddUserBook(Model model, HttpSession session) {
 
-        PostStatus status;
-        Object userSessionId = session.getAttribute("userId");
+        AddBookToUserDTO bookDTO = new AddBookToUserDTO();
+        PostStatus status = PostStatus.ERROR;
+        Long id = ((Long) session.getAttribute("userId")).longValue();
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
-        if(userSessionId == null){
-            status = PostStatus.ERROR;
-        }
-        else {
-            Optional<User> user = userRepository.findById((long)userSessionId);
+        Book book = bookDTO.getBook(user);
+
+        try {
+            bookRepository.save(book);
+            model.addAttribute("book", book);
             status = PostStatus.SUCCESS;
-
-            Book book = bookDTO.getBook(user);
-
-            try {
-                bookRepository.save(book);
-                model.addAttribute("book", book);
-                status = PostStatus.SUCCESS;
-            } catch (Exception e) {
-                status = PostStatus.DATABASE_ERROR;
-            }
+        } catch (Exception e) {
+            status = PostStatus.DATABASE_ERROR;
         }
+
 
         model.addAttribute("status", status);
         return "postAddUserBookView";
