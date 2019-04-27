@@ -132,3 +132,14 @@ ul.bottom-nav > li > a {
 .text-success{
     color: green !important;
 }
+
+.mt-navigation{
+    margin-top: 80px;
+}
+
+footer {
+    margin-top: 25px;
+    box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, .16),
+        0 -2px 10px 0 rgba(0, 0, 0, .12);
+    font-weight: 300;
+}

@@ -26,6 +26,11 @@ var postLogin = {
         title: '',
         message: '',
         style: 'none'
+    },
+    WRONG_PASSWORD_OR_USERNAME:{
+        title: 'Logowanie nie powiodło się',
+        message: 'Hasło lub nazwa użytkownika są niepoprawne',
+        style: 'error'
     }
 };
 
