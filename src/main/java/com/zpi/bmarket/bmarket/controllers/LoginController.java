@@ -2,7 +2,6 @@ package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.LoginDTO;
 import com.zpi.bmarket.bmarket.PostLoginStatus;
-import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import com.zpi.bmarket.bmarket.services.Encryption;
@@ -33,17 +32,17 @@ public class LoginController {
     @RequestMapping(value = "/postLogin", method = RequestMethod.POST)
     public String postLogin(@ModelAttribute LoginDTO loginDTO, Model model, HttpSession session){
 
-        PostStatus status = PostStatus.SUCCESS;
+        PostLoginStatus status = PostLoginStatus.SUCCESS;
         User user = null;
 
 
         try {
             user = userRepository.findUserByLoginAndPassword(loginDTO.getUsername(), Encryption.encrypt(loginDTO.getPassword()));
         } catch (Exception e) {
-            status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
+            status = PostLoginStatus.WRONG_PASSWORD_OR_LOGIN;
         }
 
-        if (status == PostStatus.SUCCESS){
+        if (status == PostLoginStatus.SUCCESS){
             session.setAttribute("userId", user.getId());
         }
         model.addAttribute("user",loginDTO);

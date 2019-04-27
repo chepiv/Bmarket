@@ -6,7 +6,7 @@
 <head>
     <title>BMarket</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<!-- STYLESHEETS -->
+    <!-- STYLESHEETS -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -18,91 +18,110 @@
 </head>
 <body>
 <!-- CONTENT -->
-    <header>
-        <nav class="navbar navbar-expand-lg white navbar-light  fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    <img src="/img/logo.png" height="50" alt="Bmarket">
-                </a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                    <form class="form-inline my-2 my-lg-0 ml-auto">
-                        <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-                    <ul class="navbar-nav ml-auto mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">Kategorie</a>
-                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Kategoria</a>
-                                <a class="dropdown-item" href="#">Inna kategoria</a>
-                                <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
-                            </div>
-                        </li>
-                    </ul>
-                    </ul>
-                    <ul class="navbar-nav ml-auto text-bold">
-                        <li class="nav-item">
-                            <a class="nav-link text-red" href="/login">Zaloguj</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-red" href="/register">Zarejestruj</a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
+<header>
+    <nav class="navbar navbar-expand-lg white navbar-light  fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" height="50" alt="Bmarket">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control rounded-corners search-border" type="search" placeholder="Search"
+                           aria-label="Search">
+                </form>
+                <ul class="navbar-nav ml-auto mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">Kategorie</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Kategoria</a>
+                            <a class="dropdown-item" href="#">Inna kategoria</a>
+                            <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
+                        </div>
+                    </li>
+                </ul>
+                </ul>
 
-        <div class="view" style="">
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md white-text text-center mt-xl-5 mb-5 wow fadeInLeft text-large" data-wow-delay="0.3s">
-                            Sprzedaj.
+
+                <ul class="navbar-nav ml-auto text-bold">
+                        <div th:if="${test == null}">
+                            <li class="nav-item">Ł
+                                <a class="nav-link text-red" href="/login">Zaloguj</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-red" href="/register">Zarejestruj</a>
+                            </li>
                         </div>
-                        <div class="col-md white-text text-center mt-xl-5 mb-5 wow fadeIn text-large" data-wow-delay="0.3s">
-                            Wymień.
+
+
+                        <div th:if="${test != null}">
+                            <li class="nav-item">
+                                <a class="nav-link text-red" href="/userEdit">th:text="${test}"</a>
+                            </li>
                         </div>
-                        <div class="col-md white-text text-center mt-xl-5 mb-5 wow fadeInRight text-large" data-wow-delay="0.3s">
-                            Czytaj.
-                        </div>
+                    </div>
+
+                </ul>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+                    aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="view" style="">
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md white-text text-center mt-xl-5 mb-5 wow fadeInLeft text-large"
+                         data-wow-delay="0.3s">
+                        Sprzedaj.
+                    </div>
+                    <div class="col-md white-text text-center mt-xl-5 mb-5 wow fadeIn text-large" data-wow-delay="0.3s">
+                        Wymień.
+                    </div>
+                    <div class="col-md white-text text-center mt-xl-5 mb-5 wow fadeInRight text-large"
+                         data-wow-delay="0.3s">
+                        Czytaj.
                     </div>
                 </div>
             </div>
-            <div class="mask d-flex justify-content-center">
-                <div class="d-flex justify-content-center align-items-center mb-0 mt-auto desc-bottom">
-                    <button class="btn bmarket-gradient text-white rounded-corners">Zacznij teraz</button>
-                </div>
+        </div>
+        <div class="mask d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center mb-0 mt-auto desc-bottom">
+                <button class="btn bmarket-gradient text-white rounded-corners">Zacznij teraz</button>
             </div>
         </div>
-    </header>
-    <footer>
-        <div class="container">
-            <div class="row py-3">
-                <ul class="nav py-3 bottom-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#!">Kontakt</a>
-                    </li>
-                    <li class="nav-item ml-20">
-                        <a class="nav-link" href="#!">Regulamin</a>
-                    </li>
-                </ul>
-            </div>
+    </div>
+</header>
+<footer>
+    <div class="container">
+        <div class="row py-3">
+            <ul class="nav py-3 bottom-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#!">Kontakt</a>
+                </li>
+                <li class="nav-item ml-20">
+                    <a class="nav-link" href="#!">Regulamin</a>
+                </li>
+            </ul>
         </div>
-    </footer>
+    </div>
+</footer>
 
 <!-- JAVASCRIPT -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
-    <!-- Bmarket TS script -->
-    <script type="text/javascript" src="/js/index.js"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+<!-- Bmarket TS script -->
+<script type="text/javascript" src="/js/index.js"></script>
 </body>
 </html>

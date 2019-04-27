@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>BMarket</title>
+</head>
+
+<body>
+<div>
+<form th:action="@{/postAddUserBook}" th:object="${bookDTO}" method="post" class="register-form">
+    <div class="md-form">
+        <input type="text" id="form1" class="black-text form-control input-purple" th:field="*{title}">
+        <label for="form1" class="label-purple active">Tytuł:</label>
+    </div>
+    <!-- condition.getDisplayName nie działa, -->
+    <div class="md-form">
+        <p>Stan:<p>
+        <label><input type="radio" class="black-text form-control input-purple" th:field="*{condition}" th:text="*{condition.getDisplayName}" >dobry</label>
+        <label><input type="radio" class="black-text form-control input-purple" th:field="*{condition}">średni</label>
+        <label><input type="radio" class="black-text form-control input-purple" th:field="*{condition}">zły</label>
+
+
+    </div>
+    <div class="md-form">
+        <input type="text" id="form3" class="black-text form-control input-purple" th:field="*{publisher}">
+        <label for="form3" class="label-purple active">Wydawnictwo::</label>
+    </div>
+    <div class="md-form">
+        <input type="text" id="form4" class="black-text form-control input-purple"  th:field="*{isbn}">
+        <label for="form4" class="label-purple">numer ISBN:</label>
+    </div>
+    <div class="md-form">
+        <input type="text" id="form5" class="black-text form-control input-purple"  th:field="*{category}">
+        <label for="form5" class="label-purple">Kategoria:</label>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btn-purple">Dodaj książkę</button>
+    </div>
+</form>
+</div>
+</body>
+</html>
