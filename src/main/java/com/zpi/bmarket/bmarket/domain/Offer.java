@@ -21,9 +21,11 @@ public class Offer {
     private Date publishDate;
     @Column
     private Date boughtDate;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "offer_type__id")
     private OfferType offerType;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "status_id")
     private Status status;
     @Column(length = 100)
     private String title;
