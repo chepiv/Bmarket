@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -45,6 +47,10 @@ public class UserBookController {
         else {
             Optional<User> user = userRepository.findById((long)userSessionId);
             status = PostStatus.SUCCESS;
+
+            List<String> spliterdAuthors = Arrays.asList(bookDTO.getAuthorsAsString().split("\\s*,\\s*"));
+            bookDTO.setAuthors(spliterdAuthors);
+
             Book book = bookDTO.getBook(user);
 
             try {
@@ -55,8 +61,6 @@ public class UserBookController {
                 status = PostStatus.DATABASE_ERROR;
             }
         }
-
-
 
         model.addAttribute("status", status);
         return "postAddUserBookView";

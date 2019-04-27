@@ -1,10 +1,7 @@
 package com.zpi.bmarket.bmarket.DTO;
 
 
-import com.zpi.bmarket.bmarket.domain.Book;
-import com.zpi.bmarket.bmarket.domain.Category;
-import com.zpi.bmarket.bmarket.domain.Condition;
-import com.zpi.bmarket.bmarket.domain.User;
+import com.zpi.bmarket.bmarket.domain.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Getter
@@ -25,7 +23,11 @@ public class AddBookToUserDTO {
 
     @NotNull
     @NotEmpty
-    private Condition condition;
+    List<String> authors;
+
+    @NotNull
+    @NotEmpty
+    private BookCondition bookCondition;
 
     @NotNull
     @NotEmpty
@@ -39,6 +41,8 @@ public class AddBookToUserDTO {
     @NotEmpty
     private Category category;
 
+    private String authorsAsString;
+
     //TODO: add author in future
 
     public Book getBook(Optional<User> user){
@@ -47,7 +51,8 @@ public class AddBookToUserDTO {
 
         book.setUser(user);
         book.setTitle(this.title);
-        book.setCondition(this.condition);
+        book.setAuthors(this.authors);
+        book.setBookCondition(this.bookCondition);
         book.setPublisher(this.publisher);
         book.setIsbn(this.isbn);
         book.setCategory(this.category);

@@ -15,12 +15,17 @@
         <input type="text" id="form1" class="black-text form-control input-purple" th:field="*{title}">
         <label for="form1" class="label-purple active">Tytuł:</label>
     </div>
-    <!-- condition.getDisplayName nie działa, -->
+
+    <div class="md-form">
+        <input type="text" id="form2" class="black-text form-control input-purple" th:field="*{authorsAsString}">
+        <label for="form2" class="label-purple active">Autorzy:</label>
+    </div>
+
     <div class="md-form">
         <p>Stan:<p>
-        <label><input type="radio" class="black-text form-control input-purple" th:field="*{condition}" th:text="*{condition.getDisplayName}" >dobry</label>
-        <label><input type="radio" class="black-text form-control input-purple" th:field="*{condition}">średni</label>
-        <label><input type="radio" class="black-text form-control input-purple" th:field="*{condition}">zły</label>
+        <label><input type="radio" class="black-text form-control input-purple" th:field="*{bookCondition}"  >dobry</label>
+        <label><input type="radio" class="black-text form-control input-purple" th:field="*{bookCondition}">średni</label>
+        <label><input type="radio" class="black-text form-control input-purple" th:field="*{bookCondition}">zły</label>
 
 
     </div>
