@@ -205,3 +205,12 @@ img.book-cover{
 .mt-35{
     margin-top: 35px;
 }
+
+.col-mw-130{
+    max-width: 130px !important;
+}
+
+.pos-ab-rg{
+    position: absolute;
+    right: 0;
+}
