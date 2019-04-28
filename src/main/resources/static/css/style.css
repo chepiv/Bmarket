@@ -185,3 +185,23 @@ footer {
     position: absolute;
     top: .65rem;
 }
+
+.book-entity{
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+img.book-cover{
+    height: 150px;
+    width: 110px;
+}
+
+.book-entity .col{
+    line-break: strict;
+    white-space: nowrap;
+}
+
+.mt-35{
+    margin-top: 35px;
+}
