@@ -28,7 +28,7 @@
                     <label for="form3" class="label-purple active">Hasło:</label>
                 </div>
                 <div class="md-form">
-                    <input "${userEditDTO.getPassword()}" type="password" id="form4" class="black-text form-control input-purple" th:field="*{matchingPassword}">
+                    <input th:value="${userEditDTO.getPassword()}" type="password" id="form4" class="black-text form-control input-purple" th:field="*{matchingPassword}">
                     <label for="form4" class="label-purple active">Potwierdź hasło:</label>
                 </div>
                 <div>
