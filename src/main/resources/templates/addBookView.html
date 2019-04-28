@@ -177,5 +177,15 @@
 
 <!--/*/ <th:block th:include="html/js.html :: scripts">
         </th:block> /*/-->
+<script>
+    $('#offer-type-radio input').on('change', function() {
+        if($('input[name=offer-type]:checked', '#offer-type-radio').val() == 'sell'){
+            $('#price-box').show();
+        }
+        else{
+            $('#price-box').hide();
+        }
+    });
+</script>
 </body>
 </html>
