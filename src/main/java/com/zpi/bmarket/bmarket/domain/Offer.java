@@ -16,22 +16,24 @@ import java.util.Date;
 @Setter
 public class Offer {
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private Date publishDate;
     @Column
     private Date boughtDate;
     @ManyToOne
-    @JoinColumn(name = "offer_type__id")
+    @JoinColumn(name = "offer_type_id")
     private OfferType offerType;
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
     @Column(length = 100)
     private String title;
-    @Column(length = 500)
+    @Column(length = 2000)
     private String description;
-    @Column(columnDefinition = "DECIMAL(19,0)")
+    @Column(columnDefinition = "DECIMAL(6,2)")
     private int price;
     @Column(length = 100)
     private String city;

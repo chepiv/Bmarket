@@ -27,7 +27,6 @@ public class Book {
     @Column
     private String authors;
 
-
     @ManyToOne
     @JoinColumn(name = "book_condition_id")
     private BookCondition bookCondition;
