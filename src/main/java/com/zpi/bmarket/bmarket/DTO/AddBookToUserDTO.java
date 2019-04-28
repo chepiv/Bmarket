@@ -46,4 +46,6 @@ public class AddBookToUserDTO {
 
         return book;
     }
+
+    // TODO: add photo path and description
 }

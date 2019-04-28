@@ -1,59 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>BMarket</title>
 <head>
     <title>BMarket</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!-- STYLESHEETS -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
-    <!-- Bmarket stylesheet -->
-    <link href="/css/style.css" rel="stylesheet">
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
 </head>
 <body>
 <!-- CONTENT -->
 <header>
-    <nav class="navbar navbar-expand-lg white navbar-light  fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/img/logo.png" height="50" alt="Bmarket">
-            </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
-                </form>
-                <ul class="navbar-nav ml-auto mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">Kategorie</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Kategoria</a>
-                            <a class="dropdown-item" href="#">Inna kategoria</a>
-                            <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
-                        </div>
-                    </li>
-                </ul>
-                </ul>
-                <ul class="navbar-nav ml-auto text-bold">
-                    <li class="nav-item">
-                        <a class="nav-link text-red" href="/login">Zaloguj</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-red" href="/register">Zarejestruj</a>
-                    </li>
-                </ul>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
+    <nav th:replace="html/header.html :: navigation"></nav>
 
     <div class="view" style="">
         <div class="mask rgba-gradient align-items-center">
@@ -109,32 +65,10 @@
         <!-- Mask & flexbox options-->
     </div>
 </header>
-<footer>
-    <div class="container">
-        <div class="row py-3">
-            <ul class="nav py-3 bottom-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#!">Kontakt</a>
-                </li>
-                <li class="nav-item ml-20">
-                    <a class="nav-link" href="#!">Regulamin</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</footer>
+<footer th:replace="html/footer.html :: footer"></footer>
 
-<!-- JAVASCRIPT -->
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
-<!-- Bmarket TS script -->
-<script type="text/javascript" src="/js/index.js"></script>
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
 
 </body>
 </html>

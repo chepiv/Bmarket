@@ -1,19 +1,23 @@
 <!DOCTYPE html>
+<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Edit user data - Bmarket</title>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
 </head>
 <body>
+<!-- CONTENT -->
+<nav th:replace="html/header.html :: navigation"></nav>
+<div class="container mt-navigation">
     <h1>Użytkownik</h1>
     <p th:text="${sid}"></p>
     <p th:text="${userEditDTO.getEmail()}"></p>
-    <!--TODO: add addres edit -->
+    <!--TODO: FILL FORMS WITH USER DATA -->
     <section>
         <h2>Informacje osobiste</h2>
 
         <form method="post" th:action="@{/postUserEdit}" th:object="${userEditDTO}">
-            <div th:object="${userEditDTO}"></div>
             <div class="form-group">
                 <div>
                     <input th:value="${userEditDTO.getName()}" type="text" id="form1" th:field="*{name}" placeholder="Imię">
@@ -41,7 +45,7 @@
                 </div>
 
             </div>
-            <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
+            <button  class="btn btn-outline-purple" type="submit" value="Zmień">Zmień</button>
         </form>
     </section>
     <!--
@@ -84,5 +88,12 @@
             </form>
         </section>
     -->
+</div>
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+
 </body>
 </html>
