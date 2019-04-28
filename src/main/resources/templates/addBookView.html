@@ -5,80 +5,11 @@
     <title>BMarket</title>
     <!--/*/ <th:block th:include="html/head.html :: imports">
         </th:block> /*/-->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!-- STYLESHEETS -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
-    <!-- Bmarket stylesheet -->
-    <link href="../static/css/style.css" rel="stylesheet">
 </head>
 <body>
 <!-- CONTENT -->
 
-<!--<nav th:replace="html/header.html :: navigation"></nav>-->
-<nav th:fragment="navigation" class="navbar navbar-expand-lg white navbar-light  fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="../static/img/logo.png" height="50" alt="Bmarket">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-            <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
-            </form>
-            <ul class="navbar-nav ml-auto mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">Kategorie</a>
-                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Kategoria</a>
-                        <a class="dropdown-item" href="#">Inna kategoria</a>
-                        <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto text-bold" id="user-if-logged">
-
-                <script th:inline="javascript">
-                    /*<![CDATA[*/
-                    let user = /*[[${session.userId}]]*/ null;
-                    if(user == null){
-                        document.write(
-                            '<li class="nav-item">'
-                            +'<a class="nav-link text-red" href="/login">Zaloguj</a>'
-                            +'</li>'
-                            +'<li class="nav-item">'
-                            +'<a class="nav-link text-red" href="/register">Zarejestruj</a>'
-                            +'</li>'
-                        )
-                    }
-                    else{
-                        document.write(
-                            '<li class="nav-item avatar dropdown">'
-                            +'<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
-                            +'<img class="avatar-img" src="img/avatar.png" class="rounded-circle z-depth-0" alt="avatar image">'
-                            +'</a>'
-                            +'<div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">'
-                            +'<a class="dropdown-item" href="/userEdit">Moje konto</a>'
-                            +'<a class="dropdown-item" href="#">Moje książki</a>'
-                            +'<a class="dropdown-item" href="#">Wyloguj</a>'
-                            +'</div>'
-                            +'</li>'
-                        )
-                    }
-                    /*]]>*/
-                </script>
-            </ul>
-
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav>
+<nav th:replace="html/header.html :: navigation"></nav>
 
 <div class="subpage-header">
     <div class="container">
@@ -207,38 +138,9 @@
 </div>
 
 
-<!--<footer th:replace="html/footer.html :: footer"></footer>-->
-<footer th:fragment="footer">
-    <div class="container">
-        <div class="row py-3">
-            <ul class="nav py-3 bottom-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#!">Kontakt</a>
-                </li>
-                <li class="nav-item ml-20">
-                    <a class="nav-link" href="#!">Regulamin</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</footer>
+<footer th:replace="html/footer.html :: footer"></footer>
 
 <!--/*/ <th:block th:include="html/js.html :: scripts">
         </th:block> /*/-->
-<!-- JAVASCRIPT -->
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
-<!-- Bmarket TS script -->
-<script type="text/javascript" src="../static/js/index.js"></script>
-<!-- Bmarket AlertEngine.js -->
-<div id="alertContainer" th:type="${redirectFrom}" th:data="${status}"></div>
-<script type="text/javascript" src="../static/js/alertManager.js"></script>
-
 </body>
 </html>
