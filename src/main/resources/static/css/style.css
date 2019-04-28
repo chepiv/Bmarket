@@ -70,7 +70,7 @@ ul.bottom-nav > li > a {
     font-weight: bold;
 }
 
-.view{
+header > .view{
     background-image: url('../img/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -149,4 +149,29 @@ footer {
     width: 40px;
 }
 
-/*rfrsh*/
+.subpage-header{
+    margin-top: 76px;
+    padding: 25px 0 25px 0;
+    background: -webkit-linear-gradient(50deg, #3823C3, #F21C32) !important;
+    background: -o-linear-gradient(50deg, #3823C3, #F21C32) !important;
+    background: linear-gradient(40deg, #3823C3, #F21C32)!important;
+}
+
+.subpage-content{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.subpage-header > div > h2{
+    color: white;
+    font-weight: bolder;
+}
+
+.custom-file-label:after{
+    content: "Przeglądaj" !important;
+}
+
+.btn-book{
+    width: 100%;
+    max-width: 300px;
+}

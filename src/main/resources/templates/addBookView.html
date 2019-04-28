@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- STYLESHEETS -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+    <!-- Bmarket stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- CONTENT -->
+
+<!--<nav th:replace="html/header.html :: navigation"></nav>-->
+<nav th:fragment="navigation" class="navbar navbar-expand-lg white navbar-light  fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/logo.png" height="50" alt="Bmarket">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <ul class="navbar-nav ml-auto mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">Kategorie</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Kategoria</a>
+                        <a class="dropdown-item" href="#">Inna kategoria</a>
+                        <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto text-bold" id="user-if-logged">
+
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    let user = /*[[${session.userId}]]*/ null;
+                    if(user == null){
+                        document.write(
+                            '<li class="nav-item">'
+                            +'<a class="nav-link text-red" href="/login">Zaloguj</a>'
+                            +'</li>'
+                            +'<li class="nav-item">'
+                            +'<a class="nav-link text-red" href="/register">Zarejestruj</a>'
+                            +'</li>'
+                        )
+                    }
+                    else{
+                        document.write(
+                            '<li class="nav-item avatar dropdown">'
+                            +'<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+                            +'<img class="avatar-img" src="img/avatar.png" class="rounded-circle z-depth-0" alt="avatar image">'
+                            +'</a>'
+                            +'<div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">'
+                            +'<a class="dropdown-item" href="/userEdit">Moje konto</a>'
+                            +'<a class="dropdown-item" href="#">Moje książki</a>'
+                            +'<a class="dropdown-item" href="#">Wyloguj</a>'
+                            +'</div>'
+                            +'</li>'
+                        )
+                    }
+                    /*]]>*/
+                </script>
+            </ul>
+
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="subpage-header">
+    <div class="container">
+        <h2>Dodaj książkę</h2>
+    </div>
+</div>
+
+<div class="container subpage-content">
+    <div>
+        <!--form start-->
+        <form method="post" th:action="" th:object="">
+            <div class="row">
+                <!--form left column start-->
+                <div class="col-md-4">
+                    <!--photo-->
+
+                    <label>Zdjęcie</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Wybierz plik</label>
+                        </div>
+                    </div>
+                    <!--title-->
+                    <div class="md-form">
+                        <label for="title">Tytuł</label>
+                        <input type="text" id="title" class="form-control">
+                    </div>
+                    <!--author-->
+                    <div class="md-form">
+                        <label for="author">Autor</label>
+                        <input type="text" id="author" class="form-control">
+                    </div>
+                    <!--publisher-->
+                    <div class="md-form">
+                        <label for="publisher">Wydawnictwo</label>
+                        <input type="text" id="publisher" class="form-control">
+                    </div>
+                    <!--isbn-->
+                    <div class="md-form">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" id="isbn" class="form-control">
+                    </div>
+                    <!--publish year-->
+                    <div class="md-form">
+                        <label for="year">Rok wydania</label>
+                        <input type="text" id="year" class="form-control">
+                    </div>
+
+                </div>
+                <!--form left column end-->
+                <!--form right column start-->
+                <div class="col-md-8">
+                    <!--category-->
+                    <div class="md-form">
+                        <!--<label for="category">Kategoria</label>
+                        <input type="text" id="category" class="form-control">-->
+                        <select id="category" class="browser-default custom-select">
+                            <option disabled selected>Kategoria</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <!--pages-->
+                    <div class="md-form">
+                        <label for="pages">Liczba stron</label>
+                        <input type="text" id="pages" class="form-control">
+                    </div>
+                    <!--condotion-->
+                    <div class="row">
+                        <div class="col col-auto">
+                            <span class="">Stan</span>
+                        </div>
+                        <div class="col">
+                            <!-- Group of default radios - option 1 -->
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="new" name="condition">
+                                <label class="custom-control-label" for="new">nowa</label>
+                            </div>
+
+                            <!-- Group of default radios - option 2 -->
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="used" name="condition" checked>
+                                <label class="custom-control-label" for="used">używana</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--cover-->
+                    <div class="row">
+                        <div class="col col-auto">
+                            <span class="">Okładka</span>
+                        </div>
+                        <div class="col">
+                            <!-- Group of default radios - option 1 -->
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="soft" name="cover" checked>
+                                <label class="custom-control-label" for="soft">miękka</label>
+                            </div>
+
+                            <!-- Group of default radios - option 2 -->
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="hard" name="cover">
+                                <label class="custom-control-label" for="hard">twarda</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--opis-->
+                    <div class="md-form">
+                        <textarea id="desc" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="desc">Opis</label>
+                    </div>
+
+
+                <!--form right column end-->
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col text-center">
+                <button class="btn btn-purple btn-book my-4" type="submit">Sign in</button>
+                </div>
+            </div>
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+
+<!--<footer th:replace="html/footer.html :: footer"></footer>-->
+<footer th:fragment="footer">
+    <div class="container">
+        <div class="row py-3">
+            <ul class="nav py-3 bottom-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#!">Kontakt</a>
+                </li>
+                <li class="nav-item ml-20">
+                    <a class="nav-link" href="#!">Regulamin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+<!-- JAVASCRIPT -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+<!-- Bmarket TS script -->
+<script type="text/javascript" src="../static/js/index.js"></script>
+<!-- Bmarket AlertEngine.js -->
+<div id="alertContainer" th:type="${redirectFrom}" th:data="${status}"></div>
+<script type="text/javascript" src="../static/js/alertManager.js"></script>
+
+</body>
+</html>
