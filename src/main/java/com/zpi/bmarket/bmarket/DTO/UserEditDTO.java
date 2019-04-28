@@ -13,12 +13,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class UserEditDTO {
-    @NotNull
-    @NotEmpty
+
     private String name;
 
-    @NotNull
-    @NotEmpty
     private String surname;
 
     @NotNull
@@ -29,20 +26,12 @@ public class UserEditDTO {
     @NotEmpty
     private String matchingPassword;
 
-    @NotNull
-    @NotEmpty
     private String phoneNumber;
 
-    @NotNull
-    @NotEmpty
     private Date birthDate;
 
-    @NotNull
-    @NotEmpty
     private String avatarUrl;
 
-    @NotNull
-    @NotEmpty
     private Address address;
 
     private String email;

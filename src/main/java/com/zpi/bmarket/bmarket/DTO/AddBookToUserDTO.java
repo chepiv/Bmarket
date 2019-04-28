@@ -21,28 +21,16 @@ public class AddBookToUserDTO {
     @NotEmpty
     private String title;
 
-    @NotNull
-    @NotEmpty
     private String authors;
 
-    @NotNull
-    @NotEmpty
     private BookCondition bookCondition;
 
-    @NotNull
-    @NotEmpty
     private String publisher;
 
-    @NotNull
-    @NotEmpty
     private String isbn;
 
-    @NotNull
-    @NotEmpty
     private Category category;
 
-
-    //TODO: add author in future
 
     public Book getBook(User user){
 

@@ -28,11 +28,11 @@
                     <label for="form3" class="label-purple active">Hasło:</label>
                 </div>
                 <div class="md-form">
-                    <input type="password" id="form4" class="black-text form-control input-purple" th:field="*{matchingPassword}">
+                    <input "${userEditDTO.getPassword()}" type="password" id="form4" class="black-text form-control input-purple" th:field="*{matchingPassword}">
                     <label for="form4" class="label-purple active">Potwierdź hasło:</label>
                 </div>
                 <div>
-                    <input th:value="${userEditDTO.getBirthDate()}" type="date" id="form5" th:field="*{birthDate}" placeholder="Data urodzenia">
+                    <input  th:value="${userEditDTO.getBirthDate()}" type="date" id="form5" th:field="*{birthDate}" placeholder="Data urodzenia">
                     <label for="form5">Data urodzenia: </label>
                 </div>
                 <div>

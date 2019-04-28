@@ -36,9 +36,8 @@ public class UserBookController {
     }
 
     @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)
-    public String postAddUserBook(Model model, HttpSession session) {
+    public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO ,Model model, HttpSession session) {
 
-        AddBookToUserDTO bookDTO = new AddBookToUserDTO();
         PostStatus status = PostStatus.ERROR;
         Long id = ((Long) session.getAttribute("userId")).longValue();
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
