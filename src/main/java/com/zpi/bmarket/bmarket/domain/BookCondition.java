@@ -6,23 +6,19 @@ import lombok.Setter;
 import javax.persistence.*;
 
 /**
- * Created by chepiv on 23/03/2019.
+ * Created by chepiv on 17/04/2019.
  * Contact: chepurin.ivan@gmail.com
  * Github:chepiv
  */
 @Entity
-@Setter
 @Getter
-public class Author {
+@Setter
+public class BookCondition {
 
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
-    private String firstName;
-    @Column(length = 100)
-    private String secondName;
-    @Column(nullable = false, length = 100)
-    private String surname;
+    @Column(unique = true,nullable = false,length = 100)
+    private String value;
 }
