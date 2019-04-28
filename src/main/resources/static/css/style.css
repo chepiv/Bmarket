@@ -175,3 +175,13 @@ footer {
     width: 100%;
     max-width: 300px;
 }
+
+#price-box{
+    margin: 0;
+    max-width: 250px;
+}
+
+#price-box label{
+    position: absolute;
+    top: .65rem;
+}
