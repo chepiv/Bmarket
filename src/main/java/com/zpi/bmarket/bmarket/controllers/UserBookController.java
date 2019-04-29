@@ -4,10 +4,15 @@ import com.zpi.bmarket.bmarket.DTO.AddBookToUserDTO;
 import com.zpi.bmarket.bmarket.DTO.LoginDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.Book;
+import com.zpi.bmarket.bmarket.domain.Category;
+import com.zpi.bmarket.bmarket.domain.Condition;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.BookRepository;
+import com.zpi.bmarket.bmarket.repositories.CategoryRepository;
+import com.zpi.bmarket.bmarket.repositories.ConditionRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +29,22 @@ public class UserBookController {
     UserRepository userRepository;
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
+    ConditionRepository conditionRepository;
 
 
-    @GetMapping(value = "/addUserBook")
+    @GetMapping(value = "/addBook")
     public String getAddUserBook(Model model) {
 
         AddBookToUserDTO bookDTO = new AddBookToUserDTO();
-        model.addAttribute("bookDTO", bookDTO);
 
-        return "addUserBookView";
+        model.addAttribute("bookDTO", bookDTO);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("conditions", conditionRepository.findAll());
+
+        return "addBookView";
     }
 
     @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)

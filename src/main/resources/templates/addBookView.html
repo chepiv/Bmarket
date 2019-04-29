@@ -20,7 +20,7 @@
 <div class="container subpage-content">
     <div>
         <!--form start-->
-        <form method="post" th:action="" th:object="">
+        <form method="post" th:action="@{/postAddUserBook}" th:object="${bookDTO}">
             <div class="row">
                 <!--form left column start-->
                 <div class="col-md-4">
@@ -36,22 +36,22 @@
                     <!--title-->
                     <div class="md-form">
                         <label for="title">Tytuł</label>
-                        <input type="text" id="title" class="form-control">
+                        <input type="text" id="title" class="form-control" th:field="*{title}">
                     </div>
                     <!--author-->
                     <div class="md-form">
                         <label for="author">Autor</label>
-                        <input type="text" id="author" class="form-control">
+                        <input type="text" id="author" class="form-control" th:field="*{authors}">
                     </div>
                     <!--publisher-->
                     <div class="md-form">
                         <label for="publisher">Wydawnictwo</label>
-                        <input type="text" id="publisher" class="form-control">
+                        <input type="text" id="publisher" class="form-control" th:field="*{publisher}">
                     </div>
                     <!--isbn-->
                     <div class="md-form">
                         <label for="isbn">ISBN</label>
-                        <input type="text" id="isbn" class="form-control">
+                        <input type="text" id="isbn" class="form-control" th:field="*{isbn}">
                     </div>
                     <!--publish year-->
                     <div class="md-form">
@@ -67,23 +67,18 @@
                     <div class="md-form">
                         <!--<label for="category">Kategoria</label>
                         <input type="text" id="category" class="form-control">-->
-                        <select id="category" class="browser-default custom-select">
-                            <option disabled selected>Kategoria</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+
+                        <select id="category" class="browser-default custom-select" >
+                            <option selected disabled>Wybierz kategorię</option>
+                            <option th:each="category : ${categories}" th:text="${category.value}"> Category </option>
                         </select>
-                    </div>
-                    <!--pages-->
-                    <div class="md-form">
-                        <label for="pages">Liczba stron</label>
-                        <input type="text" id="pages" class="form-control">
                     </div>
                     <!--condotion-->
                     <div class="row">
                         <div class="col col-auto">
                             <span class="">Stan</span>
                         </div>
+                        <!--
                         <div class="col">
                             <div class="custom-control custom-radio">
                                 <input type="radio" class="custom-control-input" id="new" name="condition">
@@ -95,21 +90,11 @@
                                 <label class="custom-control-label" for="used">używana</label>
                             </div>
                         </div>
-                    </div>
-                    <!--cover-->
-                    <div class="row">
-                        <div class="col col-auto">
-                            <span class="">Okładka</span>
-                        </div>
+                        -->
                         <div class="col">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="soft" name="cover" checked>
-                                <label class="custom-control-label" for="soft">miękka</label>
-                            </div>
-
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="hard" name="cover">
-                                <label class="custom-control-label" for="hard">twarda</label>
+                            <div class="custom-control custom-radio" th:each="condition : ${conditions}">
+                                <input type="radio" class="custom-control-input" id="new" th:id="${condition.id}" name="condition">
+                                <label class="custom-control-label" th:for="${condition.id}" th:text="${condition.value}"></label>
                             </div>
                         </div>
                     </div>
@@ -118,46 +103,12 @@
                         <textarea id="desc" class="md-textarea form-control" rows="3"></textarea>
                         <label for="desc">Opis</label>
                     </div>
-                    <!--offer type-->
-                    <div class="row">
-                        <div class="col col-auto">
-                            <span class="">Typ oferty</span>
-                        </div>
-                        <div class="col col-auto">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="sell" name="offer-type" checked>
-                                <label class="custom-control-label" for="sell">sperzdam</label>
-                            </div>
-                        </div>
-                        <div class="col col-auto">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="exchange" name="offer-type">
-                                <label class="custom-control-label" for="exchange">wymienię</label>
-                            </div>
-                        </div>
-                        <div class="col col-auto">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="giveaway" name="offer-type">
-                                <label class="custom-control-label" for="giveaway">oddam</label>
-                            </div>
-                        </div>
-                    </div>
-                    <!--price-->
-                    <div id="price-box">
-                        <div class="md-form input-group">
-                            <label for="price">Cena</label>
-                            <input type="text" class="form-control" id="price">
-                            <div class="input-group-append">
-                                <span class="input-group-text md-addon">zł</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--form right column end-->
+
                 </div>
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <button class="btn btn-purple btn-book my-4" type="submit">Sign in</button>
+                    <button class="btn btn-purple btn-book my-4" type="submit">Dodaj książkę</button>
                 </div>
             </div>
         </form>

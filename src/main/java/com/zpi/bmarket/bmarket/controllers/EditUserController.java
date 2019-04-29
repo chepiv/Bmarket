@@ -50,9 +50,8 @@ public class EditUserController {
         if (!userEditDTO.getPassword().equals(userEditDTO.getMatchingPassword())) {
             status = PostStatus.PASSWORDS_NOT_MATCH;
         } else {
-            userEditDTO.setCurrentDataUser(userRep);
-
             try {
+                userEditDTO.setCurrentDataUser(userRep);
                 userRepository.save(userRep);
                 status = PostStatus.SUCCESS;
             } catch (Exception e) {
