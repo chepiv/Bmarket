@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RegisterController {
@@ -27,12 +28,15 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/postRegister", method = RequestMethod.POST)
-    public String postRegister(@ModelAttribute RegisterDTO registerDTO, Model model) {
+    public String postRegister(@ModelAttribute RegisterDTO registerDTO, Model model, RedirectAttributes ra) {
         // TODO: 30.03.2019 in case of error do not redirect to post register view
-        PostStatus status;
+        PostStatus status = PostStatus.ERROR;
         //check for password matching
         if (!registerDTO.getPassword().equals(registerDTO.getMatchingPassword())) {
             status = PostStatus.PASSWORDS_NOT_MATCH;
+            ra.addFlashAttribute("redirectFrom", "postRegister");
+            ra.addFlashAttribute("status", status);
+            return "redirect:/register";
         } else {
             User user = registerDTO.getUser();
             //add user to database
@@ -40,13 +44,17 @@ public class RegisterController {
                 userRepository.save(user);
                 model.addAttribute("user", user);
                 status = PostStatus.SUCCESS;
+                ra.addFlashAttribute("redirectFrom", "postRegister");
+                ra.addFlashAttribute("status", status);
+                return "redirect:/";
             } catch (Exception e) {
                 // TODO: 30.03.2019 make two errors, for login and email
                 status = PostStatus.DATABASE_ERROR;
+                ra.addFlashAttribute("redirectFrom", "postRegister");
+                ra.addFlashAttribute("status", status);
+                return "redirect:/register";
             }
         }
-        model.addAttribute("status", status);
-        return "postRegisterView";
     }
 
 }
