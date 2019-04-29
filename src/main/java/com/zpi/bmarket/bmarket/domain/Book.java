@@ -50,6 +50,10 @@ public class Book {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
+
     @ManyToMany
     @JoinTable(
             name = "exchangeOffers_books",

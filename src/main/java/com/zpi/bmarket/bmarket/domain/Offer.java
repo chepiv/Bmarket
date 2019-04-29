@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chepiv on 25/03/2019.
@@ -37,6 +38,8 @@ public class Offer {
     private int price;
     @Column(length = 100)
     private String city;
+    @OneToMany(mappedBy = "offer")
+    private List<Book> books;
     @ManyToOne
     @JoinColumn(name = "buyerUser_id")
     private User buyerUser;
