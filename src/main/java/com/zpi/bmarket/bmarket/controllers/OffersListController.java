@@ -29,7 +29,9 @@ public class OffersListController {
         List<Offer> offers = offerRepository.findAll(PageRequest.of(index - 1, limit)).getContent();
 
         model.addAttribute("offers", offers);
+        model.addAttribute("index",index);
 
-        return "offersView";
+
+        return "listOffersView";
     }
 }
