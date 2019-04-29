@@ -1,10 +1,15 @@
 <!DOCTYPE html>
+<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Edit user data - Bmarket</title>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
 </head>
 <body>
+<!-- CONTENT -->
+<nav th:replace="html/header.html :: navigation"></nav>
+<div class="container mt-navigation">
     <h1>Użytkownik</h1>
     <p th:text="${sid}"></p>
     <p th:text="${user.getEmail()}"></p>
@@ -15,11 +20,13 @@
         <form method="post" th:action="@{/postUserEdit}" th:object="${user}">
             <div th:object="${user}"></div>
             <div class="form-group">
-                <label>Imię: </label><input th:value="${user.getName()}" type="text" id="name" th:field="*{name}" placeholder="Imię"><br>
-                <label>Nazwisko: </label><input th:value="${user.getSurname()}" type="text" id="surname" th:field="*{surname}" placeholder="Nazwisko"><br>
+                <label class="grey-text font-weight-light">Imię: </label>
+                <input class="form-control" th:value="${user.getName()}" type="text" id="name" th:field="*{name}" placeholder="Imię"><br>
+                <label class="grey-text font-weight-light">Nazwisko: </label>
+                <input class="form-control" th:value="${user.getSurname()}" type="text" id="surname" th:field="*{surname}" placeholder="Nazwisko"><br>
                 <!--<label>Data urodzenia: </label><input th:value="${user.getBirthDate()}" type="date" id="birthDate" th:field="*{birthDate}" placeholder="Data urodzenia">-->
             </div>
-            <button  class="btn btn-primary" type="submit" value="Zmień">Zmień</button>
+            <button  class="btn btn-outline-purple" type="submit" value="Zmień">Zmień</button>
         </form>
     </section>
     <!--
@@ -62,5 +69,12 @@
             </form>
         </section>
     -->
+</div>
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+
 </body>
 </html>
