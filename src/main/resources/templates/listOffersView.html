@@ -96,15 +96,10 @@
                             <div class="row">
                                 <h4 th:text="${offer.title}"><strong></strong></h4>
                             </div>
-                            <div class="row">
-                                Frank Herbert
+                            <div class="row" th:text="${offer.books[0].authors}">
                             </div>
                             <br>
-                            <div class="row">
-                                Dom Wydawniczy Rebis
-                            </div>
-                            <div class="row">
-                                2013
+                            <div class="row" th:text="${offer.books[0].publisher}">
                             </div>
                         </div>
                         <div class="col col-auto align-self-center pos-ab-rg">
@@ -132,7 +127,7 @@
                             <li class="page-item"><a class="page-link" href="/offers/2">2</a></li>
                             <li class="page-item"><a class="page-link" href="/offers/3">3</a></li>
                             <li class="page-item">
-                                <a class="page-link" aria-label="Next">
+                                <a class="page-link" aria-label="Next" href="/offers/2">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
