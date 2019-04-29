@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
+</head>
+<body>
+<!-- CONTENT -->
+
+<nav th:replace="html/header.html :: navigation"></nav>
+
+
+<div class="container subpage-content mt-navigation">
+    <div>
+        <!--form start-->
+            <div class="row">
+                <!--form left column start-->
+                <div class="col-sm-3">
+                    <form method="post" th:action="" th:object="">
+                        <div class="row">
+                            <div class="col col-mw-130">
+                                <span class="">Sortuj według</span>
+                            </div>
+                            <div class="col col-auto">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="price-low-high" name="order-by">
+                                    <label class="custom-control-label" for="price-low-high">cena: od najniższej</label>
+                                </div>
+
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="price-high-low" name="order-by" checked>
+                                    <label class="custom-control-label" for="price-high-low">cena: od najwyższej</label>
+                                </div>
+
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="newest-first" name="order-by" checked>
+                                    <label class="custom-control-label" for="newest-first">od najnowszych</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col col-auto">
+                                <span class="">Oferty</span>
+                            </div>
+                            <div class="col">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="show-used" checked>
+                                    <label class="custom-control-label" for="show-used">używane</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="show-new" checked>
+                                    <label class="custom-control-label" for="show-new">nowe</label>
+                                </div>
+
+                                <br>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="show-sell" checked>
+                                    <label class="custom-control-label" for="show-sell">sprzedaż</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="show-exchange" checked>
+                                    <label class="custom-control-label" for="show-exchange">wymiana</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="show-giveaway" checked>
+                                    <label class="custom-control-label" for="show-giveaway">oddam</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-form">
+                            <label for="price-min">Cena od</label>
+                            <input type="text" id="price-min" class="form-control">
+                        </div>
+                        <div class="md-form">
+                            <label for="price-max">Cena do</label>
+                            <input type="text" id="price-max" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-purple btn-book my-4">Filtruj</button>
+                    </form>
+                </div>
+                <!--form left column end-->
+                <!--form right column start-->
+                <div class="col-sm-9">
+                    <div class="row book-entity">
+                        <div class="col col-auto">
+                            <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        </div>
+                        <div class="col align-self-center">
+                            <div class="row">
+                                <h4><strong>Diuna</strong></h4>
+                            </div>
+                            <div class="row">
+                                Frank Herbert
+                            </div>
+                            <br>
+                            <div class="row">
+                                Dom Wydawniczy Rebis
+                            </div>
+                            <div class="row">
+                                2013
+                            </div>
+                        </div>
+                        <div class="col col-auto align-self-center pos-ab-rg">
+                            <h2><strong>29 zł</strong></h2>
+                        </div>
+                    </div>
+
+                    <div class="row book-entity">
+                        <div class="col col-auto">
+                            <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        </div>
+                        <div class="col align-self-center">
+                            <div class="row">
+                                <h4><strong>Diuna</strong></h4>
+                            </div>
+                            <div class="row">
+                                Frank Herbert
+                            </div>
+                            <br>
+                            <div class="row">
+                                Dom Wydawniczy Rebis
+                            </div>
+                            <div class="row">
+                                2013
+                            </div>
+                        </div>
+                        <div class="col col-auto align-self-center pos-ab-rg">
+                            <h2><strong><i class="fas fa-exchange-alt"></i></strong></h2>
+                        </div>
+                    </div>
+                <!--form right column end-->
+                </div>
+            </div>
+            <div class="row mt-35">
+                <div class="col">
+                    <nav>
+                        <ul class="pagination pg-blue justify-content-center pagination-lg">
+                            <li class="page-item disabled">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link">1</a></li>
+                            <li class="page-item"><a class="page-link">2</a></li>
+                            <li class="page-item"><a class="page-link">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+
+</body>
+</html>
