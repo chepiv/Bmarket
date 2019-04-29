@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Book {
-
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +25,12 @@ public class Book {
 
     @Column
     private String authors;
+
+    @Column(length = 1000)
+    private String description;
+
+    @Column(length = 500)
+    private String photoUrl;
 
     @ManyToOne
     @JoinColumn(name = "book_condition_id")
@@ -44,6 +49,10 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
 
     @ManyToMany
     @JoinTable(
