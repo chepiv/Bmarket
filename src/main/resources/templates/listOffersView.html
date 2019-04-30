@@ -18,7 +18,7 @@
             <div class="row">
                 <!--form left column start-->
                 <div class="col-sm-3">
-                    <form method="post" th:action="" th:object="">
+                    <form method="post">
                         <div class="row">
                             <div class="col col-mw-130">
                                 <span class="">Sortuj według</span>
@@ -88,49 +88,25 @@
                 <!--form left column end-->
                 <!--form right column start-->
                 <div class="col-sm-9">
-                    <div class="row book-entity">
+                    <div class="row book-entity" th:each="offer:${offers}">
                         <div class="col col-auto">
                             <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
                         </div>
                         <div class="col align-self-center">
                             <div class="row">
-                                <h4><strong>Diuna</strong></h4>
+                                <h4 th:text="${offer.title}"><strong></strong></h4>
                             </div>
-                            <div class="row">
-                                Frank Herbert
+                            <div class="row" th:text="${offer.books[0].authors}">
                             </div>
                             <br>
-                            <div class="row">
-                                Dom Wydawniczy Rebis
-                            </div>
-                            <div class="row">
-                                2013
+                            <div class="row" th:text="${offer.books[0].publisher}">
                             </div>
                         </div>
                         <div class="col col-auto align-self-center pos-ab-rg">
-                            <h2><strong>29 zł</strong></h2>
+                            <h2 th:text="${offer.price} + zł"><strong></strong></h2>
                         </div>
                     </div>
 
-                    <div class="row book-entity">
-                        <div class="col col-auto">
-                            <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
-                        </div>
-                        <div class="col align-self-center">
-                            <div class="row">
-                                <h4><strong>Diuna</strong></h4>
-                            </div>
-                            <div class="row">
-                                Frank Herbert
-                            </div>
-                            <br>
-                            <div class="row">
-                                Dom Wydawniczy Rebis
-                            </div>
-                            <div class="row">
-                                2013
-                            </div>
-                        </div>
                         <div class="col col-auto align-self-center pos-ab-rg">
                             <h2><strong><i class="fas fa-exchange-alt"></i></strong></h2>
                         </div>
@@ -141,21 +117,36 @@
             <div class="row mt-35">
                 <div class="col">
                     <nav>
-                        <ul class="pagination pg-blue justify-content-center pagination-lg">
+                        <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${index == 1}">
                             <li class="page-item disabled">
                                 <a class="page-link" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="page-item active"><a class="page-link">1</a></li>
-                            <li class="page-item"><a class="page-link">2</a></li>
-                            <li class="page-item"><a class="page-link">3</a></li>
+                            <li class="page-item active"><a class="page-link" href="/offers/1">1</a></li>
+                            <li class="page-item"><a class="page-link" href="/offers/2">2</a></li>
+                            <li class="page-item"><a class="page-link" href="/offers/3">3</a></li>
                             <li class="page-item">
-                                <a class="page-link" aria-label="Next">
+                                <a class="page-link" aria-label="Next" href="/offers/2">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
-                        </ul>
+
+                        </ul><ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${index == 1}">
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Previous" th:href="'/offers/'+${index-1}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index-1}" th:text="${index}-1"></a></li>
+                        <li class="page-item active"><a class="page-link" th:href="'/offers/'+${index}" th:text="${index}"></a></li>
+                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index+1}" th:text="${index}+1"></a></li>
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next" th:href="'/offers/'+${index+1}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
                     </nav>
                 </div>
             </div>
