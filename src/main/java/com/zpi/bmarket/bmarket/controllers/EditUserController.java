@@ -45,11 +45,12 @@ public class EditUserController {
     @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
     public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
         PostStatus status = PostStatus.ERROR;
-
-
+        /*
         if (!userEditDTO.getPassword().equals(userEditDTO.getMatchingPassword())) {
             status = PostStatus.PASSWORDS_NOT_MATCH;
         } else {
+            status = PostStatus.DATABASE_ERROR;
+
             try {
                 userEditDTO.setCurrentDataUser(userRep);
                 userRepository.save(userRep);
@@ -57,7 +58,9 @@ public class EditUserController {
             } catch (Exception e) {
                 status = PostStatus.DATABASE_ERROR;
             }
+
         }
+        */
 
         model.addAttribute("status", status);
         return "postUserEditView";

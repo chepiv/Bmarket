@@ -18,12 +18,8 @@ public class UserEditDTO {
 
     private String surname;
 
-    @NotNull
-    @NotEmpty
     private String password;
 
-    @NotNull
-    @NotEmpty
     private String matchingPassword;
 
     private String phoneNumber;

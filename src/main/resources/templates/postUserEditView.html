@@ -1,22 +1,40 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>BMarket</title>
 <head>
     <title>BMarket</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
 </head>
 <body>
-<!--/*@thymesVar id="status" type="com.zpi.bmarket.bmarket.PostStatus"*/-->
-<div th:switch="${status}">
-    <p th:case="${status.SUCCESS}" th:text="'Edycja zakończona pomyślnie'"></p>
-    <p th:case="${status.PASSWORDS_NOT_MATCH}">Hasła się nie zgadzają</p>
-    <!--TODO add other cases-->
-    <p th:case="*">Wystąpił nieznany błąd</p>
+<!-- CONTENT -->
+<nav th:replace="html/header.html :: navigation"></nav>
+<div class="container subpage-content">
+    <div>
+        <div th:switch="${status}">
+            <p th:case="${status.SUCCESS}" th:text="'Edycja zakończona pomyślnie'"></p>
+            <p th:case="${status.PASSWORDS_NOT_MATCH}">Hasła się nie zgadzają</p>
+            <!--TODO add other cases-->
+            <p th:case="*">Wystąpił nieznany błąd</p>
+        </div>
+        <a href="/">Powrót do strony głównej</a>
+
+    </div>
 </div>
-<a href="/">Powrót do strony głównej</a>
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+<script>
+    $('#offer-type-radio input').on('change', function() {
+        if($('input[name=offer-type]:checked', '#offer-type-radio').val() == 'sell'){
+            $('#price-box').show();
+        }
+        else{
+            $('#price-box').hide();
+        }
+    });
+</script>
 </body>
 </html>
