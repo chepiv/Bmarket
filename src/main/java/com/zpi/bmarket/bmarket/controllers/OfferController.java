@@ -48,7 +48,7 @@ public class OfferController {
     }
 
 
-    @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)
+    @RequestMapping(value = "/postAddOffer", method = RequestMethod.POST)
     public String postAddOffer(@ModelAttribute AddOfferDTO offerDTO, Model model, HttpSession session) {
 
         PostStatus status = PostStatus.ERROR;

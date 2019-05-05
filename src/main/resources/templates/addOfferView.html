@@ -20,7 +20,7 @@
 <div class="container subpage-content">
     <div>
         <!--form start-->
-        <form method="post" th:action="/postAddOfferView" th:object="${offerDTO}">
+        <form method="post" th:action="@{/postAddOffer}"  th:object="${offerDTO}">
             <div class="row">
                 <!--form left column start-->
                 <div class="col-md-4">
@@ -99,14 +99,6 @@
 
 <!--/*/ <th:block th:include="html/js.html :: scripts">
         </th:block> /*/-->
-<script>
-    $('#offer-type-radio input').on('change', function () {
-        if ($('input[name=offer-type]:checked', '#offer-type-radio').val() == 'sell') {
-            $('#price-box').show();
-        } else {
-            $('#price-box').hide();
-        }
-    });
-</script>
+
 </body>
 </html>
