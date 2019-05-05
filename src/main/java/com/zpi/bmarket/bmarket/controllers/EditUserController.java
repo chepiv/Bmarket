@@ -45,6 +45,13 @@ public class EditUserController {
     @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
     public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
         PostStatus status = PostStatus.ERROR;
+        try {
+            userEditDTO.setCurrentDataUser(userRep);
+            userRepository.save(userRep);
+            status = PostStatus.SUCCESS;
+        } catch (Exception e) {
+            status = PostStatus.DATABASE_ERROR;
+        }
         /*
         if (!userEditDTO.getPassword().equals(userEditDTO.getMatchingPassword())) {
             status = PostStatus.PASSWORDS_NOT_MATCH;

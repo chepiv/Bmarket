@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
+</head>
+<body>
+<!-- CONTENT -->
+
+<nav th:replace="html/header.html :: navigation"></nav>
+
+<div class="subpage-header">
+    <div class="container">
+        <h2>Dodaj Ofertę</h2>
+    </div>
+</div>
+
+<div class="container subpage-content">
+    <div>
+        <!--form start-->
+        <form method="post" th:action="/postAddOfferView" th:object="${offerDTO}">
+            <div class="row">
+                <!--form left column start-->
+                <div class="col-md-4">
+                    <!--title-->
+                    <div class="md-form">
+                        <label for="title">Tytuł</label>
+                        <input type="text" id="title" class="form-control" th:field="*{title}">
+                    </div>
+                    <!--user books-->
+                    <div class="col col-auto">
+                        <span class="">Książki</span>
+                    </div>
+                    <div class="col">
+                        <div class="custom-control custom-checkbox" th:each="userBook : ${userBooks}">
+                            <input type="checkbox" class="custom-control-input" id="user-books" th:id="${userBook.id}" th:field="*{books}" th:value="${userBook}"  name="offer-type">
+                            <label class="custom-control-label" th:for="${userBook.id}" th:text="${userBook.title}"></label> <!--TODO: coś się psuje (podkleśla właściwość title)-->
+                        </div>
+                    </div>
+                </div>
+
+                <!--form left column end-->
+                <!--form right column start-->
+
+                <!--description-->
+                <div class="md-form">
+                        <textarea id="desc" class="md-textarea form-control" rows="3"
+                                  th:field="*{description}"></textarea>
+                    <label for="desc">Opis</label>
+                </div>
+
+                <!--offer type-->
+                <div class="row">
+                    <div class="col col-auto">
+                        <span class="">Typ oferty</span>
+                    </div>
+                    <div class="col">
+                        <div class="custom-control custom-radio" th:each="offerT : ${offerTypes}">
+                            <input type="radio" class="custom-control-input" id="offer-types" th:id="${offerT.id}" th:field="*{offerType}" th:value="${offerT}"
+                                   name="offer-type">
+                            <label class="custom-control-label" th:for="${offerT.id}"
+                                   th:text="${offerT.type}"></label> <!--TODO: coś się psuje (podkleśla właściwość type)-->
+                        </div>
+                    </div>
+                </div>
+
+                <!--city-->
+                <div class="md-form">
+                    <label for="city">Miasto</label>
+                    <input type="text" id="city" class="form-control" th:field="*{city}">
+                </div>
+
+                <!--price-->
+                <div id="price-box">
+                    <div class="md-form input-group">
+                        <label for="price">Cena</label>
+                        <input type="text" class="form-control" id="price" th:field="*{price}">
+                        <div class="input-group-append">
+                            <span class="input-group-text md-addon">zł</span>
+                        </div>
+                    </div>
+                </div>
+                <!--form right column end-->
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-purple btn-book my-4" type="submit">dodaj ofertę</button>
+                </div>
+            </div>
+        </form>
+        <!--form end-->
+    </div>
+</div>
+
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+<script>
+    $('#offer-type-radio input').on('change', function () {
+        if ($('input[name=offer-type]:checked', '#offer-type-radio').val() == 'sell') {
+            $('#price-box').show();
+        } else {
+            $('#price-box').hide();
+        }
+    });
+</script>
+</body>
+</html>

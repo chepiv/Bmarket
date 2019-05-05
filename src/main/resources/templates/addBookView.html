@@ -68,12 +68,12 @@
                         <!--<label for="category">Kategoria</label>
                         <input type="text" id="category" class="form-control">-->
 
-                        <select id="category" class="browser-default custom-select" >
+                        <select id="category" class="browser-default custom-select" th:field="*{category}" >
                             <option selected disabled>Wybierz kategorię</option>
                             <option th:each="category : ${categories}" th:text="${category.value}"> Category </option>
                         </select>
                     </div>
-                    <!--condotion-->
+                    <!--condition-->
                     <div class="row">
                         <div class="col col-auto">
                             <span class="">Stan</span>
@@ -93,12 +93,13 @@
                         -->
                         <div class="col">
                             <div class="custom-control custom-radio" th:each="condition : ${conditions}">
-                                <input type="radio" class="custom-control-input" id="new" th:id="${condition.id}" name="condition">
+                                <input type="radio" class="custom-control-input" id="new" th:id="${condition.id}" th:field="*{bookCondition}" th:value="${condition}"  name="condition">
                                 <label class="custom-control-label" th:for="${condition.id}" th:text="${condition.value}"></label>
                             </div>
                         </div>
                     </div>
-                    <!--opis-->
+
+                    <!--opis TODO: dodać do bazy-->
                     <div class="md-form">
                         <textarea id="desc" class="md-textarea form-control" rows="3"></textarea>
                         <label for="desc">Opis</label>
