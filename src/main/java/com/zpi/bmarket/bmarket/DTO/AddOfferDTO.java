@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -56,22 +57,23 @@ public class AddOfferDTO {
     public Offer getOffer(User user){
 
         Offer offer = new Offer();
-
-        offer.setPublishDate(new Date());
+        
         offer.setOfferType(offerType);
-        offer.setStatus(status);  //TODO: jakie statusy - ustawić że oferta jest aktywna
         offer.setTitle(title);
         offer.setDescription(description);
         offer.setPrice(price);
         offer.setCity(city);
-
-        offer.setBooks(books); //TODO: dodać jakoś książki
+        offer.setStatus(status);
+        offer.setPublishDate(publishDate);
         user.getOffers().add(offer);
         for (Book book : books) {
             book.setOffer(offer);
         }
+        offer.setBooks(books);
 
         return offer;
     }
 
+    public void setStatus(Optional<Status> offerStatus) {
+    }
 }

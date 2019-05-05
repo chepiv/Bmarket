@@ -36,7 +36,7 @@
                     <div class="col">
                         <div class="custom-control custom-checkbox" th:each="userBook : ${userBooks}">
                             <input type="checkbox" class="custom-control-input" id="user-books" th:id="${userBook.id}" th:field="*{books}" th:value="${userBook}"  name="offer-type">
-                            <label class="custom-control-label" th:for="${userBook.id}" th:text="${userBook.title}"></label> <!--TODO: coś się psuje (podkleśla właściwość title)-->
+                            <label class="custom-control-label" th:for="${userBook.id}" th:text="${userBook.title}"></label>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                             <input type="radio" class="custom-control-input" id="offer-types" th:id="${offerT.id}" th:field="*{offerType}" th:value="${offerT}"
                                    name="offer-type">
                             <label class="custom-control-label" th:for="${offerT.id}"
-                                   th:text="${offerT.type}"></label> <!--TODO: coś się psuje (podkleśla właściwość type)-->
+                                   th:text="${offerT.type}"></label>
                         </div>
                     </div>
                 </div>

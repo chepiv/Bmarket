@@ -29,7 +29,7 @@
                     <label>Zdjęcie</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" th:field="*{photoUrl}">
                             <label class="custom-file-label" for="inputGroupFile01">Wybierz plik</label>
                         </div>
                     </div>
@@ -65,9 +65,6 @@
                 <div class="col-md-8">
                     <!--category-->
                     <div class="md-form">
-                        <!--<label for="category">Kategoria</label>
-                        <input type="text" id="category" class="form-control">-->
-
                         <select id="category" class="browser-default custom-select" th:field="*{category}" >
                             <option selected disabled>Wybierz kategorię</option>
                             <option th:each="category : ${categories}" th:text="${category.value}"> Category </option>
@@ -78,19 +75,6 @@
                         <div class="col col-auto">
                             <span class="">Stan</span>
                         </div>
-                        <!--
-                        <div class="col">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="new" name="condition">
-                                <label class="custom-control-label" for="new">nowa</label>
-                            </div>
-
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="used" name="condition" checked>
-                                <label class="custom-control-label" for="used">używana</label>
-                            </div>
-                        </div>
-                        -->
                         <div class="col">
                             <div class="custom-control custom-radio" th:each="condition : ${conditions}">
                                 <input type="radio" class="custom-control-input" id="new" th:id="${condition.id}" th:field="*{bookCondition}" th:value="${condition}"  name="condition">
@@ -99,9 +83,9 @@
                         </div>
                     </div>
 
-                    <!--opis TODO: dodać do bazy-->
+                    <!--description-->
                     <div class="md-form">
-                        <textarea id="desc" class="md-textarea form-control" rows="3"></textarea>
+                        <textarea id="desc" class="md-textarea form-control" rows="3" th:field="*{description}"></textarea>
                         <label for="desc">Opis</label>
                     </div>
 

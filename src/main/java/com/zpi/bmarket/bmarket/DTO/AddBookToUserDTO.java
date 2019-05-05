@@ -31,6 +31,10 @@ public class AddBookToUserDTO {
 
     private Category category;
 
+    private String photoUrl;
+
+    private String description;
+
 
     public Book getBook(User user){
 
@@ -43,9 +47,9 @@ public class AddBookToUserDTO {
         book.setPublisher(this.publisher);
         book.setIsbn(this.isbn);
         book.setCategory(this.category);
+        book.setPhotoUrl(this.photoUrl);
+        book.setDescription(this.description);
 
         return book;
     }
-
-    // TODO: add photo path and description
 }
