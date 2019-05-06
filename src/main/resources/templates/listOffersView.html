@@ -43,34 +43,39 @@
                         <br>
                         <div class="row">
                             <div class="col col-auto">
-                                <span class="">Oferty</span>
+                                <span class="">Status</span>
                             </div>
+                            <!--for each-->
                             <div class="col">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="show-used" checked>
-                                    <label class="custom-control-label" for="show-used">używane</label>
+                                <div class="custom-control custom-checkbox"  th:each="status : ${statuses}">
+                                    <input type="checkbox" class="custom-control-input" th:id="s + ${status.id}" checked>
+                                    <label class="custom-control-label" th:for="s + ${status.id}" th:text="${status.status}"></label>
                                 </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="show-new" checked>
-                                    <label class="custom-control-label" for="show-new">nowe</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col col-auto">
+                                <span class="">Status</span>
+                            </div>
+                            <!--foreach-->
+                            <div class = "col" >
+                                <div class="custom-control custom-checkbox" th:each="type : ${types}">
+                                    <input type="checkbox" class="custom-control-input" th:id="t + ${type.id}" checked>
+                                    <label class="custom-control-label" th:for="t + ${type.id}" th:text="${type.type}"></label>
                                 </div>
-
-                                <br>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="show-sell" checked>
-                                    <label class="custom-control-label" for="show-sell">sprzedaż</label>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="show-exchange" checked>
-                                    <label class="custom-control-label" for="show-exchange">wymiana</label>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="show-giveaway" checked>
-                                    <label class="custom-control-label" for="show-giveaway">oddam</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col col-auto">
+                                <span class="">Kondycja</span>
+                            </div>
+                            <!--for each-->
+                            <div class="col">
+                                <div class="custom-control custom-checkbox" th:each="condition : ${conditions}">
+                                    <input type="checkbox" class="custom-control-input" th:id="c + ${condition.id}" checked>
+                                    <label class="custom-control-label" th:for="c + ${condition.id}" th:text="${condition.value}"></label>
                                 </div>
                             </div>
                         </div>
