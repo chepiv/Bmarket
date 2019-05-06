@@ -38,11 +38,15 @@ public class OfferController {
         AddOfferDTO offerDTO = new AddOfferDTO();
         Long id = ((Long) session.getAttribute("userId")).longValue();
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
-
+        PostStatus bookStatus = PostStatus.ERROR;
 
         model.addAttribute("offerDTO", offerDTO);
         model.addAttribute("offerTypes", offerTypeRepository.findAll());
-        model.addAttribute("userBooks", user.getBooks());
+        if (!user.getBooks().isEmpty()) {
+            model.addAttribute("userBooks", user.getBooks());
+            bookStatus = PostStatus.SUCCESS;
+        }
+        model.addAttribute("bookStatus", bookStatus);
 
         return "addOfferView";
     }

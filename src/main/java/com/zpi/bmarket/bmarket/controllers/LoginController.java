@@ -24,14 +24,14 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping(value = "/login")
-    public String getLoginUserView(Model model){
+    public String getLoginUserView(Model model) {
         LoginDTO loginDTO = new LoginDTO();
         model.addAttribute("login", loginDTO);
         return "loginView";
     }
 
     @RequestMapping(value = "/postLogin", method = RequestMethod.POST)
-    public String postLogin(@ModelAttribute LoginDTO loginDTO, Model model, HttpSession session, RedirectAttributes ra){
+    public String postLogin(@ModelAttribute LoginDTO loginDTO, Model model, HttpSession session, RedirectAttributes ra) {
 
         PostStatus status = PostStatus.SUCCESS;
         User user = null;
@@ -46,19 +46,24 @@ public class LoginController {
             return "redirect:/login";
         }
 
-        if (status == PostStatus.SUCCESS){
+        if (status == PostStatus.SUCCESS) {
             session.setAttribute("userId", user.getId());
         }
         ra.addFlashAttribute("redirectFrom", "postLogin");
         ra.addFlashAttribute("status", status);
         return "redirect:/";
     }
-/*
-    @GetMapping(value = "/logout")
-    public String logout(Model model, HttpSession session){
 
-        return "logout";
+
+    @GetMapping(value = "/logout")
+    public String logout(Model model, HttpSession session) {
+
+        session.removeAttribute("userId");
+        session.invalidate();
+
+        return "index";
+
+
     }
-*/
 
 }
