@@ -1,6 +1,7 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.google.common.collect.Lists;
+import com.zpi.bmarket.bmarket.DTO.SearchOfferDTO;
 import com.zpi.bmarket.bmarket.domain.BookCondition;
 import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.OfferType;
@@ -9,8 +10,10 @@ import com.zpi.bmarket.bmarket.repositories.BookConditionRepository;
 import com.zpi.bmarket.bmarket.repositories.OfferRepository;
 import com.zpi.bmarket.bmarket.repositories.OfferTypeRepository;
 import com.zpi.bmarket.bmarket.repositories.StatusRepository;
+import jdk.nashorn.internal.runtime.Debug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,21 @@ public class OffersListController {
 
     private int limit = 3;
 
+    @ModelAttribute("conditions")
+    public List<BookCondition> conditions(){
+        return  Lists.newArrayList(bookConditionRepository.findAll());
+    }
+
+    @ModelAttribute("types")
+    public List<OfferType> types(){
+        return  Lists.newArrayList(offerTypeRepository.findAll());
+    }
+
+    @ModelAttribute("statuses")
+    public List<Status> statuses(){
+        return  Lists.newArrayList(statusRepository.findAll());
+    }
+
     @GetMapping("/offers")
     public String offerListStart(Model model) {
         return "redirect:/offers/1";
@@ -40,24 +58,30 @@ public class OffersListController {
     @GetMapping("/offers/{index}")
     public String offerList(Model model, @PathVariable("index") int index) {
         List<Offer> offers = offerRepository.findAll(PageRequest.of(index - 1, limit)).getContent();
-        List<BookCondition> conditions = Lists.newArrayList(bookConditionRepository.findAll());
-        List<OfferType> types = Lists.newArrayList(offerTypeRepository.findAll());
-        List<Status> statuses = Lists.newArrayList(statusRepository.findAll());
 
         model.addAttribute("offers", offers);
         model.addAttribute("index",index);
-        model.addAttribute("conditions",conditions);
-        model.addAttribute("types",types);
-        model.addAttribute("statuses",statuses);
+        model.addAttribute("searchOfferDTO",new SearchOfferDTO());
 
 
         return "listOffersView";
     }
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
-    public String offerListSearch(Model model ,@PathVariable("index") int index) {
+    public String offerListSearch(Model model , @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
 
+
+//        OfferType type = searchOfferDTO.getOfferTypes().get(0);
+        Pageable pageable = PageRequest.of(index - 1, limit);
+//        List<Offer> offers = offerRepository.findAllByDescriptionContaining("Krople",PageRequest.of(index - 1, limit)).getContent();
+        OfferType type = new OfferType();
+        type.setId(2L);
+        type.setType("Wymiana");
+        List<Offer> offers = offerRepository.findAllByOfferType(type,pageable).getContent();
 
         model.addAttribute("index",index);
+        model.addAttribute("offers",offers);
+
+
         return "listOffersView";
     }
 }

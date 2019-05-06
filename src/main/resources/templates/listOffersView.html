@@ -18,7 +18,8 @@
             <div class="row">
                 <!--form left column start-->
                 <div class="col-sm-3">
-                    <form method="post">
+                    <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
+                    <form th:method="post" th:action="@{'/offers/'+${index}}" th:object="${searchOfferDTO}">
                         <div class="row">
                             <div class="col col-mw-130">
                                 <span class="">Sortuj według</span>
@@ -49,20 +50,20 @@
                             <div class="col">
                                 <div class="custom-control custom-checkbox"  th:each="status : ${statuses}">
                                     <input type="checkbox" class="custom-control-input" th:id="s + ${status.id}" checked>
-                                    <label class="custom-control-label" th:for="s + ${status.id}" th:text="${status.status}"></label>
+                                    <label class="custom-control-label" th:for="s + ${status.id}" th:text="${status.status}" th:value="${status.status}"></label>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col col-auto">
-                                <span class="">Status</span>
+                                <span class="">Typ oferty</span>
                             </div>
                             <!--foreach-->
                             <div class = "col" >
                                 <div class="custom-control custom-checkbox" th:each="type : ${types}">
                                     <input type="checkbox" class="custom-control-input" th:id="t + ${type.id}" checked>
-                                    <label class="custom-control-label" th:for="t + ${type.id}" th:text="${type.type}"></label>
+                                    <label class="custom-control-label" th:for="t + ${type.id}" th:text="${type.type}" th:value="${type.type}" ></label>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +76,7 @@
                             <div class="col">
                                 <div class="custom-control custom-checkbox" th:each="condition : ${conditions}">
                                     <input type="checkbox" class="custom-control-input" th:id="c + ${condition.id}" checked>
-                                    <label class="custom-control-label" th:for="c + ${condition.id}" th:text="${condition.value}"></label>
+                                    <label class="custom-control-label" th:for="c + ${condition.id}" th:text="${condition.value}" th:value="${condition.value}"></label>
                                 </div>
                             </div>
                         </div>
