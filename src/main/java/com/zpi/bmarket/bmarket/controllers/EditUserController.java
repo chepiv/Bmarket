@@ -1,12 +1,16 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.UserEditDTO;
+import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpSession;
@@ -26,14 +30,49 @@ public class EditUserController {
         //TODO: GET SESSION INFO AND IF USER LOGGED IN PASS USER DATA TO VIEW
 
         String sid = RequestContextHolder.currentRequestAttributes().getSessionId();
-        UserEditDTO user = new UserEditDTO();
+        UserEditDTO userEditDTO = new UserEditDTO();
         Long id = ((Long)session.getAttribute("userId")).longValue();
         User userRep = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
-        //user.setFromSessionDB
-        model.addAttribute("user", userRep);
+
+        userEditDTO.getCurrentDataUser(userRep);
+
+        model.addAttribute("userEditDTO", userEditDTO);
         model.addAttribute("sid", sid);
         return "userEditView";
     }
+
+
+    @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
+    public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
+        PostStatus status = PostStatus.ERROR;
+        try {
+            userEditDTO.setCurrentDataUser(userRep);
+            userRepository.save(userRep);
+            status = PostStatus.SUCCESS;
+        } catch (Exception e) {
+            status = PostStatus.DATABASE_ERROR;
+        }
+        /*
+        if (!userEditDTO.getPassword().equals(userEditDTO.getMatchingPassword())) {
+            status = PostStatus.PASSWORDS_NOT_MATCH;
+        } else {
+            status = PostStatus.DATABASE_ERROR;
+
+            try {
+                userEditDTO.setCurrentDataUser(userRep);
+                userRepository.save(userRep);
+                status = PostStatus.SUCCESS;
+            } catch (Exception e) {
+                status = PostStatus.DATABASE_ERROR;
+            }
+
+        }
+        */
+
+        model.addAttribute("status", status);
+        return "postUserEditView";
+    }
+
     /*
     @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
     public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
@@ -103,5 +142,7 @@ public class EditUserController {
         return "postUserEditView";
     }
     */
+
+
 
 }

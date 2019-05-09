@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>BMarket</title>
+</head>
+<body>
+    <div th:switch="${status}">
+    <p th:case="${status.SUCCESS}" th:text="'książka '+${book.getTitle()}+' dodana pomyślnie'"></p>
+    <p th:case="${status.ERROR}">Dodanie książki nie powiodło się</p>
+    <p th:case="${status.DATABASE_ERROR}">błąd z bazą danych</p>
+    <p th:case="*">Wystąpił nieznany błąd</p>
+    </div>
+
+    <a href="/">Powrót do strony głównej</a>
+</body>
+</html>
