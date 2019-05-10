@@ -1,19 +1,11 @@
 package com.zpi.bmarket.bmarket.DTO;
 
 import com.zpi.bmarket.bmarket.domain.*;
-import com.zpi.bmarket.bmarket.repositories.StatusRepository;
-import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import sun.util.calendar.BaseCalendar;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
