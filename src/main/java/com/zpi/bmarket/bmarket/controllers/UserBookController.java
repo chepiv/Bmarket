@@ -1,30 +1,32 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.AddBookToUserDTO;
-import com.zpi.bmarket.bmarket.DTO.LoginDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.Book;
-import com.zpi.bmarket.bmarket.domain.Category;
-import com.zpi.bmarket.bmarket.domain.Condition;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.BookRepository;
 import com.zpi.bmarket.bmarket.repositories.CategoryRepository;
 import com.zpi.bmarket.bmarket.repositories.ConditionRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class UserBookController {
 
+    private static final String UPLOADED_FOLDER = "C:\\Users\\chepiv\\IdeaProjects\\BMarket\\images\\"; //todo dif paths for prod and local
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -50,13 +52,15 @@ public class UserBookController {
     @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)
     public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO ,Model model, HttpSession session) {
 
-        PostStatus status = PostStatus.ERROR;
-        Long id = ((Long) session.getAttribute("userId")).longValue();
+        PostStatus status;
+        Long id = (Long) session.getAttribute("userId");
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
         Book book = bookDTO.getBook(user);
 
         try {
+            saveUploadedFile(bookDTO.getImage());
+//            book.setPhotoUrl(""); TODO store file path
             bookRepository.save(book);
             model.addAttribute("book", book);
             status = PostStatus.SUCCESS;
@@ -67,5 +71,13 @@ public class UserBookController {
 
         model.addAttribute("status", status);
         return "postAddUserBookView";
+    }
+
+    private void saveUploadedFile(MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+        }
     }
 }

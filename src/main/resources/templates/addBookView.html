@@ -20,7 +20,7 @@
 <div class="container subpage-content">
     <div>
         <!--form start-->
-        <form method="post" th:action="@{/postAddUserBook}" th:object="${bookDTO}">
+        <form method="post" enctype="multipart/form-data" th:action="@{/postAddUserBook}" th:object="${bookDTO}">
             <div class="row">
                 <!--form left column start-->
                 <div class="col-md-4">
@@ -29,7 +29,7 @@
                     <label>Zdjęcie</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" th:field="*{photoUrl}">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" th:field="*{image}">
                             <label class="custom-file-label" for="inputGroupFile01">Wybierz plik</label>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                     <!--category-->
                     <div class="md-form">
                         <select id="category" class="browser-default custom-select" th:field="*{category}" >
-                            <option selected disabled>Wybierz kategorię</option>
+                            <option selected disabled value="">Wybierz kategorię</option>
                             <option th:each="category : ${categories}" th:text="${category.value}"> Category </option>
                         </select>
                     </div>

@@ -1,17 +1,16 @@
 package com.zpi.bmarket.bmarket.DTO;
 
 
-import com.zpi.bmarket.bmarket.domain.*;
+import com.zpi.bmarket.bmarket.domain.Book;
+import com.zpi.bmarket.bmarket.domain.BookCondition;
+import com.zpi.bmarket.bmarket.domain.Category;
+import com.zpi.bmarket.bmarket.domain.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -32,6 +31,8 @@ public class AddBookToUserDTO {
     private Category category;
 
     private String photoUrl;
+
+    private MultipartFile image;
 
     private String description;
 
