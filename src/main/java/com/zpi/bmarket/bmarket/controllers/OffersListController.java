@@ -69,7 +69,7 @@ public class OffersListController {
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
     public String offerListSearch(Model model , @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
 
-
+        searchOfferDTO.removeNulls();
 //        OfferType type = searchOfferDTO.getOfferTypes().get(0);
         Pageable pageable = PageRequest.of(index - 1, limit);
 //        List<Offer> offers = offerRepository.findAllByDescriptionContaining("Krople",PageRequest.of(index - 1, limit)).getContent();

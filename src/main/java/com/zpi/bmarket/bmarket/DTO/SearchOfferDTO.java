@@ -18,7 +18,13 @@ public class SearchOfferDTO {
 
     List<Status> statuses;
 
-    OfferType type;
+    int priceMin;
+    int priceMax;
 
+    public void removeNulls(){
+        conditions.removeIf(x->x==null || x.getId()==null || x.getValue()==null);
+        offerTypes.removeIf(x->x==null || x.getId()==null || x.getType()==null);
+        statuses.removeIf(x->x==null || x.getId()==null || x.getStatus()==null);
+    }
 
 }
