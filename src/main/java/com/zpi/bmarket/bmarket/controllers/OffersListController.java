@@ -6,10 +6,7 @@ import com.zpi.bmarket.bmarket.domain.BookCondition;
 import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.OfferType;
 import com.zpi.bmarket.bmarket.domain.Status;
-import com.zpi.bmarket.bmarket.repositories.BookConditionRepository;
-import com.zpi.bmarket.bmarket.repositories.OfferRepository;
-import com.zpi.bmarket.bmarket.repositories.OfferTypeRepository;
-import com.zpi.bmarket.bmarket.repositories.StatusRepository;
+import com.zpi.bmarket.bmarket.repositories.*;
 import jdk.nashorn.internal.runtime.Debug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +23,8 @@ public class OffersListController {
 
     @Autowired
     private OfferRepository offerRepository;
+    @Autowired
+    private BookRepository bookRepository;
     @Autowired
     private BookConditionRepository bookConditionRepository;
     @Autowired
@@ -70,13 +69,14 @@ public class OffersListController {
     public String offerListSearch(Model model , @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
 
         searchOfferDTO.removeNulls();
-//        OfferType type = searchOfferDTO.getOfferTypes().get(0);
         Pageable pageable = PageRequest.of(index - 1, limit);
+        List<Offer> offers = offerRepository.findAllByStatusInOrOfferTypeInOrBooksIn(
+                searchOfferDTO.getStatuses(),searchOfferDTO.getOfferTypes(),
+                bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
+                pageable).getContent();
+
+//        OfferType type = searchOfferDTO.getOfferTypes().get(0);
 //        List<Offer> offers = offerRepository.findAllByDescriptionContaining("Krople",PageRequest.of(index - 1, limit)).getContent();
-        OfferType type = new OfferType();
-        type.setId(2L);
-        type.setType("Wymiana");
-        List<Offer> offers = offerRepository.findAllByOfferType(type,pageable).getContent();
 
         model.addAttribute("index",index);
         model.addAttribute("offers",offers);

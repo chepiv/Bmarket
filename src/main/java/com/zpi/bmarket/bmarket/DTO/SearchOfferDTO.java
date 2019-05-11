@@ -12,14 +12,14 @@ import java.util.List;
 @Setter
 public class SearchOfferDTO {
 
-    List<BookCondition> conditions;
+    private List<BookCondition> conditions;
 
-    List<OfferType> offerTypes;
+    private List<OfferType> offerTypes;
 
-    List<Status> statuses;
+    private List<Status> statuses;
 
-    int priceMin;
-    int priceMax;
+    private int priceMin;
+    private int priceMax;
 
     public void removeNulls(){
         conditions.removeIf(x->x==null || x.getId()==null || x.getValue()==null);
