@@ -7,7 +7,6 @@ import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.OfferType;
 import com.zpi.bmarket.bmarket.domain.Status;
 import com.zpi.bmarket.bmarket.repositories.*;
-import jdk.nashorn.internal.runtime.Debug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -49,6 +47,11 @@ public class OffersListController {
         return  Lists.newArrayList(statusRepository.findAll());
     }
 
+
+    private Status getValidStatus(){
+        return statusRepository.getFirstById(1L);
+    }
+
     @GetMapping("/offers")
     public String offerListStart(Model model) {
         return "redirect:/offers/1";
@@ -56,7 +59,7 @@ public class OffersListController {
 
     @GetMapping("/offers/{index}")
     public String offerList(Model model, @PathVariable("index") int index) {
-        List<Offer> offers = offerRepository.findAll(PageRequest.of(index - 1, limit)).getContent();
+        List<Offer> offers = offerRepository.findAllByStatus(getValidStatus(), PageRequest.of(index - 1, limit)).getContent();
 
         model.addAttribute("offers", offers);
         model.addAttribute("index",index);
@@ -68,10 +71,10 @@ public class OffersListController {
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
     public String offerListSearch(Model model , @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
 
-        searchOfferDTO.removeNulls();
+        searchOfferDTO.init();
         Pageable pageable = PageRequest.of(index - 1, limit);
-        List<Offer> offers = offerRepository.findAllByStatusInOrOfferTypeInOrBooksIn(
-                searchOfferDTO.getStatuses(),searchOfferDTO.getOfferTypes(),
+        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksIn(
+                getValidStatus(),searchOfferDTO.getOfferTypes(),
                 bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
                 pageable).getContent();
 

@@ -44,19 +44,6 @@
                         <br>
                         <div class="row">
                             <div class="col col-auto">
-                                <span class="">Status</span>
-                            </div>
-                            <!--for each-->
-                            <div class="col">
-                                <div class="custom-control custom-checkbox"  th:each="status : ${statuses}">
-                                    <input type="checkbox" class="custom-control-input" th:id="s + ${status.id}" th:value="${status.id}" th:field="*{statuses['__${status.id}__']}">
-                                    <label class="custom-control-label" th:for="s + ${status.id}" th:text="${status.status}" th:value="${status.status}"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col col-auto">
                                 <span class="">Typ oferty</span>
                             </div>
                             <!--foreach-->

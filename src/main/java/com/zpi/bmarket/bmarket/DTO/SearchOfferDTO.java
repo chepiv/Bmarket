@@ -16,15 +16,12 @@ public class SearchOfferDTO {
 
     private List<OfferType> offerTypes;
 
-    private List<Status> statuses;
-
     private int priceMin;
     private int priceMax;
 
-    public void removeNulls(){
+    public void init(){
         conditions.removeIf(x->x==null || x.getId()==null || x.getValue()==null);
         offerTypes.removeIf(x->x==null || x.getId()==null || x.getType()==null);
-        statuses.removeIf(x->x==null || x.getId()==null || x.getStatus()==null);
     }
 
 }

@@ -11,11 +11,11 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface OfferRepository extends CrudRepository<Offer, Long> {
-    Page<Offer> findAll(Pageable pageable);
+    Page<Offer> findAllByStatus(Status status, Pageable pageable);
     Page<Offer> findAllByDescriptionContaining(String description,Pageable pageable);
     Page<Offer> findAllByOfferType(OfferType type,Pageable pageable);
 
     Page<Offer> findAllByStatusInOrOfferTypeIn(List<Status> statuses, List<OfferType> offerTypes, Pageable pageable);
-    Page<Offer> findAllByStatusInOrOfferTypeInOrBooksIn(List<Status> statuses, List<OfferType> offerTypes, List<Book> books, Pageable pageable);
+    Page<Offer> findAllByStatusAndOfferTypeInAndBooksIn(Status status, List<OfferType> offerTypes, List<Book> books, Pageable pageable);
     Page<Offer> findAllByStatusOrOfferTypeIn(Status status, List<OfferType> offerTypes, Pageable pageable);
 }
