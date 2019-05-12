@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class UserEditDTO {
+public class UserDTO {
 
     private String name;
 

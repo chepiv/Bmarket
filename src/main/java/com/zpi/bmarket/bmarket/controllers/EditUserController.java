@@ -1,17 +1,15 @@
 package com.zpi.bmarket.bmarket.controllers;
 
-import com.zpi.bmarket.bmarket.DTO.UserEditDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,29 +27,27 @@ public class EditUserController {
     public String userEdit(HttpSession session, Model model) {
         //TODO: GET SESSION INFO AND IF USER LOGGED IN PASS USER DATA TO VIEW
 
-        String sid = RequestContextHolder.currentRequestAttributes().getSessionId();
-        UserEditDTO userEditDTO = new UserEditDTO();
-        Long id = ((Long)session.getAttribute("userId")).longValue();
-        User userRep = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        Long id = ((Long) session.getAttribute("userId")).longValue();
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
-        userEditDTO.getCurrentDataUser(userRep);
 
-        model.addAttribute("userEditDTO", userEditDTO);
-        model.addAttribute("sid", sid);
+        model.addAttribute("user", user);
+
         return "userEditView";
     }
 
 
     @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
-    public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
+    public String postUserEdit( User user, Model model, BindingResult result) {
         PostStatus status = PostStatus.ERROR;
-        try {
-            userEditDTO.setCurrentDataUser(userRep);
-            userRepository.save(userRep);
-            status = PostStatus.SUCCESS;
-        } catch (Exception e) {
-            status = PostStatus.DATABASE_ERROR;
+        if (result.hasErrors()) {
+            return "userEditView";
         }
+
+        userRepository.save(user);
+        status = PostStatus.SUCCESS;
+
+
         /*
         if (!userEditDTO.getPassword().equals(userEditDTO.getMatchingPassword())) {
             status = PostStatus.PASSWORDS_NOT_MATCH;
@@ -75,7 +71,7 @@ public class EditUserController {
 
     /*
     @RequestMapping(value = "/postUserEdit", method = RequestMethod.POST)
-    public String postUserEdit(@ModelAttribute UserEditDTO userEditDTO, User userRep, Model model) {
+    public String postUserEdit(@ModelAttribute UserDTO userEditDTO, User userRep, Model model) {
         PostRegisterStatus status = PostRegisterStatus.DATABASE_ERROR;
         userRep.setName("abc");
         System.out.println(userRep.getName());
@@ -94,7 +90,7 @@ public class EditUserController {
     }
 
     @RequestMapping(value = "/postAddressEdit", method = RequestMethod.POST)
-    public String postAddressEdit(@ModelAttribute UserEditDTO userEditDTO, Model model) {
+    public String postAddressEdit(@ModelAttribute UserDTO userEditDTO, Model model) {
         PostRegisterStatus status = PostRegisterStatus.DATABASE_ERROR;
         User user = userEditDTO.getUser();
         //edit user in database
@@ -109,7 +105,7 @@ public class EditUserController {
     }
 
     @RequestMapping(value = "/postContactEdit", method = RequestMethod.POST)
-    public String postContactEdit(@ModelAttribute UserEditDTO userEditDTO, Model model) {
+    public String postContactEdit(@ModelAttribute UserDTO userEditDTO, Model model) {
         PostRegisterStatus status = PostRegisterStatus.DATABASE_ERROR;
         User user = userEditDTO.getUser();
         //edit user in database
@@ -124,7 +120,7 @@ public class EditUserController {
     }
 
     @RequestMapping(value = "/postPasswordEdit", method = RequestMethod.POST)
-    public String postPasswordEdit(@ModelAttribute UserEditDTO userEditDTO, Model model) {
+    public String postPasswordEdit(@ModelAttribute UserDTO userEditDTO, Model model) {
         PostRegisterStatus status = PostRegisterStatus.DATABASE_ERROR;
         User user = userEditDTO.getUser();
         if (!userEditDTO.getPassword().equals(userEditDTO.getMatchingPassword())) {
@@ -142,7 +138,6 @@ public class EditUserController {
         return "postUserEditView";
     }
     */
-
 
 
 }

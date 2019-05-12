@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Getter
 @Setter
-public class AddOfferDTO {
+public class OfferDTO {
 
     @NotNull
     @NotEmpty
@@ -46,7 +46,7 @@ public class AddOfferDTO {
 
 
 
-    public Offer getOffer(User user){
+    public Offer createOffer(User user){
 
         Offer offer = new Offer();
         

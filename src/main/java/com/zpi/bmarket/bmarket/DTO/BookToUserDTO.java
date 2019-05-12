@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Getter
 @Setter
-public class AddBookToUserDTO {
+public class BookToUserDTO {
 
     @NotNull
     @NotEmpty

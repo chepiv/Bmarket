@@ -20,14 +20,14 @@
 <div class="container subpage-content">
     <div>
         <!--form start-->
-        <form method="post" th:action="@{/postAddOffer}" th:object="${offerDTO}">
+        <form method="post" th:action="@{/postEditOffer}" th:object="${offer}">
             <div class="row">
                 <!--form left column start-->
                 <div class="col-md-4">
                     <!--title-->
                     <div class="md-form">
                         <label for="title">Tytuł</label>
-                        <input type="text" id="title" class="form-control" th:field="*{title}">
+                        <input type="text" id="title" class="form-control" th:value="${offer.title}" th:field="*{title}">
                     </div>
                     <!--user books-->
                     <div class="col col-auto">
@@ -36,10 +36,10 @@
                     <div class="col">
                         <div class="custom-control custom-checkbox" th:each="userBook : ${userBooks}">
                             <input type="checkbox" class="custom-control-input" id="user-books" th:id="${userBook.id}"
-                                   th:field="*{books}" th:value="${userBook}" name="offer-type">
+                                   th:field="*{books}" th:value="${userBook}" name="offer-type" th:checked="${offer.getBooks().forEach(userBook)} ? 'checked'">
                             <label class="custom-control-label" th:for="${userBook.id}"
                                    th:text="${userBook.title}"></label>
-                        </div> <!--TODO: od Bartka do sprawdzenia th:value="${status.id}" th:field="*{statuses['_${status.id}_']} -->
+                        </div> <!--TODO: od Bartka do sprawdzenia th:value="${status.id}" th:field="*{statuses['_${status.id}_']} --> <!-- th:checked="${flag} ? 'checked'" -->
                     </div>
                 </div>
                 <!--form left column end-->
@@ -47,7 +47,7 @@
                 <div class="col-md-8">
                     <!--description-->
                     <div class="md-form">
-                        <textarea id="desc" class="md-textarea form-control" rows="3"
+                        <textarea id="desc" class="md-textarea form-control" rows="3" th:value="${offer.description}"
                                   th:field="*{description}"></textarea>
                         <label for="desc">Opis</label>
                     </div>
@@ -71,14 +71,14 @@
                     <!--city-->
                     <div class="md-form">
                         <label for="city">Miasto</label>
-                        <input type="text" id="city" class="form-control" th:field="*{city}">
+                        <input type="text" id="city" class="form-control" th:field="*{city}" th:value="${offer.city}">
                     </div>
 
                     <!--price-->
                     <div id="price-box">
                         <div class="md-form input-group">
                             <label for="price">Cena</label>
-                            <input type="text" class="form-control" id="price" th:field="*{price}">
+                            <input type="text" class="form-control" id="price" th:field="*{price}" th:value="${offer.price}">
                             <div class="input-group-append">
                                 <span class="input-group-text md-addon">zł</span>
                             </div>

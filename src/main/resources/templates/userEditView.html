@@ -11,21 +11,23 @@
 <nav th:replace="html/header.html :: navigation"></nav>
 <div class="container mt-navigation">
     <h1>Użytkownik</h1>
-    <p th:text="${userEditDTO.getName()}"></p>
-    <p th:text="${userEditDTO.getEmail()}"></p>
+    <p th:text="${user.getName()}"></p>
+    <p th:text="${user.getEmail()}"></p>
     <!--TODO: FILL FORMS WITH USER DATA -->
     <section>
         <h2>Informacje osobiste</h2>
 
-        <form method="post" th:action="@{/postUserEdit}" th:object="${userEditDTO}">
+        <form method="post" th:action="@{/postUserEdit}" th:object="${user}">
             <div class="form-group">
                 <div class="md-form">
                     <label for="form1">Imię: </label>
-                    <input th:value="${userEditDTO.name}" type="text" id="form1" class="form-control" th:field="*{name}">
+                    <input th:value="${user.name}" type="text" id="form1" class="form-control" th:field="*{name}">
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                 </div>
                 <div class="md-form">
                     <label for="form2">Nazwisko: </label>
-                    <input th:value="${userEditDTO.surname}" type="text" id="form2" class="form-control" th:field="*{surname}">
+                    <input th:value="${user.surname}" type="text" id="form2" class="form-control" th:field="*{surname}">
+                    <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
                 </div>
 
 
