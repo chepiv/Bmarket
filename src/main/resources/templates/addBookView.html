@@ -67,7 +67,7 @@
                     <div class="md-form">
                         <select id="category" class="browser-default custom-select" th:field="*{category}" >
                             <option selected disabled value="">Wybierz kategorię</option>
-                            <option th:each="category : ${categories}" th:text="${category.value}"> Category </option>
+                            <option  th:each="category : ${categories}" th:value="${category.value}"> Category </option>
                         </select>
                     </div>
                     <!--condition-->

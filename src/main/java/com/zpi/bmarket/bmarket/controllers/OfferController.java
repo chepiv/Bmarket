@@ -3,9 +3,11 @@ package com.zpi.bmarket.bmarket.controllers;
 import com.zpi.bmarket.bmarket.DTO.AddOfferDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.Offer;
-import com.zpi.bmarket.bmarket.domain.Status;
 import com.zpi.bmarket.bmarket.domain.User;
-import com.zpi.bmarket.bmarket.repositories.*;
+import com.zpi.bmarket.bmarket.repositories.OfferRepository;
+import com.zpi.bmarket.bmarket.repositories.OfferTypeRepository;
+import com.zpi.bmarket.bmarket.repositories.StatusRepository;
+import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,13 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class OfferController {
+
+    private static Logger logger = Logger.getLogger(OfferController.class.getName());
 
     @Autowired
     OfferRepository offerRepository;
@@ -66,6 +71,7 @@ public class OfferController {
             status = PostStatus.SUCCESS;
         } catch (Exception e) {
             status = PostStatus.DATABASE_ERROR;
+            logger.log(Level.WARNING,"Database Error",e);
         }
 
         model.addAttribute("status", status);

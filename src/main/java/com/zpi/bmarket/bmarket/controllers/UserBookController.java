@@ -8,6 +8,7 @@ import com.zpi.bmarket.bmarket.repositories.BookRepository;
 import com.zpi.bmarket.bmarket.repositories.CategoryRepository;
 import com.zpi.bmarket.bmarket.repositories.ConditionRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
+import com.zpi.bmarket.bmarket.services.ContentPathAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class UserBookController {
+    private static Logger logger = Logger.getLogger(UserBookController.class.getName());
+    private static final String UPLOADED_FOLDER = ContentPathAccessor.getContentPath();
 
-    private static final String UPLOADED_FOLDER = "C:\\Users\\chepiv\\IdeaProjects\\BMarket\\images\\"; //todo dif paths for prod and local
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -50,7 +54,7 @@ public class UserBookController {
     }
 
     @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)
-    public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO ,Model model, HttpSession session) {
+    public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO, Model model, HttpSession session) {
 
         PostStatus status;
         Long id = (Long) session.getAttribute("userId");
@@ -60,12 +64,13 @@ public class UserBookController {
 
         try {
             saveUploadedFile(bookDTO.getImage());
-//            book.setPhotoUrl(""); TODO store file path
+            book.setPhotoUrl(UPLOADED_FOLDER + bookDTO.getImage().getOriginalFilename());
             bookRepository.save(book);
             model.addAttribute("book", book);
             status = PostStatus.SUCCESS;
         } catch (Exception e) {
             status = PostStatus.DATABASE_ERROR;
+            logger.log(Level.WARNING, "Database Error", e);
         }
 
 
