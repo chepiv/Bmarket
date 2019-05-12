@@ -214,3 +214,82 @@ img.book-cover{
     position: absolute;
     right: 0;
 }
+
+.book-offer{
+    background-color: #f1f1f1;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding-left: 40px;
+    padding-top: 20px;
+    margin-bottom: 25px;
+}
+
+.book-entity-offer{
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.book-offer > div > div:first-child{
+    padding-left: 0;
+}
+
+.offer-list-table{
+    width: 100%
+}
+
+.offer-row{
+    width: 100%;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.offer-row div.row{
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 25px;
+    width: 575px;
+}
+
+.offer-row > td{
+    width:auto;
+}
+
+.offer-list-table thead  th{
+    text-align: center;
+}
+
+.offer-row h4, .offer-row span{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media (max-width: 1200px){
+    .offer-row div.row{
+        width: 475px;
+    }
+}
+
+@media (max-width: 992px){
+    .offer-row div.row{
+        width: 355px;
+    }
+}
+
+@media (max-width: 767px){
+    .offer-row div.row{
+        width: 345px;
+        padding-left: 0;
+    }
+    .image-cell{
+        display: none;
+    }
+    .
+}
+
+@media (max-width: 576px){
+    .offer-row div.row{
+        width: 345px;
+    }
+}
