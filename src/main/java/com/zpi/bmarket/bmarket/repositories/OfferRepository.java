@@ -15,7 +15,6 @@ public interface OfferRepository extends CrudRepository<Offer, Long> {
     Page<Offer> findAllByDescriptionContaining(String description,Pageable pageable);
     Page<Offer> findAllByOfferType(OfferType type,Pageable pageable);
 
-    Page<Offer> findAllByStatusInOrOfferTypeIn(List<Status> statuses, List<OfferType> offerTypes, Pageable pageable);
     Page<Offer> findAllByStatusAndOfferTypeInAndBooksIn(Status status, List<OfferType> offerTypes, List<Book> books, Pageable pageable);
-    Page<Offer> findAllByStatusOrOfferTypeIn(Status status, List<OfferType> offerTypes, Pageable pageable);
+    Page<Offer> findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax, Pageable pageable);
 }

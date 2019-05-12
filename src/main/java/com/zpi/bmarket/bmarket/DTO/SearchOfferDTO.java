@@ -1,10 +1,12 @@
 package com.zpi.bmarket.bmarket.DTO;
 
 import com.zpi.bmarket.bmarket.domain.BookCondition;
+import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.OfferType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,12 +76,19 @@ public class SearchOfferDTO {
         newestFirst = true;
     }
 
-    List<OfferType> getOfferTypes(){
-        return Arrays.asList(typeSale,typeExchange,typeFree);
+    public List<OfferType> getOfferTypes(){
+        ArrayList<OfferType> offerTypes = new ArrayList<>();
+        if(isSale)offerTypes.add(typeSale);
+        if(isExchange)offerTypes.add(typeExchange);
+        if(isFree)offerTypes.add(typeFree);
+        return offerTypes;
     }
 
-    List<BookCondition> getConditions(){
-        return Arrays.asList(conditionNew,conditionUsed);
+    public List<BookCondition> getConditions(){
+        ArrayList<BookCondition> conditions = new ArrayList<>();
+        if(isNew)conditions.add(conditionNew);
+        if(isUsed)conditions.add(conditionUsed);
+        return conditions;
     }
 
 }

@@ -52,6 +52,16 @@ public class OffersListController {
         return statusRepository.getFirstById(1L);
     }
 
+    private List<Offer> getOffersByDTO(SearchOfferDTO searchOfferDTO,int index){
+        Pageable pageable = PageRequest.of(index - 1, limit);
+        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(
+                getValidStatus(),searchOfferDTO.getOfferTypes(),
+                bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
+                searchOfferDTO.getPriceMin(),searchOfferDTO.getPriceMax(),
+                pageable).getContent();
+        return offers;
+    }
+
     @GetMapping("/offers")
     public String offerListStart(Model model) {
         return "redirect:/offers/1";
@@ -59,7 +69,8 @@ public class OffersListController {
 
     @GetMapping("/offers/{index}")
     public String offerList(Model model, @PathVariable("index") int index) {
-        List<Offer> offers = offerRepository.findAllByStatus(getValidStatus(), PageRequest.of(index - 1, limit)).getContent();
+        SearchOfferDTO searchOfferDTO = new SearchOfferDTO();
+        List<Offer> offers = getOffersByDTO(searchOfferDTO,index);
 
         model.addAttribute("offers", offers);
         model.addAttribute("index",index);
@@ -70,20 +81,10 @@ public class OffersListController {
     }
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
     public String offerListSearch(Model model , @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
+        List<Offer> offers = getOffersByDTO(searchOfferDTO, index);
 
-//        searchOfferDTO.init();
-//        Pageable pageable = PageRequest.of(index - 1, limit);
-//        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksIn(
-//                getValidStatus(),searchOfferDTO.getOfferTypes(),
-//                bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
-//                pageable).getContent();
-//
-////        OfferType type = searchOfferDTO.getOfferTypes().get(0);
-////        List<Offer> offers = offerRepository.findAllByDescriptionContaining("Krople",PageRequest.of(index - 1, limit)).getContent();
-//
-//        model.addAttribute("index",index);
-//        model.addAttribute("offers",offers);
-
+        model.addAttribute("index",index);
+        model.addAttribute("offers",offers);
 
         return "listOffersView";
     }
