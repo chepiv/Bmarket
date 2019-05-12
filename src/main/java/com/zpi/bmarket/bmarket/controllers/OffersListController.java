@@ -71,18 +71,18 @@ public class OffersListController {
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
     public String offerListSearch(Model model , @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
 
-        searchOfferDTO.init();
-        Pageable pageable = PageRequest.of(index - 1, limit);
-        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksIn(
-                getValidStatus(),searchOfferDTO.getOfferTypes(),
-                bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
-                pageable).getContent();
-
-//        OfferType type = searchOfferDTO.getOfferTypes().get(0);
-//        List<Offer> offers = offerRepository.findAllByDescriptionContaining("Krople",PageRequest.of(index - 1, limit)).getContent();
-
-        model.addAttribute("index",index);
-        model.addAttribute("offers",offers);
+//        searchOfferDTO.init();
+//        Pageable pageable = PageRequest.of(index - 1, limit);
+//        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksIn(
+//                getValidStatus(),searchOfferDTO.getOfferTypes(),
+//                bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
+//                pageable).getContent();
+//
+////        OfferType type = searchOfferDTO.getOfferTypes().get(0);
+////        List<Offer> offers = offerRepository.findAllByDescriptionContaining("Krople",PageRequest.of(index - 1, limit)).getContent();
+//
+//        model.addAttribute("index",index);
+//        model.addAttribute("offers",offers);
 
 
         return "listOffersView";

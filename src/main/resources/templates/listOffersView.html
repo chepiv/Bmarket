@@ -48,9 +48,21 @@
                             </div>
                             <!--foreach-->
                             <div class = "col" >
-                                <div class="custom-control custom-checkbox" th:each="type : ${types}">
-                                    <input type="checkbox" class="custom-control-input" th:id="t + ${type.id}" th:value="${type.id}" th:field="*{offerTypes['__${type.id}__']}">
-                                    <label class="custom-control-label" th:for="t + ${type.id}" th:text="${type.type}" th:value="${type.type}" ></label>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" th:id="type-sale" th:field="*{sale}">
+                                    <label class="custom-control-label" th:for="type-sale" th:text="*{typeSale.type}" th:value="*{typeSale.type}" ></label>
+                                </div>
+                            </div>
+                            <div class = "col" >
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" th:id="type-exchange" th:field="*{exchange}">
+                                    <label class="custom-control-label" th:for="type-exchange" th:text="*{typeExchange.type}" th:value="*{typeExchange.type}" ></label>
+                                </div>
+                            </div>
+                            <div class = "col" >
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" th:id="type-free" th:field="*{free}">
+                                    <label class="custom-control-label" th:for="type-free" th:text="*{typeFree.type}" th:value="*{typeFree.type}" ></label>
                                 </div>
                             </div>
                         </div>
@@ -61,9 +73,15 @@
                             </div>
                             <!--for each-->
                             <div class="col">
-                                <div class="custom-control custom-checkbox" th:each="condition : ${conditions}">
-                                    <input type="checkbox" class="custom-control-input" th:id="c + ${condition.id}" th:value="${condition.id}" th:field="*{conditions['__${condition.id}__']}">
-                                    <label class="custom-control-label" th:for="c + ${condition.id}" th:text="${condition.value}" th:value="${condition.value}"></label>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" th:id="cond-new" th:field="*{new}">
+                                    <label class="custom-control-label" th:for="cond-new" th:text="*{conditionNew.value}" th:value="*{conditionNew.value}"></label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" th:id="cond-used" th:field="*{used}">
+                                    <label class="custom-control-label" th:for="cond-used" th:text="*{conditionUsed.value}" th:value="*{conditionUsed.value}"></label>
                                 </div>
                             </div>
                         </div>
