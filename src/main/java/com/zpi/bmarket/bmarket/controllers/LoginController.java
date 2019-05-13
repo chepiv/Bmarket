@@ -1,7 +1,6 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.LoginDTO;
-import com.zpi.bmarket.bmarket.PostLoginStatus;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
@@ -24,14 +23,14 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping(value = "/login")
-    public String getLoginUserView(Model model){
+    public String getLoginUserView(Model model) {
         LoginDTO loginDTO = new LoginDTO();
         model.addAttribute("login", loginDTO);
         return "loginView";
     }
 
     @RequestMapping(value = "/postLogin", method = RequestMethod.POST)
-    public String postLogin(@ModelAttribute LoginDTO loginDTO, Model model, HttpSession session, RedirectAttributes ra){
+    public String postLogin(@ModelAttribute LoginDTO loginDTO, Model model, HttpSession session, RedirectAttributes ra) {
 
         PostStatus status = PostStatus.SUCCESS;
         User user = null;
@@ -46,7 +45,7 @@ public class LoginController {
             return "redirect:/login";
         }
 
-        if (status == PostStatus.SUCCESS){
+        if (status == PostStatus.SUCCESS) {
             session.setAttribute("userId", user.getId());
         }
         ra.addFlashAttribute("redirectFrom", "postLogin");

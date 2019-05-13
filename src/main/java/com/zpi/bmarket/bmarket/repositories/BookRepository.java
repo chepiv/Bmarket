@@ -1,6 +1,8 @@
 package com.zpi.bmarket.bmarket.repositories;
 
 import com.zpi.bmarket.bmarket.domain.Book;
+import com.zpi.bmarket.bmarket.domain.BookCondition;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -11,5 +13,6 @@ import java.util.List;
  * Github:chepiv
  */
 public interface BookRepository extends CrudRepository<Book,Long> {
-    public List<Book> findAllByUserId(Long id);
+    List<Book> findAllByUserId(Long id);
+    List<Book> findAllByBookConditionIn(List<BookCondition> bookCondition);
 }
