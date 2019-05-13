@@ -96,7 +96,9 @@
                         </thead>
                         <tbody>
                         <tr class="offer-row" style="" th:each="offer:${offers}">
-                            <td class="image-cell"><img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif"></td>
+                            <td class="image-cell">
+                                <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif"></td>
+                                <!--<img class="book-cover" th:src="${offer.books[0].getPhotoUrl()}"></td>-->
                             <td style=""><div class="row">
                                 <h4 th:text="${offer.title}"><strong></strong></h4>
                                 </div>
