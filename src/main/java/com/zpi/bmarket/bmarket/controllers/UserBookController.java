@@ -8,6 +8,7 @@ import com.zpi.bmarket.bmarket.repositories.BookRepository;
 import com.zpi.bmarket.bmarket.repositories.CategoryRepository;
 import com.zpi.bmarket.bmarket.repositories.ConditionRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
+import com.zpi.bmarket.bmarket.services.ContentPathAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +16,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class UserBookController {
+    private static Logger logger = Logger.getLogger(UserBookController.class.getName());
+    private static final String UPLOADED_FOLDER = ContentPathAccessor.getContentPath();
 
     @Autowired
     UserRepository userRepository;
@@ -46,22 +56,33 @@ public class UserBookController {
     @RequestMapping(value = "/postAddUserBook", method = RequestMethod.POST)
     public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO, Model model, HttpSession session) {
 
-        PostStatus status = PostStatus.ERROR;
-        Long id = ((Long) session.getAttribute("userId")).longValue();
+        PostStatus status;
+        Long id = (Long) session.getAttribute("userId");
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
         Book book = bookDTO.getBook(user);
 
         try {
+            saveUploadedFile(bookDTO.getImage());
+            book.setPhotoUrl(UPLOADED_FOLDER + bookDTO.getImage().getOriginalFilename());
             bookRepository.save(book);
             model.addAttribute("book", book);
             status = PostStatus.SUCCESS;
         } catch (Exception e) {
             status = PostStatus.DATABASE_ERROR;
+            logger.log(Level.WARNING, "Database Error", e);
         }
 
 
         model.addAttribute("status", status);
         return "postAddUserBookView";
+    }
+
+    private void saveUploadedFile(MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+        }
     }
 }

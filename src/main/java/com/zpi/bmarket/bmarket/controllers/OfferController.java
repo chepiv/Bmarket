@@ -19,9 +19,13 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class OfferController {
+
+    private static Logger logger = Logger.getLogger(OfferController.class.getName());
 
     @Autowired
     OfferRepository offerRepository;
@@ -53,7 +57,7 @@ public class OfferController {
     public String postAddOffer(@ModelAttribute AddOfferDTO offerDTO, Model model, HttpSession session) {
 
         PostStatus status = PostStatus.ERROR;
-        Long id = ((Long) session.getAttribute("userId")).longValue();
+        Long id = (Long) session.getAttribute("userId");
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
         offerDTO.setStatus(statusRepository.findById(0L));  // TODO: jakie statusy - ustawić że oferta jest aktywna
@@ -67,6 +71,7 @@ public class OfferController {
             status = PostStatus.SUCCESS;
         } catch (Exception e) {
             status = PostStatus.DATABASE_ERROR;
+            logger.log(Level.WARNING, "Database Error", e);
         }
 
         model.addAttribute("status", status);
