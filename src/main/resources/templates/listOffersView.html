@@ -15,176 +15,188 @@
 <div class="container subpage-content mt-navigation">
     <div>
         <!--form start-->
-            <div class="row">
-                <!--form left column start-->
-                <div class="col-sm-3">
-                    <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
-                    <form th:method="post" th:action="@{'/offers/'+${index}}" th:object="${searchOfferDTO}">
-                        <div class="row">
-                            <div class="col col-mw-130">
-                                <span class="">Sortuj według</span>
-                            </div>
-                            <div class="col col-auto">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="price-low-high" name="order-by">
-                                    <label class="custom-control-label" for="price-low-high">cena: od najniższej</label>
-                                </div>
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="price-high-low" name="order-by" checked>
-                                    <label class="custom-control-label" for="price-high-low">cena: od najwyższej</label>
-                                </div>
-
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="newest-first" name="order-by" checked>
-                                    <label class="custom-control-label" for="newest-first">od najnowszych</label>
-                                </div>
-                            </div>
+        <div class="row">
+            <!--form left column start-->
+            <div class="col-sm-3">
+                <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
+                <form th:method="post" th:action="@{'/offers/'+${index}}" th:object="${searchOfferDTO}">
+                    <div class="row">
+                        <div class="col col-mw-130">
+                            <span class="">Sortuj według</span>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col col-auto">
-                                <span class="">Typ oferty</span>
-                            </div>
-                            <!--foreach-->
-                            <div class = "col" >
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" th:id="type-sale" th:field="*{sale}">
-                                    <label class="custom-control-label" th:for="type-sale" th:text="*{typeSale.type}" th:value="*{typeSale.type}" ></label>
-                                </div>
-                            </div>
-                            <div class = "col" >
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" th:id="type-exchange" th:field="*{exchange}">
-                                    <label class="custom-control-label" th:for="type-exchange" th:text="*{typeExchange.type}" th:value="*{typeExchange.type}" ></label>
-                                </div>
-                            </div>
-                            <div class = "col" >
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" th:id="type-free" th:field="*{free}">
-                                    <label class="custom-control-label" th:for="type-free" th:text="*{typeFree.type}" th:value="*{typeFree.type}" ></label>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col col-auto">
-                                <span class="">Kondycja</span>
-                            </div>
-                            <!--for each-->
-                            <div class="col">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" th:id="cond-new" th:field="*{new}">
-                                    <label class="custom-control-label" th:for="cond-new" th:text="*{conditionNew.value}" th:value="*{conditionNew.value}"></label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" th:id="cond-used" th:field="*{used}">
-                                    <label class="custom-control-label" th:for="cond-used" th:text="*{conditionUsed.value}" th:value="*{conditionUsed.value}"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md-form">
-                            <label for="price-min">Cena od</label>
-                            <input type="text" id="price-min" class="form-control" th:field="*{priceMin}">
-                        </div>
-                        <div class="md-form">
-                            <label for="price-max">Cena do</label>
-                            <input type="text" id="price-max" class="form-control"th:field="*{priceMax}">
-                        </div>
-                        <button type="submit" class="btn btn-purple btn-book my-4" >Filtruj</button>
-                    </form>
-                </div>
-                <!--form left column end-->
-                <!--form right column start-->
-                <div class="col-sm-9">
-                    <table class="offer-list-table" style="">
-                        <thead>
-                            <th class="image-cell">Okładka</th>
-                            <th>Szczegóły</th>
-                            <th>Cena</th>
-                        </thead>
-                        <tbody>
-                        <tr class="offer-row" style="" th:each="offer:${offers}">
-                            <td class="image-cell"><img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif"></td>
-                            <td style=""><div class="row">
-                                <h4 th:text="${offer.title}"><strong></strong></h4>
-                                </div>
-                                <div class="row"><span th:text="${offer.books[0].authors}"></span>
-                                </div>
-                                <br>
-                                <div class="row"> <span th:text="${offer.books[0].publisher}"></span>
-                                </div></td>
-                            <td style=""> <h2 th:text="${offer.price} + zł"><strong></strong></h2></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!--
-                    <div class="row book-entity" th:each="offer:${offers}">
                         <div class="col col-auto">
-                            <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="price-low-high" name="order-by">
+                                <label class="custom-control-label" for="price-low-high">cena: od najniższej</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="price-high-low" name="order-by"
+                                       checked>
+                                <label class="custom-control-label" for="price-high-low">cena: od najwyższej</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="newest-first" name="order-by"
+                                       checked>
+                                <label class="custom-control-label" for="newest-first">od najnowszych</label>
+                            </div>
                         </div>
-                        <div class="col align-self-center">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col col-auto">
+                            <span class="">Typ oferty</span>
+                        </div>
+                        <!--foreach-->
+                        <div class="col">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" th:id="type-sale"
+                                       th:field="*{sale}">
+                                <label class="custom-control-label" th:for="type-sale" th:text="*{typeSale.type}"
+                                       th:value="*{typeSale.type}"></label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" th:id="type-exchange"
+                                       th:field="*{exchange}">
+                                <label class="custom-control-label" th:for="type-exchange"
+                                       th:text="*{typeExchange.type}" th:value="*{typeExchange.type}"></label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" th:id="type-free"
+                                       th:field="*{free}">
+                                <label class="custom-control-label" th:for="type-free" th:text="*{typeFree.type}"
+                                       th:value="*{typeFree.type}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col col-auto">
+                            <span class="">Kondycja</span>
+                        </div>
+                        <!--for each-->
+                        <div class="col">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" th:id="cond-new" th:field="*{new}">
+                                <label class="custom-control-label" th:for="cond-new" th:text="*{conditionNew.value}"
+                                       th:value="*{conditionNew.value}"></label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" th:id="cond-used"
+                                       th:field="*{used}">
+                                <label class="custom-control-label" th:for="cond-used" th:text="*{conditionUsed.value}"
+                                       th:value="*{conditionUsed.value}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <label for="price-min">Cena od</label>
+                        <input type="text" id="price-min" class="form-control" th:field="*{priceMin}">
+                    </div>
+                    <div class="md-form">
+                        <label for="price-max">Cena do</label>
+                        <input type="text" id="price-max" class="form-control" th:field="*{priceMax}">
+                    </div>
+                    <button type="submit" class="btn btn-purple btn-book my-4">Filtruj</button>
+                </form>
+            </div>
+            <!--form left column end-->
+            <!--form right column start-->
+            <div class="col-sm-9">
+                <table class="offer-list-table" style="">
+                    <thead>
+                    <th class="image-cell">Okładka</th>
+                    <th>Szczegóły</th>
+                    <th>Cena</th>
+                    </thead>
+                    <tbody>
+                    <tr class="offer-row" style="" th:each="offer:${offers}">
+                        <td class="image-cell"><img class="book-cover"
+                                                    src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        </td>
+                        <td style="">
                             <div class="row">
                                 <h4 th:text="${offer.title}"><strong></strong></h4>
                             </div>
-                            <div class="row" th:text="${offer.books[0].authors}">
+                            <div class="row"><span th:text="${offer.books[0].authors}"></span>
                             </div>
                             <br>
-                            <div class="row" th:text="${offer.books[0].publisher}">
+                            <div class="row"><span th:text="${offer.books[0].publisher}"></span>
                             </div>
+                        </td>
+                        <td style=""><h2 th:text="${offer.price} + zł"><strong></strong></h2></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--
+                <div class="row book-entity" th:each="offer:${offers}">
+                    <div class="col col-auto">
+                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                    </div>
+                    <div class="col align-self-center">
+                        <div class="row">
+                            <h4 th:text="${offer.title}"><strong></strong></h4>
                         </div>
-                        <div class="col col-auto align-self-center pos-ab-rg">
-                            <h2 th:text="${offer.price} + zł"><strong></strong></h2>
+                        <div class="row" th:text="${offer.books[0].authors}">
+                        </div>
+                        <br>
+                        <div class="row" th:text="${offer.books[0].publisher}">
                         </div>
                     </div>
-
-                        <div class="col col-auto align-self-center pos-ab-rg">
-                            <h2><strong><i class="fas fa-exchange-alt"></i></strong></h2>
-                        </div>
+                    <div class="col col-auto align-self-center pos-ab-rg">
+                        <h2 th:text="${offer.price} + zł"><strong></strong></h2>
                     </div>
-                   -->
-                <!--form right column end-->
                 </div>
-            </div>
-            <div class="row mt-35">
-                <div class="col">
-                    <nav>
-                        <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${index == 1}">
-                            <li class="page-item disabled">
-                                <a class="page-link" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="/offers/1">1</a></li>
-                            <li class="page-item"><a class="page-link" href="/offers/2">2</a></li>
-                            <li class="page-item"><a class="page-link" href="/offers/3">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" aria-label="Next" href="/offers/2">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
 
-                        </ul><ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${index == 1}">
+                    <div class="col col-auto align-self-center pos-ab-rg">
+                        <h2><strong><i class="fas fa-exchange-alt"></i></strong></h2>
+                    </div>
+                </div>
+               -->
+                <!--form right column end-->
+            </div>
+        </div>
+        <div class="row mt-35">
+            <div class="col">
+                <nav>
+                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${index == 1}">
+                        <li class="page-item disabled">
+                            <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="/offers/1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/offers/2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/offers/3">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next" href="/offers/2">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${index == 1}">
                         <li class="page-item">
                             <a class="page-link" aria-label="Previous" th:href="'/offers/'+${index-1}">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index-1}" th:text="${index}-1"></a></li>
-                        <li class="page-item active"><a class="page-link" th:href="'/offers/'+${index}" th:text="${index}"></a></li>
-                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index+1}" th:text="${index}+1"></a></li>
+                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index-1}"
+                                                 th:text="${index}-1"></a></li>
+                        <li class="page-item active"><a class="page-link" th:href="'/offers/'+${index}"
+                                                        th:text="${index}"></a></li>
+                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index+1}"
+                                                 th:text="${index}+1"></a></li>
                         <li class="page-item">
                             <a class="page-link" aria-label="Next" th:href="'/offers/'+${index+1}">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                     </ul>
-                    </nav>
-                </div>
+                </nav>
             </div>
-        </form>
+        </div>
         <!--form end-->
     </div>
 </div>
