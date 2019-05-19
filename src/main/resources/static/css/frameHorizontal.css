@@ -131,3 +131,15 @@
 .frame ul li a:hover{
     color: mediumpurple;
 }
+
+.frame .img-container{
+    height: 150px;
+}
+
+.frame .name-container{
+    color: white;
+    height: 25px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
