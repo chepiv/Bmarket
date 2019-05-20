@@ -66,6 +66,7 @@ public class OfferDTO {
         return offer;
     }
 
+
     public void setStatus(Optional<Status> offerStatus) {
     }
 }

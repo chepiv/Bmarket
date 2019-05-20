@@ -12,7 +12,7 @@
 <div class="container subpage-content">
     <div>
         <div th:switch="${status}">
-            <p th:case="${status.SUCCESS}" th:text="'Zamiania hasła zakończone pomyślnie'"></p>
+            <p th:case="${status.SUCCESS}" th:text="'Zamiania adresu zakończona pomyślnie'"></p>
             <p th:case="${status.DATABASE_ERROR}">Błąd zapisu do bazy danych</p>
             <p th:case="*">Wystąpił nieznany błąd</p>
         </div>

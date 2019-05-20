@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
+</head>
+<body>
+<!-- CONTENT -->
+<nav th:replace="html/header.html :: navigation"></nav>
+<div class="container mt-navigation">
+    <h1>Użytkownik</h1>
+    <p th:text="${userDTO.getName()}"></p>
+    <p th:text="${userDTO.getEmail()}"></p>
+    <!--TODO: FILL FORMS WITH USER DATA -->
+    <section>
+        <h2>Informacje osobiste</h2>
+
+        <form action="#" method="post" th:action="@{/postBuyBook}" th:object="${offer}">
+        <div>
+            <h2>Informacje o ofercie:</h2>
+
+                <p th:text="${offer.getTitle()}"/>
+
+
+
+        </div>
+            <button class="btn btn-outline-purple" type="submit" value="Zmień">kup</button>
+        </form>
+    </section>
+</div>
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+
+</body>
+</html>

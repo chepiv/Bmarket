@@ -1,5 +1,6 @@
 package com.zpi.bmarket.bmarket.repositories;
 
+import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,4 +11,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UserRepository extends CrudRepository<User,Long> {
     User findUserByLoginAndPassword(String login, String password);
+    User findByOffers(Offer offer);
 }

@@ -40,7 +40,6 @@ public class EditUserController {
 
     @GetMapping("/userEdit")
     public String userEdit(HttpSession session, Model model) {
-        //TODO: GET SESSION INFO AND IF USER LOGGED IN PASS USER DATA TO VIEW
 
         Long id = ((Long) session.getAttribute("userId")).longValue();
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
@@ -48,7 +47,6 @@ public class EditUserController {
         userDTO.getCurrentDataUser(user);
 
         model.addAttribute("userDTO", userDTO);
-
 
         return "userEditView";
     }
@@ -70,6 +68,7 @@ public class EditUserController {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+
         model.addAttribute("status", status);
 
         return "postUserEditView";
@@ -133,7 +132,9 @@ public class EditUserController {
 
 
     @RequestMapping(value = "/postChangeAddress", method = RequestMethod.POST)
-    public String postChangeAddress(Model model, UserDTO userDTO, User user) {
+    public String postChangeAddress(Model model, UserDTO userDTO, HttpSession session) {
+        Long id = ((Long) session.getAttribute("userId")).longValue();
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
         PostStatus status = PostStatus.ERROR;
         try {
@@ -144,9 +145,9 @@ public class EditUserController {
                 status = PostStatus.SUCCESS;
             } else {
                 Address address = userDTO.createAddress();
+                addressRepository.save(address);
                 user.setAddress(address);
                 userRepository.save(user);
-                //addressRepository.save(address);
                 status = PostStatus.SUCCESS;
             }
         } catch (Exception e) {
