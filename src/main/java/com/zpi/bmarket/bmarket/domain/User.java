@@ -2,6 +2,7 @@ package com.zpi.bmarket.bmarket.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -33,6 +34,8 @@ public class User {
     @Column(length = 15)
     private String phoneNumber;
     @Column
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column
     private String avatarUrl;
