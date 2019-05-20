@@ -36,14 +36,14 @@ public class LoginController {
         User user = null;
 
 
-        try {
+
             user = userRepository.findUserByLoginAndPassword(loginDTO.getUsername(), Encryption.encrypt(loginDTO.getPassword()));
-        } catch (Exception e) {
-            status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
-            ra.addFlashAttribute("redirectFrom", "postLogin");
-            ra.addFlashAttribute("status", status);
-            return "redirect:/login";
-        }
+            if (user == null) {
+                status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
+                ra.addFlashAttribute("redirectFrom", "postLogin");
+                ra.addFlashAttribute("status", status);
+                return "redirect:/login";
+            }
 
         if (status == PostStatus.SUCCESS) {
             session.setAttribute("userId", user.getId());
