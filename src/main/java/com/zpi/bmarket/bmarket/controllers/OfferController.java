@@ -9,10 +9,7 @@ import com.zpi.bmarket.bmarket.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
@@ -79,4 +76,13 @@ public class OfferController {
 
         return "postAddOfferView";
     }
+
+    @RequestMapping(value = "/offerView/{id}",method = RequestMethod.GET)
+    public String viewOffer(Model model, @PathVariable("id")long id){
+
+        model.addAttribute("offer",offerRepository.findOfferById(id));
+        return "offerView";
+    }
 }
+
+
