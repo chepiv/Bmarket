@@ -36,7 +36,7 @@
             <br>
             <!-- IMIĘ I NAZWISKO -->
             <div>
-                <h5 th:text="${user.name + ' ' + user.surname}"></h5>
+                <h5 th:text="${(user.name==null?'':user.name) + ' ' + (user.surname==null?'':user.surname)}"></h5>
             </div>
         </div>
         <div class="col-sm-2">
@@ -68,7 +68,7 @@
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a href="#">usuń</a></h6></div>
+                    <div><h6><a th:href="'/postRemoveBookFromAccount/'+${book.id}">usuń</a></h6></div>
                 </li>
 
             </ul>
