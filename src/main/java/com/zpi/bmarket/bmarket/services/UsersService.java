@@ -2,10 +2,11 @@ package com.zpi.bmarket.bmarket.services;
 
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-
-public class StaticHelper {
+@Service
+public class UsersService {
     public static User getUser(Long id, UserRepository userRepository){
         return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
     }

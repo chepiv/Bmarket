@@ -103,7 +103,7 @@
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a href="#">edytuj</a> | <a href="#">usuń</a></h6></div>
+                    <div><h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">edytuj</a> | <a href="#">usuń</a></h6></div>
 
                 </li>
             </ul>

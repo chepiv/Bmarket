@@ -9,6 +9,7 @@ import com.zpi.bmarket.bmarket.repositories.CategoryRepository;
 import com.zpi.bmarket.bmarket.repositories.ConditionRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import com.zpi.bmarket.bmarket.services.ContentPathAccessor;
+import com.zpi.bmarket.bmarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,8 +58,7 @@ public class UserBookController {
     public String postAddUserBook(@ModelAttribute AddBookToUserDTO bookDTO, Model model, HttpSession session) {
 
         PostStatus status;
-        Long id = (Long) session.getAttribute("userId");
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
 
         Book book = bookDTO.getBook(user);
 

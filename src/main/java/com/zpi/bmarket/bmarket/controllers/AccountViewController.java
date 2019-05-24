@@ -7,19 +7,18 @@ import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.BookRepository;
 import com.zpi.bmarket.bmarket.repositories.OfferRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
-import com.zpi.bmarket.bmarket.services.StaticHelper;
+import com.zpi.bmarket.bmarket.services.UsersService;
+import com.zpi.bmarket.bmarket.services.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @Controller
@@ -33,7 +32,7 @@ public class AccountViewController {
 
     @GetMapping("/userAccount")
     public String viewAccount(HttpSession session, Model model){
-        User user = StaticHelper.getUser(session,userRepository);
+        User user = UsersService.getUser(session,userRepository);
 
         model.addAttribute("user",user);
         List<Offer> allOffers = Lists.newArrayList(offerRepository.findAll());
@@ -60,12 +59,19 @@ public class AccountViewController {
     //TODO: czy to musi być w poście?
     @GetMapping("/postRemoveBookFromAccount/{id}")
     public String removeBookFromAccount(HttpSession session, Model model, @PathVariable Long id){
-        User user = StaticHelper.getUser(session,userRepository);
+        User user = UsersService.getUser(session,userRepository);
         //remove book from offer and from user
         Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
-        book.setOffer(null);
-        book.setUser(null);
-        //TODO: check if offer has any more books
+        UserAccount.removeBook(book);
+
+        return "redirect:/userAccount";
+    }
+    @GetMapping("/postRemoveOfferFromAccount/{id}")
+    public String removeOfferFromAccount(HttpSession session, Model model, @PathVariable Long id) {
+        User user = UsersService.getUser(session,userRepository);
+
+        UserAccount.removeBooksFromOffer(id,offerRepository,bookRepository);
+
 
         return "redirect:/userAccount";
     }
