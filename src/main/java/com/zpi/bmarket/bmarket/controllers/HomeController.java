@@ -14,6 +14,7 @@ public class HomeController {
     @Autowired
     UserRepository userRepository;
 
+    //TODO: fix "test"
     @GetMapping("/")
     public String getHomeView(Model model, HttpSession session) {
 
