@@ -63,8 +63,9 @@ public class UserBookController {
         Book book = bookDTO.getBook(user);
 
         try {
-            saveUploadedFile(bookDTO.getImage());
-            book.setPhotoUrl(UPLOADED_FOLDER + bookDTO.getImage().getOriginalFilename());
+            String title = bookDTO.getTitle();
+            saveUploadedFile(bookDTO.getImage(), title);
+            book.setPhotoUrl(title + bookDTO.getImage().getOriginalFilename());
             bookRepository.save(book);
             model.addAttribute("book", book);
             status = PostStatus.SUCCESS;
@@ -78,10 +79,10 @@ public class UserBookController {
         return "postAddUserBookView";
     }
 
-    private void saveUploadedFile(MultipartFile file) throws IOException {
+    private void saveUploadedFile(MultipartFile file, String title) throws IOException {
         if (!file.isEmpty()) {
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Path path = Paths.get(UPLOADED_FOLDER + title + file.getOriginalFilename());
             Files.write(path, bytes);
         }
     }
