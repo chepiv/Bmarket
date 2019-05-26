@@ -13,40 +13,26 @@
 
 <div class="subpage-header">
     <div class="container">
-        <h2>Oferta nr <span th:text="${offer.id}"></span></h2>
+        <h2 th:text="${offer.title}"></h2>
     </div>
 </div>
 
 <div class="container subpage-content">
     <div class="row">
-        <div class="col-md-4">
-            <h4 th:text="${offer.title}"></h4>
-            <br>
-            <h5>Opis ofery</h5>
-            <span th:text="${offer.description}"></span>
-            <br>
-            <h5>Typ oferty</h5>
-            <span th:text="${offer.offerType.type}"></span>
-            <h5>Lokalizacja</h5>
-            <span th:text="${offer.city}"></span>
-            <h5>Cena</h5>
-            <span th:text="${offer.price}"></span>
-        </div>
-        <div class="col-md-8">
-            <h4>Książki w ofercie</h4>
-            <br>
+        <div class="col-md-8 offer-desc">
+            <h6>Książki w ofercie</h6>
             <table class="offer-list-table" style="">
                 <thead>
-                <th class="image-cell">Okładka</th>
-                <th>Szczegóły</th>
+                <th class="image-cell"><h6>Okładka</h6></th>
+                <th><h6>Szczegóły</h6></th>
                 </thead>
                 <tbody>
                 <tr class="offer-row" style="" th:each="book : ${offer.books}">
-                    <td class="image-cell"><img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif"></td>
+                    <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif'} + ');'"></td>
                     <td style="">
                         <!-- TITLE -->
                         <div class="row">
-                            <strong><h4 th:text="${book.title}"></h4></strong>
+                            <h4 th:text="${book.title}"></h4>
                         </div>
                         <!-- AUTHOR -->
                         <div class="row">
@@ -60,6 +46,21 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-md-4 offer-desc">
+            <h6>Opis ofery</h6>
+            <span class="text-offer-details" th:text="${offer.description}"></span>
+            <br><br>
+            <h6>Typ oferty</h6>
+            <span class="text-offer-details" th:text="${offer.offerType.type}"></span>
+            <br><br>
+            <h6>Lokalizacja</h6>
+            <span class="text-offer-details" th:text="${offer.city}"></span>
+            <br><br>
+            <h6>Cena</h6>
+            <span class="text-offer-price" th:text="${offer.price}"></span>
+            <br>
+            <h6>Oferta nr <span th:text="${offer.id}"></span></h6>
         </div>
     </div>
     <div class="row mt-35">
