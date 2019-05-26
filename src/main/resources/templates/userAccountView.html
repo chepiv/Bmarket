@@ -68,7 +68,11 @@
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a href="#">usuń</a></h6></div>
+                    
+                    <div><form>
+                        <input type="hidden" id="delId">
+                        <h6><button class="del-button-link" type="submit" onclick="return confirm('Czy napewno chcesz usunąć książkę?')">usuń</button></h6>
+                    </form></div>
                 </li>
 
             </ul>
@@ -133,6 +137,8 @@
             $('#price-box').hide();
         }
     });
+
+    
 </script>
 <script type="text/javascript" src="/js/sly.min.js"></script>
 <script type="text/javascript" src="/js/frameController.js"></script>
