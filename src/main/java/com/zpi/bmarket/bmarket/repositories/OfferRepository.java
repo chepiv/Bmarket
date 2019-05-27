@@ -13,4 +13,5 @@ import java.util.List;
 public interface OfferRepository extends CrudRepository<Offer, Long> {
 
     Page<Offer> findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax, Pageable pageable);
+    Offer findOfferById(Long id);
 }

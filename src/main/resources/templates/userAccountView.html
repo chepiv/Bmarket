@@ -36,7 +36,7 @@
             <br>
             <!-- IMIĘ I NAZWISKO -->
             <div>
-                <h5>Imię Nazwisko Bardzo Długie Imię Nazwisko</h5>
+                <h5 th:text="${user.name + ' ' + user.surname}"></h5>
             </div>
         </div>
         <div class="col-sm-2">
@@ -44,7 +44,7 @@
 
             <!-- BUTTON EDYCJI PROFILU -->
             <div class="text-center">
-                <button class="btn btn-purple">edytuj profil</button>
+                <a href="/userEdit"><button class="btn btn-purple">edytuj profil</button></a>
             </div>
         </div>
     </div>
@@ -60,25 +60,19 @@
 
         <div class="frame" id="frameOne">
             <ul class="clearfix" style="transform: translateZ(0px) translateX(0px); width: 6840px;">
-                <li>
+                <li th:each="book : ${user.books}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
                         <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
                     </div>
                     <!-- TYTUŁ -->
-                    <div class="name-container"><h6 class="card-book-title" >Mr.Mercedes</h6></div>
+                    <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a href="#">usuń</a></h6></div>
-                </li>
-                <li>
-                    <!-- OBRAZEK -->
-                    <div class="img-container">
-                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
-                    </div>
-                    <!-- TYTUŁ -->
-                    <div class="name-container"><h6 class="card-book-title" >Mr.Mercedes</h6></div>
-                    <!-- BUTTONY -->
-                    <div><h6><a href="#">usuń</a></h6></div>
+                    
+                    <div><form>
+                        <input type="hidden" id="delId">
+                        <h6><button class="del-button-link" type="submit" onclick="return confirm('Czy napewno chcesz usunąć książkę?')">usuń</button></h6>
+                    </form></div>
                 </li>
 
             </ul>
@@ -105,26 +99,16 @@
 
         <div class="frame" id="frameTwo" style="overflow: hidden;">
             <ul class="clearfix" style="transform: translateZ(0px) translateX(0px); width: 6840px;">
-                <li>
+                <li th:each="offer : ${offers}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
                         <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
                     </div>
                     <!-- TYTUŁ -->
-                    <div class="name-container"><h6 class="card-book-title" >Mr.Mercedes</h6></div>
+                    <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>
                     <!-- BUTTONY -->
                     <div><h6><a href="#">edytuj</a> | <a href="#">usuń</a></h6></div>
 
-                </li>
-                <li>
-                    <!-- OBRAZEK -->
-                    <div class="img-container">
-                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
-                    </div>
-                    <!-- TYTUŁ -->
-                    <div class="name-container"><h6 class="card-book-title" >Mr.Mercedes</h6></div>
-                    <!-- BUTTONY -->
-                    <div><h6><a href="#">edytuj</a> | <a href="#">usuń</a></h6></div>
                 </li>
             </ul>
         </div>
@@ -153,6 +137,8 @@
             $('#price-box').hide();
         }
     });
+
+    
 </script>
 <script type="text/javascript" src="/js/sly.min.js"></script>
 <script type="text/javascript" src="/js/frameController.js"></script>

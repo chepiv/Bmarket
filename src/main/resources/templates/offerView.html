@@ -13,24 +13,24 @@
 
 <div class="subpage-header">
     <div class="container">
-        <h2>Oferta nr <span>XXXXXXXXX</span></h2>
+        <h2>Oferta nr <span th:text="${offer.id}"></span></h2>
     </div>
 </div>
 
 <div class="container subpage-content">
     <div class="row">
         <div class="col-md-4">
-            <h4>Tytuł oferty</h4>
+            <h4 th:text="${offer.title}"></h4>
             <br>
             <h5>Opis ofery</h5>
-            <span>fasdfdsafsdafasdf</span>
+            <span th:text="${offer.description}"></span>
             <br>
             <h5>Typ oferty</h5>
-            <span>fasdfdsafsdafasdf</span>
+            <span th:text="${offer.offerType.type}"></span>
             <h5>Lokalizacja</h5>
-            <span>fasdfdsafsdafasdf</span>
+            <span th:text="${offer.city}"></span>
             <h5>Cena</h5>
-            <span>fasdfdsafsdafasdf</span>
+            <span th:text="${offer.price}"></span>
         </div>
         <div class="col-md-8">
             <h4>Książki w ofercie</h4>
@@ -41,21 +41,21 @@
                 <th>Szczegóły</th>
                 </thead>
                 <tbody>
-                <tr class="offer-row" style="" th:each="">
+                <tr class="offer-row" style="" th:each="book : ${offer.books}">
                     <td class="image-cell"><img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif"></td>
                     <td style="">
                         <!-- TITLE -->
                         <div class="row">
-                            <strong><h4 th:text="${offer.title}"></h4></strong>
+                            <strong><h4 th:text="${book.title}"></h4></strong>
                         </div>
                         <!-- AUTHOR -->
                         <div class="row">
-                            <span th:text="${offer.books[0].authors}"></span>
+                            <span th:text="${book.authors}"></span>
                         </div>
                         <br>
                         <!-- PUBLISHER -->
                         <div class="row">
-                            <span th:text="${offer.books[0].publisher}"></span>
+                            <span th:text="${book.publisher}"></span>
                         </div></td>
                 </tr>
                 </tbody>
