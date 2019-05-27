@@ -63,7 +63,7 @@
                 <li th:each="book : ${user.books}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
-                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        <img class="book-cover" th:src="'../files/' + ${book.photoUrl}">
                     </div>
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
@@ -102,7 +102,7 @@
                 <li th:each="offer : ${offers}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
-                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        <img class="book-cover" th:src="'../files/' + ${offer.books[0].photoUrl}">
                     </div>
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>

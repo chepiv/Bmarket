@@ -36,6 +36,8 @@ public class AddBookToUserDTO {
 
     private String description;
 
+    private String imageBase64;
+
 
     public Book getBook(User user){
 

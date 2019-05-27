@@ -99,7 +99,7 @@
                         <label>Zdjęcie</label>
                         <div class="input-group">
                             <div class="custom-file" id="photo-input-group">
-                                <input id="imgInp" type="file" accept="image/*" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+                                <input id="imgInp" type="file" accept="image/jpg" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
                                 <label class="custom-file-label" for="imgInp">Wybierz zdjęcie</label>
                                 <br>
                             </div>
@@ -108,7 +108,7 @@
                             <img id="my-image" src="#" />
                         </div>
                         <img id="result" class="rounded mx-auto d-block" src="">
-                        <input id="hiddenResImg" type="hidden" value="">
+                        <input id="hiddenResImg" type="hidden" th:field="*{imageBase64}">
                         <br>
                         <button type="button" id="use" class="btn btn-purple">Potwierdź</button>
                     </div>
