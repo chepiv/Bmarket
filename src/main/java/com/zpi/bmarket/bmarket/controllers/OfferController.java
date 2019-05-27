@@ -2,7 +2,6 @@ package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.AddOfferDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
-import com.zpi.bmarket.bmarket.domain.Book;
 import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.*;
@@ -14,7 +13,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,7 +72,7 @@ public class OfferController {
 
         model.addAttribute("status", status);
 
-        return "postAddOfferView";
+        return "redirect:/userAccount";
     }
 
     @RequestMapping(value = "/offerView/{id}",method = RequestMethod.GET)
