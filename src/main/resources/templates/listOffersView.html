@@ -11,8 +11,13 @@
 
 <nav th:replace="html/header.html :: navigation"></nav>
 
+<div class="subpage-header">
+    <div class="container">
+        <h2>Lista ofert</h2>
+    </div>
+</div>
 
-<div class="container subpage-content mt-navigation">
+<div class="container subpage-content">
     <div>
         <!--form start-->
         <div class="row">
@@ -112,8 +117,7 @@
                     </thead>
                     <tbody>
                     <tr class="offer-row" style="" th:each="offer:${offers}">
-                        <td class="image-cell"><img class="book-cover"
-                                                    th:src="'../files/' + ${offer.books[0].photoUrl}">
+                        <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
                         </td>
                         <td style="">
                             <div class="row">
