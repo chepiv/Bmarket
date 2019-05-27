@@ -5,6 +5,12 @@
     <title>BMarket</title>
     <!--/*/ <th:block th:include="html/head.html :: imports">
         </th:block> /*/-->
+    <link href="/css/croppie.css" rel="stylesheet">
+    <style>
+        #my-image, #use {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <!-- CONTENT -->
@@ -24,15 +30,41 @@
             <div class="row">
                 <!--form left column start-->
                 <div class="col-md-4">
-                    <!--photo-->
+                    <!--photo
 
                     <label>Zdjęcie</label>
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" th:field="*{image}">
                             <label class="custom-file-label" for="inputGroupFile01">Wybierz plik</label>
+
+                            <button type="button" id="uploadImg" class="button-purple">Dodaj obrazek</button>
+                            <input type='file' id="imgInp" />
+                            <img src="" id="resultImg">
+                            <input type="hidden">
+                            <div id="imageUploadModal">
+                                <div class="modal fade right" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-full-height modal-right" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title w-100" id="myModalLabel">Dodaj zdjęcie</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="" id="tempImg">
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button id="use" type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!--title-->
                     <div class="md-form">
                         <label for="title">Tytuł</label>
@@ -63,6 +95,24 @@
                 <!--form left column end-->
                 <!--form right column start-->
                 <div class="col-md-8">
+                    <div class="md-form" style="text-align: center;">
+                        <label>Zdjęcie</label>
+                        <div class="input-group">
+                            <div class="custom-file" id="photo-input-group">
+                                <input id="imgInp" type="file" accept="image/jpg" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="imgInp">Wybierz zdjęcie</label>
+                                <br>
+                            </div>
+                        </div>
+                        <div id="croppie-div">
+                            <img id="my-image" src="#" />
+                        </div>
+                        <img id="result" class="rounded mx-auto d-block" src="">
+                        <input id="hiddenResImg" type="hidden" th:field="*{imageBase64}">
+                        <br>
+                        <button type="button" id="use" class="btn btn-purple">Potwierdź</button>
+                    </div>
+
                     <!--category-->
                     <div class="md-form">
                         <select id="category" class="browser-default custom-select" th:field="*{category}" >
@@ -102,11 +152,14 @@
 </div>
 
 
+
 <footer th:replace="html/footer.html :: footer"></footer>
+<script src="/js/croppie.min.js"></script>
 
 <!--/*/ <th:block th:include="html/js.html :: scripts">
         </th:block> /*/-->
 <script>
+    /*
     $('#offer-type-radio input').on('change', function() {
         if($('input[name=offer-type]:checked', '#offer-type-radio').val() == 'sell'){
             $('#price-box').show();
@@ -124,6 +177,45 @@
             this.value = "";
         };
     }
+*/
+    $('#uploadImg').click(function () {
+        $('#imgModal').modal('show');
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#my-image').attr('src', e.target.result);
+                var resize = new Croppie($('#my-image')[0], {
+                    viewport: { width: 200, height: 250 },
+                    boundary: { width: 300, height: 300 },
+                    showZoomer: true,
+                    enableResize: false,
+                    enableOrientation: true
+                });
+                $('#use').fadeIn();
+                $('#photo-input-group').fadeOut();
+                $('#use').on('click', function() {
+                    resize.result('base64').then(function(dataImg) {
+                        var data = [{ image: dataImg }, { name: 'myimgage.jpg' }];
+                        $("#hiddenResImg").val(dataImg);
+                        $('#result').attr('src', dataImg);
+                        resize.destroy();
+                        $('#my-image').attr('src', "#");
+                        $('#use').fadeOut();
+                    })
+                })
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function() {
+        readURL(this);
+    });
+
 </script>
+
 </body>
 </html>
