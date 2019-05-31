@@ -52,12 +52,12 @@ public class LoginController {
         ra.addFlashAttribute("status", status);
         return "redirect:/";
     }
-/*
+
     @GetMapping(value = "/logout")
     public String logout(Model model, HttpSession session){
-
+        session.removeAttribute("userId");
+        session.invalidate();
         return "logout";
     }
-*/
 
 }
