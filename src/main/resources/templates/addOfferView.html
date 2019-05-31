@@ -82,9 +82,10 @@
                     <span class="">Typ oferty</span>
                 </div>
                 <div class="col">
-                    <div class="custom-control custom-radio" th:each="offerT : ${offerTypes}">
-                        <input type="radio" class="custom-control-input" id="offer-types" th:id="${offerT.id}"
-                               th:field="*{offerType}" th:value="${offerT.id}"
+                    <div class="custom-control custom-radio" id="offer-type-radio" th:each="offerT : ${offerTypes}">
+                        <input type="radio" class="custom-control-input" th:id="${offerT.id}"
+                               th:field="*{offerType}" th:value="${offerT}"
+
                                name="offer-type">
                         <label class="custom-control-label" th:for="${offerT.id}"
                                th:text="${offerT.type}"></label>
@@ -129,6 +130,16 @@
         </th:block> /*/-->
 <script type="text/javascript" src="/js/sly.min.js"></script>
 <script type="text/javascript" src="/js/frameController.js"></script>
+<script>
+    $('#offer-type-radio input').on('change', function() {
+        if($('#offer-type-radio input:checked').attr('id') == '1'){
+            $('#price-box').show();
+        }
+        else{
+            $('#price-box').hide();
+        }
+    });
+</script>
 
 </body>
 </html>
