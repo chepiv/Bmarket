@@ -1,7 +1,5 @@
 package com.zpi.bmarket.bmarket.controllers;
 
-import com.zpi.bmarket.bmarket.DTO.OfferDTO;
-import com.zpi.bmarket.bmarket.DTO.UserDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.User;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 
 @Controller
 public class BuyBookController {

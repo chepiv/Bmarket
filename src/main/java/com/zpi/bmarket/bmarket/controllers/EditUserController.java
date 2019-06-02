@@ -83,16 +83,19 @@ public class EditUserController {
         UserDTO userDTO = new UserDTO();
         userDTO.getCurrentDataUser(user);
 
-        model.addAttribute("user", user);
+        //model.addAttribute("user", user);
         model.addAttribute("userDTO", userDTO);
 
         return "changePasswordView";
     }
 
     @RequestMapping(value = "/postChangePassword", method = RequestMethod.POST)
-    public String postChangePassword(Model model, UserDTO userDTO, User user) {
+    public String postChangePassword(Model model,@ModelAttribute UserDTO userDTO, HttpSession session) {
 
         PostStatus status = PostStatus.ERROR;
+        Long id = ((Long) session.getAttribute("userId")).longValue();
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+
 
         if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
             status = PostStatus.PASSWORDS_NOT_MATCH;

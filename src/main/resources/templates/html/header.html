@@ -13,27 +13,31 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <nav th:fragment="navigation" class="navbar navbar-expand-lg white navbar-light  fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/img/logo.png" height="50" alt="Bmarket">
-            </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
-                </form>
-                <ul class="navbar-nav ml-auto mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">Kategorie</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Kategoria</a>
-                            <a class="dropdown-item" href="#">Inna kategoria</a>
-                            <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto text-bold" id="user-if-logged">
+<nav th:fragment="navigation" class="navbar navbar-expand-lg white navbar-light  fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/logo.png" height="50" alt="Bmarket">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
+            </form>
+
+            <ul class="navbar-nav ml-auto mr-auto">
+                <li class="nav-item">
+                    <a href="/offers" class="nav-link text-purple text-bold">Oferty</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">Kategorie</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Kategoria</a>
+                        <a class="dropdown-item" href="#">Inna kategoria</a>
+                        <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto text-bold" id="user-if-logged">
 
                 <script th:inline="javascript">
                     /*<![CDATA[*/
@@ -41,36 +45,38 @@
                     if(user == null){
                         document.write(
                             '<li class="nav-item">'
-                                +'<a class="nav-link text-red" href="/login">Zaloguj</a>'
+                            +'<a class="nav-link text-red" href="/login">Zaloguj</a>'
                             +'</li>'
                             +'<li class="nav-item">'
-                                +'<a class="nav-link text-red" href="/register">Zarejestruj</a>'
+                            +'<a class="nav-link text-red" href="/register">Zarejestruj</a>'
                             +'</li>'
                         )
                     }
                     else{
                         document.write(
                             '<li class="nav-item avatar dropdown">'
-                                +'<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
-                                    +'<img class="avatar-img" src="/img/avatar.png" class="rounded-circle z-depth-0" alt="avatar image">'
-                                +'</a>'
-                                +'<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-55">'
-                                    +'<a class="dropdown-item" href="/userEdit">Moje konto</a>'
-                                    +'<a class="dropdown-item" href="#">Moje książki</a>'
-                                    +'<a class="dropdown-item" <a href="/logout" th:href="@{/logout}">Wyloguj</a>'
-                                +'</div>'
+                            +'<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+                            +'<img class="avatar-img" src="/img/avatar.png" class="rounded-circle z-depth-0" alt="avatar image">'
+                            +'</a>'
+                            +'<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-55">'
+                            +'<a class="dropdown-item" href="/userEdit">Moje konto</a>'
+                            +'<a class="dropdown-item" href="/userAccount">Moje książki</a>'
+                            +'<a class="dropdown-item" href="/addBook">Dodaj książkę</a>'
+                            +'<a class="dropdown-item" href="/userAccount">Dodaj ofertę</a>'
+                            +'<a class="dropdown-item" href="/logout">Wyloguj</a>'
+                            +'</div>'
                             +'</li>'
                         )
                     }
                     /*]]>*/
                 </script>
-                </ul>
+            </ul>
 
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
         </div>
-    </nav>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
 </body>
 </html>

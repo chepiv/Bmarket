@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMarket</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- STYLESHEETS -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+    <!-- Bmarket stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    <!-- Frame horizontal scroll stylesheet -->
+    <link href="../static/css/frameHorizontal.css" rel="stylesheet">
+</head>
+<body>
+<nav th:fragment="navigation" class="navbar navbar-expand-lg white navbar-light  fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/logo.png" height="50" alt="Bmarket">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control rounded-corners search-border" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <ul class="navbar-nav ml-auto mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-purple text-bold" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">Kategorie</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Kategoria</a>
+                        <a class="dropdown-item" href="#">Inna kategoria</a>
+                        <a class="dropdown-item" href="#">Jeszcze inna kategoria</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto text-bold" id="user-if-logged">
+
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    let user = /*[[${session.userId}]]*/ 'a';
+                    if(user == null){
+                        document.write(
+                            '<li class="nav-item">'
+                            +'<a class="nav-link text-red" href="/login">Zaloguj</a>'
+                            +'</li>'
+                            +'<li class="nav-item">'
+                            +'<a class="nav-link text-red" href="/register">Zarejestruj</a>'
+                            +'</li>'
+                        )
+                    }
+                    else{
+                        document.write(
+                            '<li class="nav-item avatar dropdown">'
+                            +'<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+                            +'<img class="avatar-img" src="img/avatar.png" class="rounded-circle z-depth-0" alt="avatar image">'
+                            +'</a>'
+                            +'<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-55">'
+                            +'<a class="dropdown-item" href="/userEdit">Moje konto</a>'
+                            +'<a class="dropdown-item" href="#">Moje książki</a>'
+                            +'<a class="dropdown-item" href="#">Wyloguj</a>'
+                            +'</div>'
+                            +'</li>'
+                        )
+                    }
+                    /*]]>*/
+                </script>
+            </ul>
+
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="subpage-header">
+    <div class="container">
+        <h2>Dodaj ofertę</h2>
+    </div>
+</div>
+
+<div class="container subpage-content">
+    <div class="wrap">
+        <h2>Wybierz książki</h2>
+
+        <div class="scrollbar">
+            <div class="handle" style="transform: translateZ(0px) translateX(0px); width: 190px;">
+                <div class="mousearea"></div>
+            </div>
+        </div>
+
+        <div class="frame" id="frameOne">
+            <ul class="clearfix" style="transform: translateZ(0px) translateX(0px); width: 6840px;">
+                <li>
+                    <!--BOOK COVER IMAGE-->
+                    <div class="book-offer-image">
+                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                    </div>
+                    <!--BOOK TITLE-->
+                    <div class="book-offer-title"><h6 class="card-book-title" >Mr.Mercedes sdfnksdabfkd sbfjkasdbkfsdnkfn sdakfnsdakfn</h6></div>
+                    <!-- CHECKBOX -->
+                    <input type="checkbox" class="custom-control-input" id="book1" name="book1">
+                    <label class="custom-control-label" for="book1">Dodaj</label>
+                </li>
+                <li>
+                    <!--BOOK COVER IMAGE-->
+                    <div class="book-offer-image">
+                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                    </div>
+                    <!--BOOK TITLE-->
+                    <div class="book-offer-title"><h6 class="card-book-title" >Mr.Mercedes sdfnksdabfkd sbfjkasdbkfsdnkfn sdakfnsdakfn</h6></div>
+                    <!-- CHECKBOX -->
+                    <input type="checkbox" class="custom-control-input" id="book2" name="book2">
+                    <label class="custom-control-label" for="book2">Dodaj</label>
+                </li>
+
+            </ul>
+        </div>
+
+        <ul class="pages"><li class="active">1</li><li class="">2</li><li class="">3</li><li class="">4</li><li class="">5</li><li class="">6</li></ul>
+
+        <!--
+        <div class="controls center">
+            <button class="btn prevPage disabled" disabled=""><i class="icon-chevron-left"></i><i class="icon-chevron-left"></i> page</button>
+            <button class="btn nextPage">page <i class="icon-chevron-right"></i><i class="icon-chevron-right"></i></button>
+        </div>
+        -->
+    </div>
+    <br>
+    <div class="row">
+        <!--form left column start-->
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <h2>Szczególy oferty</h2>
+            <!--title-->
+            <div class="md-form">
+                <label for="title">Tytuł</label>
+                <input type="text" id="title" class="form-control" th:field="*{title}">
+            </div>
+            <!--description-->
+            <div class="md-form">
+                        <textarea id="desc" class="md-textarea form-control" rows="3"
+                                  th:field="*{description}"></textarea>
+                <label for="desc">Opis</label>
+            </div>
+
+            <!--offer type-->
+            <div class="row">
+                <div class="col col-auto">
+                    <span class="">Typ oferty</span>
+                </div>
+                <div class="col">
+                    <div class="custom-control custom-radio" th:each="offerT : ${offerTypes}">
+                        <input type="radio" class="custom-control-input" id="offer-types" th:id="${offerT.id}"
+                               th:field="*{offerType}" th:value="${offerT}"
+                               name="offer-type">
+                        <label class="custom-control-label" th:for="${offerT.id}"
+                               th:text="${offerT.type}"></label>
+                    </div>
+                </div>
+            </div>
+
+            <!--city-->
+            <div class="md-form">
+                <label for="city">Miasto</label>
+                <input type="text" id="city" class="form-control" th:field="*{city}">
+            </div>
+
+            <!--price-->
+            <div id="price-box">
+                <div class="md-form input-group">
+                    <label for="price">Cena</label>
+                    <input type="text" class="form-control" id="price" th:field="*{price}">
+                    <div class="input-group-append">
+                        <span class="input-group-text md-addon">zł</span>
+                    </div>
+                </div>
+            </div>
+            <!--form right column end-->
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-purple btn-book my-4" type="submit">dodaj ofertę</button>
+        </div>
+    </div>
+</div>
+
+<footer th:fragment="footer">
+    <div class="container">
+        <div class="row py-3">
+            <ul class="nav py-3 bottom-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#!">Kontakt</a>
+                </li>
+                <li class="nav-item ml-20">
+                    <a class="nav-link" href="#!">Regulamin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div th:fragment="scripts">
+    <!-- JAVASCRIPT -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+    <!-- Bmarket TS script -->
+    <script type="text/javascript" src="../static/js/index.js"></script>
+    <!-- Bmarket AlertEngine.js -->
+    <div id="alertContainer" th:type="${redirectFrom}" th:data="${status}"></div>
+    <script type="text/javascript" src="../static/js/alertManager.js"></script>
+    <script type="text/javascript" src="../static/js/sly.min.js"></script>
+    <script type="text/javascript" src="../static/js/frameController.js"></script>
+</div>
+
+
+
+</body>
+</html>

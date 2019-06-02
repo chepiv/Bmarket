@@ -15,12 +15,12 @@ public class HomeController {
     UserRepository userRepository;
 
     @GetMapping("/")
-    public String getHomeView(Model model, HttpSession session){
+    public String getHomeView(Model model, HttpSession session) {
 
-        Long id = ((Long)session.getAttribute("userId")).longValue();
-        Optional<User> user =  userRepository.findById(id);
+        Long id = ((Long) session.getAttribute("userId")).longValue();
+        Optional<User> user = userRepository.findById(id);
 
-        if(user.isPresent()){
+        if (user.isPresent()) {
             model.addAttribute("user", user);
             model.addAttribute("test", "test");
         }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
+</head>
+<body>
+<!-- CONTENT -->
+
+<nav th:replace="html/header.html :: navigation"></nav>
+
+<div class="subpage-header">
+    <div class="container">
+        <h2 th:text="${offer.title}"></h2>
+    </div>
+</div>
+
+<div class="container subpage-content">
+    <div class="row">
+        <div class="col-md-8 offer-desc">
+            <h6>Książki w ofercie</h6>
+            <table class="offer-list-table" style="">
+                <thead>
+                <th class="image-cell"><h6>Okładka</h6></th>
+                <th><h6>Szczegóły</h6></th>
+                </thead>
+                <tbody>
+                <tr class="offer-row" style="" th:each="book : ${offer.books}">
+                    <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif'} + ');'"></td>
+                    <td style="">
+                        <!-- TITLE -->
+                        <div class="row">
+                            <h4 th:text="${book.title}"></h4>
+                        </div>
+                        <!-- AUTHOR -->
+                        <div class="row">
+                            <span th:text="${book.authors}"></span>
+                        </div>
+                        <br>
+                        <!-- PUBLISHER -->
+                        <div class="row">
+                            <span th:text="${book.publisher}"></span>
+                        </div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4 offer-desc">
+            <h6>Opis ofery</h6>
+            <span class="text-offer-details" th:text="${offer.description}"></span>
+            <br><br>
+            <h6>Typ oferty</h6>
+            <span class="text-offer-details" th:text="${offer.offerType.type}"></span>
+            <br><br>
+            <h6>Lokalizacja</h6>
+            <span class="text-offer-details" th:text="${offer.city}"></span>
+            <br><br>
+            <h6>Cena</h6>
+            <span class="text-offer-price" th:text="${offer.price}"></span>
+            <br>
+            <h6>Oferta nr <span th:text="${offer.id}"></span></h6>
+        </div>
+    </div>
+    <div class="row mt-35">
+        <div class="col text-center">
+            <button class="btn btn-purple btn-book my-4" type="submit">akceptuj</button>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+
+</body>
+</html>

@@ -1,7 +1,6 @@
 package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.LoginDTO;
-import com.zpi.bmarket.bmarket.PostLoginStatus;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
@@ -37,14 +36,14 @@ public class LoginController {
         User user = null;
 
 
-        try {
+
             user = userRepository.findUserByLoginAndPassword(loginDTO.getUsername(), Encryption.encrypt(loginDTO.getPassword()));
-        } catch (Exception e) {
-            status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
-            ra.addFlashAttribute("redirectFrom", "postLogin");
-            ra.addFlashAttribute("status", status);
-            return "redirect:/login";
-        }
+            if (user == null) {
+                status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
+                ra.addFlashAttribute("redirectFrom", "postLogin");
+                ra.addFlashAttribute("status", status);
+                return "redirect:/login";
+            }
 
         if (status == PostStatus.SUCCESS) {
             session.setAttribute("userId", user.getId());
@@ -53,8 +52,6 @@ public class LoginController {
         ra.addFlashAttribute("status", status);
         return "redirect:/";
     }
-
-
     @GetMapping(value = "/logout")
     public String logout(Model model, HttpSession session) {
 
@@ -62,8 +59,5 @@ public class LoginController {
         session.invalidate();
 
         return "index";
-
-
     }
-
 }
