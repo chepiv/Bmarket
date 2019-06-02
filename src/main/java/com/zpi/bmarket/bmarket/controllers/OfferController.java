@@ -2,10 +2,10 @@ package com.zpi.bmarket.bmarket.controllers;
 
 import com.zpi.bmarket.bmarket.DTO.AddOfferDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
-import com.zpi.bmarket.bmarket.domain.Book;
 import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.*;
+import com.zpi.bmarket.bmarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,8 +38,7 @@ public class OfferController {
     public String addOffer(WebRequest request, Model model, HttpSession session) {
 
         AddOfferDTO addOfferDTO = new AddOfferDTO();
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
 //        List<Book> books = bookRepository.findAllByUserId(id);
 
         model.addAttribute("addOfferDTO", addOfferDTO);
@@ -58,7 +56,8 @@ public class OfferController {
         Long id = (Long) session.getAttribute("userId");
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
-        offerDTO.setStatus(statusRepository.findById(0L));  // TODO: jakie statusy - ustawić że oferta jest aktywna
+        Long statusId = 0L;
+        offerDTO.setStatus(statusRepository.findById(statusId).orElseThrow(() -> new IllegalArgumentException("id: " + statusId)));  // TODO: jakie statusy - ustawić że oferta jest aktywna
         offerDTO.setPublishDate(new Date());
 
         Offer offer = offerDTO.getOffer(user);
@@ -74,7 +73,7 @@ public class OfferController {
 
         model.addAttribute("status", status);
 
-        return "postAddOfferView";
+        return "redirect:/userAccount";
     }
 
     @RequestMapping(value = "/offerView/{id}",method = RequestMethod.GET)
@@ -102,7 +101,7 @@ public class OfferController {
 
 
     @RequestMapping(value = "/postEditOffer", method = RequestMethod.POST)
-    public String postEditOffer( Model model, HttpSession session, Offer offer) {
+    public String postEditOffer( Model model, HttpSession session, @ModelAttribute Offer offer) {
 
         PostStatus status = PostStatus.ERROR;
 

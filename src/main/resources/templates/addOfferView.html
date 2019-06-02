@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<form method="post" enctype="multipart/form-data" th:action="@{postAddOfferView.html}" th:object="${addOfferDTO}">
+<form method="post" enctype="multipart/form-data" th:action="@{postAddOffer}" th:object="${addOfferDTO}">
 <div class="container subpage-content">
     <div class="wrap">
         <h2>Wybierz książki</h2>
@@ -35,12 +35,12 @@
                 <li th:each="book : ${userBooks}">
                     <!--BOOK COVER IMAGE-->
                     <div class="book-offer-image">
-                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        <img class="book-cover" th:src="'../files/' + ${book.photoUrl}">
                     </div>
                     <!--BOOK TITLE-->
                     <div class="book-offer-title"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
                     <!-- CHECKBOX -->
-                    <input type="checkbox" class="custom-control-input" th:id="book + ${book.id}" name="book1">
+                    <input type="checkbox" class="custom-control-input" th:value="${book.id}" th:field="${addOfferDTO.books}" th:id="book + ${book.id}" name="book1">
                     <label class="custom-control-label" th:for="book + ${book.id}">Dodaj</label>
                 </li>
 
@@ -82,9 +82,10 @@
                     <span class="">Typ oferty</span>
                 </div>
                 <div class="col">
-                    <div class="custom-control custom-radio" th:each="offerT : ${offerTypes}">
-                        <input type="radio" class="custom-control-input" id="offer-types" th:id="${offerT.id}"
+                    <div class="custom-control custom-radio" id="offer-type-radio" th:each="offerT : ${offerTypes}">
+                        <input type="radio" class="custom-control-input" th:id="${offerT.id}"
                                th:field="*{offerType}" th:value="${offerT}"
+
                                name="offer-type">
                         <label class="custom-control-label" th:for="${offerT.id}"
                                th:text="${offerT.type}"></label>
@@ -129,6 +130,16 @@
         </th:block> /*/-->
 <script type="text/javascript" src="/js/sly.min.js"></script>
 <script type="text/javascript" src="/js/frameController.js"></script>
+<script>
+    $('#offer-type-radio input').on('change', function() {
+        if($('#offer-type-radio input:checked').attr('id') == '1'){
+            $('#price-box').show();
+        }
+        else{
+            $('#price-box').hide();
+        }
+    });
+</script>
 
 </body>
 </html>

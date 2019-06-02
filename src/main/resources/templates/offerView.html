@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                 <tr class="offer-row" style="" th:each="book : ${offer.books}">
-                    <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif'} + ');'"></td>
+                    <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+book.photoUrl} + ');'"></td>
                     <td style="">
                         <!-- TITLE -->
                         <div class="row">

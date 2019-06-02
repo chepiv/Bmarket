@@ -10,31 +10,36 @@
 <!-- CONTENT -->
 <nav th:replace="html/header.html :: navigation"></nav>
 <div class="container mt-navigation">
-    <h1>Użytkownik</h1>
-    <p th:text="${userDTO.getName()}"></p>
-    <p th:text="${userDTO.getEmail()}"></p>
-    <!--TODO: FILL FORMS WITH USER DATA -->
-    <section>
-        <h2>Informacje osobiste</h2>
+    <h1>Podsumowanie zakupu</h1>
 
-        <form action="#" method="post" th:action="@{/postBuyBook}" th:object="${offer}">
-        <div>
-            <h2>Informacje o ofercie:</h2>
+    <h4>Oferta</h4>
+    <div>
+        <p th:text="'Tytuł oferty:' + ${offer.title}"></p>
+        <p th:text="'Opis:' + ${offer.description}"></p>
+        <p th:text="'Cena: ' + ${offer.price}"></p>
+        <p th:text="'Miasto:' + ${offer.city}"></p>
+        <p>Książki:</p>
+        <tr th:each="book : ${offer.books}">
+            <td><span th:text="${book.title}"> Title </span></td>
+            <td><span th:text="${book.authors}"> Author </span></td>
+            <td><span th:text="${book.publisher}"> Author </span></td>
+            <td><span th:text="${book.getBookCondition()}"> Author </span></td>
+        </tr>
+    </div>
 
-                <p th:text="${offer.getTitle()}"/>
+    <h4>Sprzedający</h4>
+    <div>
+        <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
+        <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
+        <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
+    </div>
 
 
+    <footer th:replace="html/footer.html :: footer"></footer>
 
-        </div>
-            <button class="btn btn-outline-purple" type="submit" value="Zmień">kup</button>
-        </form>
-    </section>
+    <!--/*/ <th:block th:include="html/js.html :: scripts">
+            </th:block> /*/-->
+
 </div>
-
-<footer th:replace="html/footer.html :: footer"></footer>
-
-<!--/*/ <th:block th:include="html/js.html :: scripts">
-        </th:block> /*/-->
-
 </body>
 </html>

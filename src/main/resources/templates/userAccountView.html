@@ -63,7 +63,8 @@
                 <li th:each="book : ${user.books}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
-                        <img class="book-cover" th:src="'../files/' + ${book.photoUrl}">
+                            <img class="book-cover" th:src="'../files/' + ${book.photoUrl}" >
+
                     </div>
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
@@ -102,12 +103,14 @@
                 <li th:each="offer : ${offers}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
-                        <img class="book-cover" th:src="'../files/' + ${offer.books[0].photoUrl}">
+                        <a th:href="'/offerView/'+${offer.id}">
+                            <img class="book-cover" th:src="'../files/' + ${offer.books[0].photoUrl}">
+                        </a>
                     </div>
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a href="#">edytuj</a> | <a href="#">usuń</a></h6></div>
+                    <div><h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">edytuj</a> | <a href="#">usuń</a></h6></div>
 
                 </li>
             </ul>

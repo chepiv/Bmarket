@@ -36,14 +36,13 @@ public class LoginController {
         User user = null;
 
 
-
-            user = userRepository.findUserByLoginAndPassword(loginDTO.getUsername(), Encryption.encrypt(loginDTO.getPassword()));
-            if (user == null) {
-                status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
-                ra.addFlashAttribute("redirectFrom", "postLogin");
-                ra.addFlashAttribute("status", status);
-                return "redirect:/login";
-            }
+        user = userRepository.findUserByLoginAndPassword(loginDTO.getUsername(), Encryption.encrypt(loginDTO.getPassword()));
+        if (user == null) {
+            status = PostStatus.WRONG_PASSWORD_OR_USERNAME;
+            ra.addFlashAttribute("redirectFrom", "postLogin");
+            ra.addFlashAttribute("status", status);
+            return "redirect:/login";
+        }
 
         if (status == PostStatus.SUCCESS) {
             session.setAttribute("userId", user.getId());
@@ -52,12 +51,12 @@ public class LoginController {
         ra.addFlashAttribute("status", status);
         return "redirect:/";
     }
-    @GetMapping(value = "/logout")
-    public String logout(Model model, HttpSession session) {
 
+    @GetMapping(value = "/logout")
+    public String logout(Model model, HttpSession session){
         session.removeAttribute("userId");
         session.invalidate();
-
-        return "index";
+        return "logout";
     }
+
 }

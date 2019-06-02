@@ -1,10 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BMarket</title>
+
 </head>
 <body>
+<!-- CONTENT -->
+
+<div class="container subpage-content">
+    <div>
+        <div th:switch="${status}">
+            <p th:case="${status.SUCCESS}" th:text="'zakupiono książki'"></p>
+            <p th:case="${status.DATABASE_ERROR}">Błąd zapisu do bazy danych</p>
+            <p th:case="*">Wystąpił nieznany błąd</p>
+        </div>
+        <a href="/">Powrót do strony głównej</a>
+
+    </div>
+</div>
+
+
+
 
 </body>
 </html>
