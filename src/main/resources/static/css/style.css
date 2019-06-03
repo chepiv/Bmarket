@@ -1,8 +1,10 @@
+/*
 html,
 body,
 .view {
     height: 100%;
 }
+*/
 
 header{
     height: 88%;
@@ -160,6 +162,7 @@ footer {
 .subpage-content{
     padding-top: 25px;
     padding-bottom: 25px;
+    min-height: calc(100vh - 278px);
 }
 
 .subpage-header > div > h2{
@@ -356,3 +359,4 @@ footer {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }​
+

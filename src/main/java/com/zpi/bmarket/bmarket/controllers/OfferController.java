@@ -5,6 +5,7 @@ import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.*;
+import com.zpi.bmarket.bmarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +38,7 @@ public class OfferController {
     public String addOffer(WebRequest request, Model model, HttpSession session) {
 
         AddOfferDTO addOfferDTO = new AddOfferDTO();
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
 //        List<Book> books = bookRepository.findAllByUserId(id);
 
         model.addAttribute("addOfferDTO", addOfferDTO);

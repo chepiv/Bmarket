@@ -4,6 +4,7 @@ import com.zpi.bmarket.bmarket.DTO.UserEditDTO;
 import com.zpi.bmarket.bmarket.PostStatus;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
+import com.zpi.bmarket.bmarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,8 @@ public class EditUserController {
 
         String sid = RequestContextHolder.currentRequestAttributes().getSessionId();
         UserEditDTO userEditDTO = new UserEditDTO();
-        Long id = ((Long)session.getAttribute("userId")).longValue();
-        User userRep = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+
+        User userRep = UsersService.getUser(session,userRepository);
 
         userEditDTO.getCurrentDataUser(userRep);
 
