@@ -14,28 +14,40 @@
 
     <h4>Oferta</h4>
     <div>
-        <p th:text="'Tytuł oferty:' + ${offer.title}"></p>
-        <p th:text="'Opis:' + ${offer.description}"></p>
+        <p th:text="'Tytuł oferty: ' + ${offer.title}"></p>
+        <p th:text="'Opis: ' + ${offer.description}"></p>
         <p th:text="'Cena: ' + ${offer.price}"></p>
-        <p th:text="'Miasto:' + ${offer.city}"></p>
+        <p th:text="'Miasto: ' + ${offer.city}"></p>
         <p>Książki:</p>
-        <tr th:each="book : ${offer.books}">
-            <td><span th:text="${book.title}"> Title </span></td>
-            <td><span th:text="${book.authors}"> Author </span></td>
-            <td><span th:text="${book.publisher}"> Author </span></td>
-            <td><span th:text="${book.getBookCondition()}"> Author </span></td>
-        </tr>
+        <table th:each="book : ${offer.books}">
+            <tr>
+                <td><span th:text="${book.title}"> Tytuł </span></td>
+            </tr>
+            <tr>
+                <td><span th:text="${book.authors}"> Autor </span></td>
+            </tr>
+            <tr>
+                <td><span th:text="${book.publisher}"> Wydawnictwo </span></td>
+            </tr>
+            <tr>
+                <td><span th:text="${book.getBookCondition()}"> Stan książki </span></td>
+            </tr>
+        </table>
     </div>
+    <!--
+        <h4>Sprzedający</h4>
 
-    <h4>Sprzedający</h4>
-    <div>
-        <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
-        <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
-        <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
-    </div>
+        <div>
+            <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
+            <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
+            <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
+        </div>
+        -->
 
+    <div><h6><a th:href="'/postBuyBook'">edytuj</a></h6></div>
 
     <footer th:replace="html/footer.html :: footer"></footer>
+
 
     <!--/*/ <th:block th:include="html/js.html :: scripts">
             </th:block> /*/-->

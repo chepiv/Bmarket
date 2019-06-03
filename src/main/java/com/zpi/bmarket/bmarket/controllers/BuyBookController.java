@@ -11,10 +11,7 @@ import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -30,8 +27,8 @@ public class BuyBookController {
     @Autowired
     StatusRepository statusRepository;
 
-    @GetMapping("/buyBook")
-    public String buyBook(HttpSession session, Model model, @ModelAttribute long offerId) {
+    @GetMapping("/buyBook/{offerId}")
+    public String buyBook(HttpSession session, Model model, @PathVariable long offerId) {
 
         Long id = ((Long) session.getAttribute("userId")).longValue();
         User buyer = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
@@ -61,7 +58,7 @@ public class BuyBookController {
 
 
         try {
-            long statusId = 1L;
+            long statusId = 2L;
             offer.setStatus(statusRepository.findById(statusId).orElseThrow(() -> new IllegalArgumentException("id: " + statusId)));
             offer.setBoughtDate(new Date());
             offerRepository.save(offer);

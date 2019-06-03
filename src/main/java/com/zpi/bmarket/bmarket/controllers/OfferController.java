@@ -56,7 +56,7 @@ public class OfferController {
         Long id = (Long) session.getAttribute("userId");
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
-        Long statusId = 0L;
+        Long statusId = 1L;
         offerDTO.setStatus(statusRepository.findById(statusId).orElseThrow(() -> new IllegalArgumentException("id: " + statusId)));  // TODO: jakie statusy - ustawić że oferta jest aktywna
         offerDTO.setPublishDate(new Date());
 
