@@ -84,7 +84,7 @@
                 <div class="col">
                     <div class="custom-control custom-radio" id="offer-type-radio" th:each="offerT : ${offerTypes}">
                         <input type="radio" class="custom-control-input" th:id="${offerT.id}"
-                               th:field="*{offerType}" th:value="${offerT}"
+                               th:field="*{offerType}" th:value="${offerT.id}"
 
                                name="offer-type">
                         <label class="custom-control-label" th:for="${offerT.id}"
