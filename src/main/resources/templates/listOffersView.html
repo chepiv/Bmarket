@@ -28,13 +28,13 @@
                     <h5>Filtruj...</h5>
                     <div class="md-form">
                         <label for="search-query">Szukaj...</label>
-                        <input type="text" id="search-query" class="form-control">
+                        <input type="text" id="search-query" class="form-control" th:field="*{textQuery}">
                     </div>
 
                     <div class="md-form">
-                        <select id="category" class="browser-default custom-select"><!--th:field="*{category}"-->
-                            <option selected="selected" disabled  value="" label="Wybierz kategorię">Wybierz kategorię</option>
-                            <option><!--th:each="category : ${categories}" th:value="${category.id}" th:text="${category.value}"--></option>
+                        <select id="category" class="browser-default custom-select" th:field="*{category}">
+                            <option selected="selected" th:value="${null}" label="Wszystkie kategorie">Wybierz kategorię</option>
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.value}"></option>
                         </select>
                     </div>
 

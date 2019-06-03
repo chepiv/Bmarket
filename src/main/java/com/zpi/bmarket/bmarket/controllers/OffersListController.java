@@ -29,6 +29,8 @@ public class OffersListController {
     private OfferTypeRepository offerTypeRepository;
     @Autowired
     private StatusRepository statusRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     private int limit = 3;
 
@@ -45,6 +47,11 @@ public class OffersListController {
     @ModelAttribute("statuses")
     public List<Status> statuses() {
         return Lists.newArrayList(statusRepository.findAll());
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> categories() {
+        return Lists.newArrayList(categoryRepository.findAll());
     }
 
 
@@ -71,11 +78,11 @@ public class OffersListController {
         if (searchOfferDTO.getCategory() != null) {
 //            List<Book> booksByCat = bookRepository.findAllByCategory(searchOfferDTO.getCategory());
             offers = offers.stream().
-                    filter(x->x.getBooks().stream().anyMatch(
-                            b->b.getCategory() == searchOfferDTO.getCategory())).
+                    filter(x -> x.getBooks().stream().anyMatch(
+                            b -> b.getCategory() == searchOfferDTO.getCategory())).
                     collect(Collectors.toList());
         }
-            return offers;
+        return offers;
 
     }
 
