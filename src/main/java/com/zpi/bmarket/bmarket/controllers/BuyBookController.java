@@ -73,6 +73,7 @@ public class BuyBookController {
 
             for ( Book book : offer.getBooks()) {
                 book.setUser(buyer);
+                book.setOffer(null);
             }
             userRepository.save(buyer);
             userRepository.save(seller);
