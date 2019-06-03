@@ -9,9 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OfferRepository extends CrudRepository<Offer, Long> {
 
     Page<Offer> findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax, Pageable pageable);
     Offer findOfferById(Long id);
+
 }

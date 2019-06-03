@@ -11,46 +11,54 @@
 <nav th:replace="html/header.html :: navigation"></nav>
 <div class="container mt-navigation">
     <h1>Podsumowanie zakupu</h1>
+    <!-- <form th:action="@{/postBuyBook}" th:object="${offer}" method="post" class="register-form"> -->
 
-    <h4>Oferta</h4>
-    <div>
-        <p th:text="'Tytuł oferty: ' + ${offer.title}"></p>
-        <p th:text="'Opis: ' + ${offer.description}"></p>
-        <p th:text="'Cena: ' + ${offer.price}"></p>
-        <p th:text="'Miasto: ' + ${offer.city}"></p>
-        <p>Książki:</p>
-        <table th:each="book : ${offer.books}">
-            <tr>
-                <td><span th:text="${book.title}"> Tytuł </span></td>
-            </tr>
-            <tr>
-                <td><span th:text="${book.authors}"> Autor </span></td>
-            </tr>
-            <tr>
-                <td><span th:text="${book.publisher}"> Wydawnictwo </span></td>
-            </tr>
-            <tr>
-                <td><span th:text="${book.getBookCondition()}"> Stan książki </span></td>
-            </tr>
-        </table>
-    </div>
-    <!--
-        <h4>Sprzedający</h4>
+                <h4>Oferta</h4>
+                <div>
+                    <p th:text="'Tytuł oferty: ' + ${offer.title}"></p>
+                    <p th:text="'Opis: ' + ${offer.description}"></p>
+                    <p th:text="'Cena: ' + ${offer.price}"></p>
+                    <p th:text="'Miasto: ' + ${offer.city}"></p>
+                    <p>Książki:</p>
+                    <table th:each="book : ${offer.books}">
+                        <tr>
+                            <td><span th:text="${book.title}"> Tytuł </span></td>
+                        </tr>
+                        <tr>
+                            <td><span th:text="${book.authors}"> Autor </span></td>
+                        </tr>
+                        <tr>
+                            <td><span th:text="${book.publisher}"> Wydawnictwo </span></td>
+                        </tr>
+                        <tr>
+                            <td><span th:text="${book.getBookCondition()}"> Stan książki </span></td>
+                        </tr>
+                    </table>
+                </div>
 
-        <div>
-            <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
-            <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
-            <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
+
+                    <h4>Sprzedający</h4>
+
+                    <div>
+                        <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
+                        <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
+                        <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
+                    </div>
+        <div><h6><a th:href="'/postBuyBook/'+${offer.id}">Potwierdź</a></h6></div>
+                <!--
+                   <div><h6><a th:href="'/postBuyBook/'+${offer.id}">Potwierdź</a></h6></div>
+
+
+
+        <div class="text-center mt-4">
+            <button class="btn btn-purple" type="submit" value="accept">Potwierdź</button>
         </div>
-        -->
-
-    <div><h6><a th:href="'/postBuyBook'">edytuj</a></h6></div>
-
-    <footer th:replace="html/footer.html :: footer"></footer>
+    <!-- </form> -->
+     <footer th:replace="html/footer.html :: footer"></footer>
 
 
-    <!--/*/ <th:block th:include="html/js.html :: scripts">
-            </th:block> /*/-->
+     <!--/*/ <th:block th:include="html/js.html :: scripts">
+             </th:block> /*/-->
 
 </div>
 </body>
