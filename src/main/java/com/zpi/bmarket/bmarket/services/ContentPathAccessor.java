@@ -17,7 +17,12 @@ public class ContentPathAccessor {
 
 
     public static String getContentPath() {
-        return "var/opt/oss/content/";
+        String os = System.getProperty("os.name");
+        if (StringUtils.containsIgnoreCase(os, "windows") || StringUtils.containsIgnoreCase(os, "mac os")) {
+            return BASE_DIR_LOCAL;
+        } else {
+            return "/var/opt/oss/content/";
+        }
     }
 
     public static String getFilesPath() {
