@@ -25,6 +25,19 @@
             <div class="col-sm-3">
                 <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
                 <form th:method="post" th:action="@{'/offers/'+${index}}" th:object="${searchOfferDTO}">
+                    <h5>Filtruj...</h5>
+                    <div class="md-form">
+                        <label for="search-query">Szukaj...</label>
+                        <input type="text" id="search-query" class="form-control">
+                    </div>
+
+                    <div class="md-form">
+                        <select id="category" class="browser-default custom-select"><!--th:field="*{category}"-->
+                            <option selected="selected" disabled  value="" label="Wybierz kategorię">Wybierz kategorię</option>
+                            <option><!--th:each="category : ${categories}" th:value="${category.id}" th:text="${category.value}"--></option>
+                        </select>
+                    </div>
+
                     <div class="row">
                         <div class="col col-mw-130">
                             <span class="">Sortuj według</span>
