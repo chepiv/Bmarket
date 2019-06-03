@@ -30,7 +30,7 @@ public class OffersListController {
     @Autowired
     private StatusRepository statusRepository;
 
-    private int limit = 3;
+    private static final int limit = 10;
 
     @ModelAttribute("conditions")
     public List<BookCondition> conditions() {
