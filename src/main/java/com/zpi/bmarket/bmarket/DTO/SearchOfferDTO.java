@@ -1,6 +1,7 @@
 package com.zpi.bmarket.bmarket.DTO;
 
 import com.zpi.bmarket.bmarket.domain.BookCondition;
+import com.zpi.bmarket.bmarket.domain.Category;
 import com.zpi.bmarket.bmarket.domain.OfferType;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +38,12 @@ public class SearchOfferDTO {
     boolean priceHighLow;
     boolean newestFirst;
 
+    //text query
+    String textQuery;
+
+    //Category
+    Category category;
+
     public SearchOfferDTO() {
         isSale = true;
         isExchange = true;
@@ -72,6 +79,9 @@ public class SearchOfferDTO {
         priceLowHigh = false;
         priceHighLow = false;
         newestFirst = true;
+
+        //all categories
+        category = null;
     }
 
     public List<OfferType> getOfferTypes() {

@@ -1,12 +1,11 @@
 package com.zpi.bmarket.bmarket.controllers;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.zpi.bmarket.bmarket.DTO.SearchOfferDTO;
-import com.zpi.bmarket.bmarket.domain.BookCondition;
-import com.zpi.bmarket.bmarket.domain.Offer;
-import com.zpi.bmarket.bmarket.domain.OfferType;
-import com.zpi.bmarket.bmarket.domain.Status;
+import com.zpi.bmarket.bmarket.domain.*;
 import com.zpi.bmarket.bmarket.repositories.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class OffersListController {
@@ -54,12 +54,29 @@ public class OffersListController {
 
     private List<Offer> getOffersByDTO(SearchOfferDTO searchOfferDTO, int index) {
         Pageable pageable = PageRequest.of(index - 1, limit);
-        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(
-                getValidStatus(), searchOfferDTO.getOfferTypes(),
-                bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
-                searchOfferDTO.getPriceMin(), searchOfferDTO.getPriceMax(),
-                pageable).getContent();
-        return offers;
+        List<Offer> offers;
+        if (StringUtils.isEmpty(searchOfferDTO.getTextQuery()))
+            offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(
+                    getValidStatus(), searchOfferDTO.getOfferTypes(),
+                    bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
+                    searchOfferDTO.getPriceMin(), searchOfferDTO.getPriceMax(),
+                    pageable).getContent();
+        else
+            offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetweenAndTitleIsContaining(
+                    getValidStatus(), searchOfferDTO.getOfferTypes(),
+                    bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
+                    searchOfferDTO.getPriceMin(), searchOfferDTO.getPriceMax(),
+                    searchOfferDTO.getTextQuery(),
+                    pageable).getContent();
+        if (searchOfferDTO.getCategory() != null) {
+//            List<Book> booksByCat = bookRepository.findAllByCategory(searchOfferDTO.getCategory());
+            offers = offers.stream().
+                    filter(x->x.getBooks().stream().anyMatch(
+                            b->b.getCategory() == searchOfferDTO.getCategory())).
+                    collect(Collectors.toList());
+        }
+            return offers;
+
     }
 
     @GetMapping("/offers")
