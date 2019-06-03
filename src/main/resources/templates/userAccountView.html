@@ -72,7 +72,8 @@
                     
                     <div><form>
                         <input type="hidden" id="delId">
-                        <h6><button class="del-button-link" type="submit" onclick="return confirm('Czy napewno chcesz usunąć książkę?')">usuń</button></h6>
+                        <!--<h6><button th:href="'/postRemoveBookFromAccount/'+${book.id}" class="del-button-link" >usuń</button></h6>-->
+                        <div><h6><a th:href="'/postRemoveBookFromAccount/'+${book.id}">usuń</a> </h6></div>
                     </form></div>
                 </li>
 
