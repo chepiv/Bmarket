@@ -6,6 +6,7 @@ import com.zpi.bmarket.bmarket.domain.OfferType;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,9 @@ public class SearchOfferDTO {
 
     //Category
     Category category;
+
+    //for pages
+    Pageable pageable;
 
     public SearchOfferDTO() {
         isSale = true;

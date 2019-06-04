@@ -82,6 +82,8 @@ public class OffersListController {
                             b -> b.getCategory() == searchOfferDTO.getCategory())).
                     collect(Collectors.toList());
         }
+        if(((PageRequest) pageable).previous() == pageable);
+        pageable = pageable.next();
         return offers;
 
     }
@@ -92,13 +94,28 @@ public class OffersListController {
     }
 
     @GetMapping("/offers/{index}")
-    public String offerList(Model model, @PathVariable("index") int index) {
+    public String offerList(Model model
+                            ,@PathVariable("index") int index
+//                            ,@RequestParam(value = "query",required = false) String query
+////                            ,@RequestParam(value = "cat", required = false) int catID
+//                            ,@RequestParam(value = "typeS", required = false) boolean typeS
+//                            ,@RequestParam(value = "typeW", required = false) boolean typeW
+//                            ,@RequestParam(value = "typeF", required = false) boolean typeF
+//                            ,@RequestParam(value = "conN", required = false) boolean conN
+//                            ,@RequestParam(value = "conU", required = false) boolean conU
+//                            ,@RequestParam(value = "priceMin", required = false) int priceMin
+//                            ,@RequestParam(value = "priceMax", required = false) int priceMax
+    ) {
         SearchOfferDTO searchOfferDTO = new SearchOfferDTO();
+//        if (!StringUtils.isEmpty(query)) {
+//            searchOfferDTO.setTextQuery(query);
+//        }
         List<Offer> offers = getOffersByDTO(searchOfferDTO, index);
+        searchOfferDTO.setPageable(PageRequest.of(index-1,limit));
 
         model.addAttribute("offers", offers);
         model.addAttribute("index", index);
-        model.addAttribute("searchOfferDTO", new SearchOfferDTO());
+        model.addAttribute("searchOfferDTO", searchOfferDTO);
 
 
         return "listOffersView";
@@ -107,6 +124,7 @@ public class OffersListController {
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
     public String offerListSearch(Model model, @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
         List<Offer> offers = getOffersByDTO(searchOfferDTO, index);
+        searchOfferDTO.setPageable(PageRequest.of(index-1,limit));
 
         model.addAttribute("index", index);
         model.addAttribute("offers", offers);

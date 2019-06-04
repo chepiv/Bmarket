@@ -177,7 +177,7 @@
         <div class="row mt-35">
             <div class="col">
                 <nav>
-                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${index == 1}">
+                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="*{searchOfferDTO.pageable.first() == searchOfferDTO.pageable}">
                         <li class="page-item disabled">
                             <a class="page-link" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -193,7 +193,7 @@
                         </li>
 
                     </ul>
-                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${index == 1}">
+                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${searchOfferDTO.pageable.first() == searchOfferDTO.pageable}">
                         <li class="page-item">
                             <a class="page-link" aria-label="Previous" th:href="'/offers/'+${index-1}">
                                 <span aria-hidden="true">&laquo;</span>
