@@ -10,7 +10,7 @@
 <!-- CONTENT -->
 <nav th:replace="html/header.html :: navigation"></nav>
 <div class="container mt-navigation">
-    <h1>Podsumowanie zakupu</h1>
+    <h1>Podsumowanie transakcji</h1>
     <!-- <form th:action="@{/postBuyBook}" th:object="${offer}" method="post" class="register-form"> -->
 
                 <h4>Oferta</h4>
@@ -44,7 +44,7 @@
                         <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
                         <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
                     </div>
-        <div><h6><a th:href="'/postBuyBook/'+${offer.id}">Potwierdź</a></h6></div>
+        <div><h6><a th:href="'/postBuyOffer/'+${offer.id}">Potwierdź</a></h6></div>
                 <!--
                    <div><h6><a th:href="'/postBuyBook/'+${offer.id}">Potwierdź</a></h6></div>
 

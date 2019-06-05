@@ -12,7 +12,7 @@
 <div class="container subpage-content">
     <div>
         <div th:switch="${status}">
-            <p th:case="${status.SUCCESS}" th:text="'zakupiono książki'"></p>
+            <p th:case="${status.SUCCESS}" th:text="'Zakupiono książki. Znajdą się one na Twoim koncie po tym jak sprzedający potwierdzi odbiór płatności'"></p>
             <p th:case="${status.DATABASE_ERROR}">Błąd zapisu do bazy danych</p>
             <p th:case="*">Wystąpił nieznany błąd</p>
         </div>

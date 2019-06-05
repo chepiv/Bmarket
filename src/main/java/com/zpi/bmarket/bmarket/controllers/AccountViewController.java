@@ -6,6 +6,7 @@ import com.zpi.bmarket.bmarket.domain.Offer;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.BookRepository;
 import com.zpi.bmarket.bmarket.repositories.OfferRepository;
+import com.zpi.bmarket.bmarket.repositories.StatusRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
 import com.zpi.bmarket.bmarket.services.UserAccount;
 import com.zpi.bmarket.bmarket.services.UsersService;
@@ -24,11 +25,13 @@ import java.util.stream.Collectors;
 @Controller
 public class AccountViewController {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    OfferRepository offerRepository;
+    private OfferRepository offerRepository;
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
+    @Autowired
+    private StatusRepository statusRepository;
 
     @GetMapping("/userAccount")
     public String viewAccount(HttpSession session, Model model){
@@ -56,7 +59,6 @@ public class AccountViewController {
         return "userAccountView";
     }
 
-    //TODO: czy to musi być w poście?
     @GetMapping("/postRemoveBookFromAccount/{id}")
     public String removeBookFromAccount(HttpSession session, Model model, @PathVariable Long id){
         User user = UsersService.getUser(session,userRepository);
@@ -72,6 +74,14 @@ public class AccountViewController {
 
         UserAccount.removeBooksFromOffer(id,offerRepository,bookRepository);
 
+
+        return "redirect:/userAccount";
+    }
+    @GetMapping("postConfirmBuyOffer/{id}")
+    public String confirmBuyOffer(HttpSession session, Model model, @PathVariable Long id){
+
+        Offer offer = offerRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("id: " + id));
+        UserAccount.processBuyOffer(offer,offerRepository,userRepository,statusRepository);
 
         return "redirect:/userAccount";
     }

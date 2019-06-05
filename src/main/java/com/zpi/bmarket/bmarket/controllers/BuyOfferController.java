@@ -8,18 +8,17 @@ import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.OfferRepository;
 import com.zpi.bmarket.bmarket.repositories.StatusRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
+import com.zpi.bmarket.bmarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
-public class BuyBookController {
+public class BuyOfferController {
 
     @Autowired
     UserRepository userRepository;
@@ -28,11 +27,10 @@ public class BuyBookController {
     @Autowired
     StatusRepository statusRepository;
 
-    @GetMapping("/buyBook/{offerId}")
+    @GetMapping("/buyOffer/{offerId}")
     public String buyBook(HttpSession session, Model model, @PathVariable Long offerId) {
 
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User buyer = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User buyer = UsersService.getUser(session,userRepository);
 
         //kupujący, oferta, sprzedający
         //wyświetlić dane oferty i sprzedającego
@@ -46,46 +44,28 @@ public class BuyBookController {
         model.addAttribute("seller", seller);
         model.addAttribute("offer", offer);
         model.addAttribute("buyer", buyer);
-        return "buyBookView";
+        return "buyOfferView";
     }
 
 
-    @RequestMapping(value = "/postBuyBook/{offerId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/postBuyOffer/{offerId}", method = RequestMethod.GET)
     public String postBuyBook(Model model, HttpSession session, @PathVariable Long offerId ) {
 
         PostStatus status = PostStatus.ERROR;
 
-        //Long offerIdLong = Long.parseLong(offerId);
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User buyer = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User buyer = UsersService.getUser(session,userRepository);
         Offer offer = offerRepository.findById(offerId).orElseThrow(() -> new IllegalArgumentException("id: " + offerId));
-        //User seller = userRepository.findByOffers(offer);
-        List<Book> books = offer.getBooks();
-        User seller = books.get(0).getUser();
 
-        //pierwsza książka z oferty i z niej użytkownik (sprzedawca)
-
-        try {
-            long statusId = 2L;
-            offer.setStatus(statusRepository.findById(statusId).orElseThrow(() -> new IllegalArgumentException("id: " + statusId)));
-            offer.setBoughtDate(new Date());
-            offerRepository.save(offer);
-
-            for ( Book book : offer.getBooks()) {
-                book.setUser(buyer);
-                book.setOffer(null);
-            }
-            userRepository.save(buyer);
-            userRepository.save(seller);
-            status = PostStatus.SUCCESS;
-
-        } catch (Exception e) {
-            status = PostStatus.DATABASE_ERROR;
-        }
+        Long statusID = 3L;//w trakcie
+        Status statusInProces = statusRepository.findById(statusID).orElseThrow(()->new IllegalArgumentException("id: " + statusID));
+        offer.setStatus(statusInProces);
+        offer.setBuyerUser(buyer);
+        status = PostStatus.SUCCESS;
+//        status = UserAccount.processBuyOffer(offer,buyer,offerRepository,userRepository,statusRepository);
 
         model.addAttribute("status", status);
 
-        return "postBuyBookView";
+        return "postBuyOfferView";
     }
 
 }

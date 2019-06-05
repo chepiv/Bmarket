@@ -36,6 +36,7 @@
             <br>
             <!-- IMIĘ I NAZWISKO -->
             <div>
+                <!--change to if null show empty-->
                 <h5 th:text="${user.name + ' ' + user.surname}"></h5>
             </div>
         </div>
@@ -111,7 +112,7 @@
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">edytuj</a> | <a href="#">usuń</a></h6></div>
+                    <div><h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">usuń</a> | <!--th:if="${offer.status.id == 3}" THEN NIEWIDOCZNE  --> <a  th:href="'/postConfirmBuyOffer/'+${offer.id}">zaakceptuj</a></h6></div>
 
                 </li>
             </ul>
