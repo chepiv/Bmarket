@@ -34,54 +34,57 @@ public class AccountViewController {
     private StatusRepository statusRepository;
 
     @GetMapping("/userAccount")
-    public String viewAccount(HttpSession session, Model model){
-        User user = UsersService.getUser(session,userRepository);
+    public String viewAccount(HttpSession session, Model model) {
+        User user = UsersService.getUser(session, userRepository);
 
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         List<Offer> allOffers = Lists.newArrayList(offerRepository.findAll());
         List<Book> books = user.getBooks();
         List<Offer> usersOffers = new ArrayList<>();
         //TODO: to sprawia że ładowanie strony trwa długo
-        if(books!=null && !books.isEmpty()){
+        if (books != null && !books.isEmpty()) {
 
             for (Book book :
                     books) {
                 long bookId = book.getId();
                 usersOffers.addAll(allOffers.stream().
-                        filter(x->x.getBooks().stream().
-                                anyMatch(b->b.getId() == bookId)).
+                        filter(x -> x.getBooks().stream().
+                                anyMatch(b -> b.getId() == bookId
+                                        && x.getStatus().getId() != 2)).//sprzedana
                         collect(Collectors.toList()));
             }
             usersOffers = new ArrayList<>(new HashSet<>(usersOffers));
 
         }
-        model.addAttribute("offers",usersOffers);
+        model.addAttribute("offers", usersOffers);
         return "userAccountView";
     }
 
     @GetMapping("/postRemoveBookFromAccount/{id}")
-    public String removeBookFromAccount(HttpSession session, Model model, @PathVariable Long id){
-        User user = UsersService.getUser(session,userRepository);
+    public String removeBookFromAccount(HttpSession session, Model model, @PathVariable Long id) {
+        User user = UsersService.getUser(session, userRepository);
         //remove book from offer and from user
         Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
         UserAccount.removeBook(book);
 
         return "redirect:/userAccount";
     }
+
     @GetMapping("/postRemoveOfferFromAccount/{id}")
     public String removeOfferFromAccount(HttpSession session, Model model, @PathVariable Long id) {
-        User user = UsersService.getUser(session,userRepository);
+        User user = UsersService.getUser(session, userRepository);
 
-        UserAccount.removeBooksFromOffer(id,offerRepository,bookRepository);
+        UserAccount.removeBooksFromOffer(id, offerRepository, bookRepository);
 
 
         return "redirect:/userAccount";
     }
-    @GetMapping("postConfirmBuyOffer/{id}")
-    public String confirmBuyOffer(HttpSession session, Model model, @PathVariable Long id){
 
-        Offer offer = offerRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("id: " + id));
-        UserAccount.processBuyOffer(offer,offerRepository,userRepository,statusRepository);
+    @GetMapping("postConfirmBuyOffer/{id}")
+    public String confirmBuyOffer(HttpSession session, Model model, @PathVariable Long id) {
+
+        Offer offer = offerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        UserAccount.processBuyOffer(offer, offerRepository, userRepository, statusRepository);
 
         return "redirect:/userAccount";
     }

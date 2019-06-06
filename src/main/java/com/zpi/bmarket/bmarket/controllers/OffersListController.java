@@ -54,7 +54,7 @@ public class OffersListController {
 
     private List<Offer> getOffersByDTO(SearchOfferDTO searchOfferDTO, int index) {
         Pageable pageable = PageRequest.of(index - 1, limit);
-        List<Offer> offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(
+        List<Offer> offers = offerRepository.findDistinctByStatusAndOfferTypeInAndBooksInAndPriceBetween(
                 getValidStatus(), searchOfferDTO.getOfferTypes(),
                 bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
                 searchOfferDTO.getPriceMin(), searchOfferDTO.getPriceMax(),

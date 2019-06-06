@@ -62,7 +62,6 @@ public class BuyOfferController {
         offer.setStatus(statusInProces);
         offer.setBuyerUser(buyer);
         status = PostStatus.SUCCESS;
-//        status = UserAccount.processBuyOffer(offer,buyer,offerRepository,userRepository,statusRepository);
 
         model.addAttribute("status", status);
 
@@ -80,7 +79,7 @@ public class BuyOfferController {
 
         return "redirect:/userAccount";
 
-        //return "postBuyOfferView";
+//        return "postBuyOfferView";
     }
 
 }
