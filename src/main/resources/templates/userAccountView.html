@@ -64,13 +64,13 @@
                 <li th:each="book : ${user.books}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
-                            <img class="book-cover" th:src="'../files/' + ${book.photoUrl}" >
+                        <img class="book-cover" th:src="'../files/' + ${book.photoUrl}" >
 
                     </div>
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
                     <!-- BUTTONY -->
-                    
+
                     <div><form>
                         <input type="hidden" id="delId">
                         <!--<h6><button th:href="'/postRemoveBookFromAccount/'+${book.id}" class="del-button-link" >usuń</button></h6>-->
@@ -102,7 +102,16 @@
 
         <div class="frame" id="frameTwo" style="overflow: hidden;">
             <ul class="clearfix" style="transform: translateZ(0px) translateX(0px); width: 6840px;">
-                <li th:each="offer : ${offers}">
+
+                <!-- klasa to-accept żeby zmienić styl na do potwierdznia, bez tej klasy nie ma ramki i div.accept-offer ma display:none-->
+                <!-- PRZYKLAD Z RAMKA I PRZYCISKIEM -->
+                <li class="to-accept" th:each="offer : ${offers}">
+
+                    <!--th:if="${offer.status.id == 3}" THEN NIEWIDOCZNE  -->
+                    <div class="accept-offer">
+                        <i class="fas fa-check"></i>&nbsp;&nbsp;<span><a th:href="'/postConfirmBuyOffer/'+${offer.id}">zaakceptuj</a></span>
+                    </div>
+
                     <!-- OBRAZEK -->
                     <div class="img-container">
                         <a th:href="'/offerView/'+${offer.id}">
@@ -110,11 +119,38 @@
                         </a>
                     </div>
                     <!-- TYTUŁ -->
-                    <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>
+                    <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}">tyyuulul</h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">usuń</a> | <!--th:if="${offer.status.id == 3}" THEN NIEWIDOCZNE  --> <a  th:href="'/postConfirmBuyOffer/'+${offer.id}">zaakceptuj</a></h6></div>
+                    <div>
+                        <h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">usuń</a>
+                        </h6>
+                    </div>
 
                 </li>
+
+
+                <!-- PRZYKLAD BEZ RAMKI I GUZIKA ZAAKCEPTUJ (BRAK KLASY to-accept)-->
+                <!--TODO WYRZUCIC JEDNO Z DWOCH <li>-->
+                <li th:each="offer : ${offers}">
+                    <!--th:if="${offer.status.id == 3}" THEN NIEWIDOCZNE  -->
+                    <div class="accept-offer">
+                        <i class="fas fa-check"></i>&nbsp;&nbsp;<span><a th:href="'/postConfirmBuyOffer/'+${offer.id}">zaakceptuj</a></span>
+                    </div>
+                    <!-- OBRAZEK -->
+                    <div class="img-container">
+                        <a th:href="'/offerView/'+${offer.id}">
+                            <img class="book-cover" th:src="'../files/' + ${offer.books[0].photoUrl}">
+                        </a>
+                    </div>
+                    <!-- TYTUŁ -->
+                    <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}">tyyuulul</h6></div>
+                    <!-- BUTTONY -->
+                    <div>
+                        <h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">usuń</a>
+                        </h6>
+                    </div>
+                </li>
+
             </ul>
         </div>
 

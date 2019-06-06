@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -49,7 +50,7 @@ public class BuyOfferController {
 
 
     @RequestMapping(value = "/postBuyOffer/{offerId}", method = RequestMethod.GET)
-    public String postBuyBook(Model model, HttpSession session, @PathVariable Long offerId ) {
+    public String postBuyBook(Model model, HttpSession session, @PathVariable Long offerId, RedirectAttributes ra) {
 
         PostStatus status = PostStatus.ERROR;
 
@@ -65,7 +66,21 @@ public class BuyOfferController {
 
         model.addAttribute("status", status);
 
-        return "postBuyOfferView";
+        //alert używając alertManager.js
+        //trzeba w RedirectAttributes podać skąd przekierowanie i jaki status
+        //dostępny na każdej podstronie
+        //te 2 atrybuty wypełniają pola ukrytego div (w html/js.html), resztę robi skrypt
+        //identycznie działają alerty przy logowaniu
+
+        //TODO: test alerts
+        //nie moge przetestowac bo wszystkie oferty są vhyba bez sprzedającego i dostaje errory na buyOffer
+
+        ra.addFlashAttribute("redirectFrom", "postBuyOffer");
+        ra.addFlashAttribute("status", status);
+
+        return "redirect:/userAccount";
+
+        //return "postBuyOfferView";
     }
 
 }

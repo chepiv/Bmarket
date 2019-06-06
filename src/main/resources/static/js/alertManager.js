@@ -34,11 +34,25 @@ var postLogin = {
     }
 };
 
+var postBuyOffer = {
+    DATABASE_ERROR: {
+        title: 'Transakcja nie powiodła się',
+        message: 'Błąd bazy danych',
+        style: 'error'
+    },
+    SUCCESS:{
+        title: 'Transakcja powiodła się',
+        message: 'Zakupiono książki. Znajdą się one na Twoim koncie po tym jak sprzedający potwierdzi odbiór płatności',
+        style: 'none'
+    }
+};
+
 let type = $('#alertContainer').attr('type');
 let data = $('#alertContainer').attr('data');
 let message;
 let title;
 let style;
+
 if(type == "postRegister"){
     title = postRegister[data]['title'];
     message = postRegister[data]['message'];
@@ -48,6 +62,11 @@ else if(type == "postLogin"){
     title = postLogin[data]['title'];
     message = postLogin[data]['message'];
     style = postLogin[data]['style'];
+}
+else if(type == "postBuyOffer"){
+    title = postBuyOffer[data]['title'];
+    message = postBuyOffer[data]['message'];
+    style = postBuyOffer[data]['style'];
 }
 if(title != undefined) {
     if (style == "warning" || style == "error" || style == "success") {
