@@ -58,7 +58,8 @@
             <span class="text-offer-details" th:text="${offer.city}"></span>
             <br><br>
             <h6>Cena</h6>
-            <span class="text-offer-price" th:text="${offer.price}"></span>
+            <span th:unless="${offer.offerType.id == 2}" class="text-offer-price" th:text="${offer.price}"></span>
+            <h2 th:if="${offer.offerType.id==2}"><strong><i class="fas fa-exchange-alt"></i></strong></h2>
             <br>
             <h6>Oferta nr <span th:text="${offer.id}"></span></h6>
         </div>
