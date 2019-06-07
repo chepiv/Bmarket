@@ -23,7 +23,6 @@ public class HomeController {
 
         if (user.isPresent()) {
             model.addAttribute("user", user);
-            model.addAttribute("test", "test");
         }
         return "index";
     }

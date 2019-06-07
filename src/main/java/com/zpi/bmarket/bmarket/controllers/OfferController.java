@@ -56,7 +56,8 @@ public class OfferController {
         Long id = (Long) session.getAttribute("userId");
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
 
-        offerDTO.setStatus(statusRepository.findById(0L));  // TODO: jakie statusy - ustawić że oferta jest aktywna
+        Long statusId = 1L;
+        offerDTO.setStatus(statusRepository.findById(statusId).orElseThrow(() -> new IllegalArgumentException("id: " + statusId)));  // TODO: jakie statusy - ustawić że oferta jest aktywna
         offerDTO.setPublishDate(new Date());
 
         Offer offer = offerDTO.getOffer(user);
@@ -80,6 +81,49 @@ public class OfferController {
 
         model.addAttribute("offer",offerRepository.findOfferById(id));
         return "offerView";
+    }
+
+    @GetMapping(value = "/editOffer")
+    public String editOffer(Model model, HttpSession session, long id) {
+
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid offer Id:" + id));
+
+        Long userId = ((Long) session.getAttribute("userId")).longValue();
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user Id: " + userId));
+
+        model.addAttribute("offer", offer);
+        model.addAttribute("userBooks", user.getBooks());
+        model.addAttribute("offerTypes", offerTypeRepository.findAll());
+
+        return "editOfferView";
+    }
+
+
+    @RequestMapping(value = "/postEditOffer", method = RequestMethod.POST)
+    public String postEditOffer( Model model, HttpSession session, @ModelAttribute Offer offer) {
+
+        PostStatus status = PostStatus.ERROR;
+
+        try {
+            offerRepository.save(offer);
+        }
+        catch (Exception e) {
+            status = PostStatus.DATABASE_ERROR;
+        }
+
+        model.addAttribute("status", status);
+
+        return "postEditOfferView";
+    }
+
+
+    @GetMapping(value = "/deleteOffer")
+    public String deleteOffer(Model model, HttpSession session, Long id) {
+
+        offerRepository.deleteById(id);
+
+        return "listOfferView";
     }
 }
 
