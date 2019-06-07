@@ -18,7 +18,7 @@
 
 <div class="container subpage-content">
     <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
-    <form th:method="get" th:action="@{'/offers/list'}" th:object="${searchOfferDTO}">
+    <form th:method="get" th:action="@{'/offers/list/'+${offerPage.number+1}}" th:object="${searchOfferDTO}">
     <div>
         <!--form start-->
         <div class="row">
@@ -182,32 +182,43 @@
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li th:class="'page-item active'"><a class="page-link" href="/offers/1">1</a></li>
-                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><input class="page-link" type="text" th:field="*{index}" th:with="index=2"></li>
-                        <li th:class="${3<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" href="/offers/3">3</a></li>
-                        <li class="page-item">
-                            <a th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}" aria-label="Next" href="/offers/2">
+                        <li th:class="'page-item active'"><button class="page-link" type="submit" th:formaction="'/offers/list/2'">1</button></li>
+                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><button class="page-link" type="submit" th:formaction="'/offers/list/2'">2</button></li>
+                        <li th:class="${3<=offerPage.totalPages?'page-item':'page-item disabled'}"><button class="page-link" type="submit" th:formaction="'/offers/list/3'">3</button></li>
+                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}">
+                            <button class="page-link" aria-label="Next" type="submit" th:formaction="'/offers/list/2'">
                                 <span aria-hidden="true">&raquo;</span>
-                            </a>
+                            </button>
                         </li>
 
                     </ul>
                     <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${offerPage.first}">
+                        <!--previous-->
                         <li class="page-item">
-                            <a class="page-link" aria-label="Previous" th:href="'/offers/'+${index-1}">
+                            <button class="page-link" aria-label="Previous" type="submit" th:formaction="'/offers/list/'+${index-1}">
                                 <span aria-hidden="true">&laquo;</span>
-                            </a>
+                            </button>
                         </li>
-                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index-1}"
-                                                 th:text="${index}-1"></a></li>
-                        <li class="page-item active"><a class="page-link" th:href="'/offers/'+${index}"
-                                                        th:text="${index}"></a></li>
-                        <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" th:href="'/offers/'+${index+1}"
-                                                 th:text="${index}+1"></a></li>
+                        <!--index - 1-->
+                        <li class="page-item">
+                            <button class="page-link" type="submit" th:formaction="'/offers/list/'+${index-1}"
+                                    th:text="${index}-1"></button>
+                        </li>
+                        <!--index(current)-->
+                        <li class="page-item active"><button class="page-link" type="submit" th:formaction="'/offers/list/'+${index}"
+                                    th:text="${index}"></button>
+                        </li>
+                        <!--index + 1-->
                         <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
-                            <a class="page-link" aria-label="Next" th:href="'/offers/'+${index+1}">
+                            <button class="page-link" type="submit" th:formaction="'/offers/list/'+${index+1}"
+                                    th:text="${index}+1">
+                            </button>
+                        </li>
+                        <!--next-->
+                        <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
+                            <button class="page-link" aria-label="Next" type="submit" th:formaction="'/offers/list/'+${index+1}">
                                 <span aria-hidden="true">&raquo;</span>
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </nav>

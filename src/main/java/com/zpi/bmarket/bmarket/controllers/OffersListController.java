@@ -11,10 +11,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class OffersListController {
@@ -32,7 +35,7 @@ public class OffersListController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    private static final int limit = 10;
+    private static final int limit = 5;
 
     @ModelAttribute("conditions")
     public List<BookCondition> conditions() {
@@ -61,9 +64,9 @@ public class OffersListController {
     private Page<Offer> getOffersByDTO(SearchOfferDTO searchOfferDTO, int index) {
         Pageable pageable = PageRequest.of(index - 1, limit);
         Page<Offer> offerPage;
-        List<Book> booksSource = searchOfferDTO.getCategory()==null?
+        List<Book> booksSource = searchOfferDTO.getCategory() == null ?
                 bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions())
-                :bookRepository.findAllByBookConditionInAndCategory(searchOfferDTO.getConditions(),searchOfferDTO.getCategory());
+                : bookRepository.findAllByBookConditionInAndCategory(searchOfferDTO.getConditions(), searchOfferDTO.getCategory());
         if (StringUtils.isEmpty(searchOfferDTO.getTextQuery()))
             offerPage = offerRepository.findDistinctByStatusAndOfferTypeInAndBooksInAndPriceBetween(
                     getValidStatus(), searchOfferDTO.getOfferTypes(),
@@ -83,14 +86,14 @@ public class OffersListController {
     @GetMapping("/offers")
     public String offerListStart(Model model) {
         return
-//                "redirect:/offers/list/1?textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
-                "redirect:/offers/list?index=1&textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
+                "redirect:/offers/list/1?textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
+//                "redirect:/offers/list?index=1&textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
     }
 
-    @GetMapping("/offers/list")
+    @GetMapping("/offers/list/{index}")
     public String offerList(Model model
-//            , @PathVariable("index") int index
-            , @RequestParam(value = "index", required = true) int index
+            , @PathVariable("index") int index
+//            , @RequestParam(value = "index", required = true) int index
             , @RequestParam(value = "query", required = false) String query
             , @RequestParam(value = "category", required = false) Integer catID
             , @RequestParam(value = "sale", required = false) Boolean typeS
@@ -119,7 +122,6 @@ public class OffersListController {
         model.addAttribute("offerPage", offerPage);
         model.addAttribute("index", index);
         model.addAttribute("searchOfferDTO", searchOfferDTO);
-
 
         return "listOffersView";
     }
