@@ -16,7 +16,8 @@ public interface OfferRepository extends CrudRepository<Offer, Long> {
     Page<Offer> findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax, Pageable pageable);
     Page<Offer> findAllByStatusAndOfferTypeInAndBooksInAndPriceBetweenAndTitleIsContaining(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax,String textQuery, Pageable pageable);
 
-    Offer findOfferById(Long id);
     Page<Offer> findDistinctByStatusAndOfferTypeInAndBooksInAndPriceBetween(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax, Pageable pageable);
+    Page<Offer> findDistinctByStatusAndOfferTypeInAndBooksInAndPriceBetweenAndTitleIsContaining(Status status, List<OfferType> offerTypes, List<Book> books, int priceMin, int priceMax,String textQuery, Pageable pageable);
+    Offer findOfferById(Long id);
 
 }

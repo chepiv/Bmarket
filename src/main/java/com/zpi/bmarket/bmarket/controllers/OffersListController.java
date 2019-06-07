@@ -1,6 +1,5 @@
 package com.zpi.bmarket.bmarket.controllers;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.zpi.bmarket.bmarket.DTO.SearchOfferDTO;
 import com.zpi.bmarket.bmarket.domain.*;
@@ -63,13 +62,13 @@ public class OffersListController {
         Pageable pageable = PageRequest.of(index - 1, limit);
         List<Offer> offers;
         if (StringUtils.isEmpty(searchOfferDTO.getTextQuery()))
-            offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetween(
+            offers = offerRepository.findDistinctByStatusAndOfferTypeInAndBooksInAndPriceBetween(
                     getValidStatus(), searchOfferDTO.getOfferTypes(),
                     bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
                     searchOfferDTO.getPriceMin(), searchOfferDTO.getPriceMax(),
                     pageable).getContent();
         else
-            offers = offerRepository.findAllByStatusAndOfferTypeInAndBooksInAndPriceBetweenAndTitleIsContaining(
+            offers = offerRepository.findDistinctByStatusAndOfferTypeInAndBooksInAndPriceBetweenAndTitleIsContaining(
                     getValidStatus(), searchOfferDTO.getOfferTypes(),
                     bookRepository.findAllByBookConditionIn(searchOfferDTO.getConditions()),
                     searchOfferDTO.getPriceMin(), searchOfferDTO.getPriceMax(),
@@ -82,35 +81,45 @@ public class OffersListController {
                             b -> b.getCategory() == searchOfferDTO.getCategory())).
                     collect(Collectors.toList());
         }
-        if(((PageRequest) pageable).previous() == pageable);
+        if (((PageRequest) pageable).previous() == pageable) ;
         pageable = pageable.next();
         return offers;
     }
 
     @GetMapping("/offers")
     public String offerListStart(Model model) {
-        return "redirect:/offers/1";
+        return
+        "redirect:/offers/1?textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
     }
 
     @GetMapping("/offers/{index}")
     public String offerList(Model model
-                            ,@PathVariable("index") int index
-//                            ,@RequestParam(value = "query",required = false) String query
-////                            ,@RequestParam(value = "cat", required = false) int catID
-//                            ,@RequestParam(value = "typeS", required = false) boolean typeS
-//                            ,@RequestParam(value = "typeW", required = false) boolean typeW
-//                            ,@RequestParam(value = "typeF", required = false) boolean typeF
-//                            ,@RequestParam(value = "conN", required = false) boolean conN
-//                            ,@RequestParam(value = "conU", required = false) boolean conU
-//                            ,@RequestParam(value = "priceMin", required = false) int priceMin
-//                            ,@RequestParam(value = "priceMax", required = false) int priceMax
+            , @PathVariable("index") int index
+            , @RequestParam(value = "query", required = false) String query
+            , @RequestParam(value = "category", required = false) Integer catID
+            , @RequestParam(value = "sale", required = false) Boolean typeS
+            , @RequestParam(value = "exchange", required = false) Boolean typeE
+            , @RequestParam(value = "free", required = false) Boolean typeF
+            , @RequestParam(value = "new", required = false) Boolean conN
+            , @RequestParam(value = "used", required = false) Boolean conU
+            , @RequestParam(value = "priceMin", required = false) Integer priceMin
+            , @RequestParam(value = "priceMax", required = false) Integer priceMax
     ) {
         SearchOfferDTO searchOfferDTO = new SearchOfferDTO();
-//        if (!StringUtils.isEmpty(query)) {
-//            searchOfferDTO.setTextQuery(query);
-//        }
+        if (!StringUtils.isEmpty(query)) searchOfferDTO.setTextQuery(query);
+        if (catID != null)
+            searchOfferDTO.setCategory(categoryRepository.findById((long) catID).orElseThrow(() -> new IllegalArgumentException("catid: " + catID)));
+        searchOfferDTO.setSale(typeS != null);
+        searchOfferDTO.setExchange(typeE != null);
+        searchOfferDTO.setFree(typeF != null);
+        searchOfferDTO.setNew(conN != null);
+        searchOfferDTO.setUsed(conU != null);
+        if (priceMin != null)
+            searchOfferDTO.setPriceMin(priceMin);
+        if (priceMax != null)
+            searchOfferDTO.setPriceMax(priceMax);
         List<Offer> offers = getOffersByDTO(searchOfferDTO, index);
-        searchOfferDTO.setPageable(PageRequest.of(index-1,limit));
+        searchOfferDTO.setPageable(PageRequest.of(index - 1, limit));
 
         model.addAttribute("offers", offers);
         model.addAttribute("index", index);
@@ -123,7 +132,7 @@ public class OffersListController {
     @RequestMapping(value = "/offers/{index}", method = RequestMethod.POST)
     public String offerListSearch(Model model, @PathVariable("index") int index, @ModelAttribute SearchOfferDTO searchOfferDTO) {
         List<Offer> offers = getOffersByDTO(searchOfferDTO, index);
-        searchOfferDTO.setPageable(PageRequest.of(index-1,limit));
+        searchOfferDTO.setPageable(PageRequest.of(index - 1, limit));
 
         model.addAttribute("index", index);
         model.addAttribute("offers", offers);

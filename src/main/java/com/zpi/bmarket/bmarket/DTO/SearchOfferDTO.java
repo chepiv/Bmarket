@@ -31,8 +31,8 @@ public class SearchOfferDTO {
     private BookCondition conditionUsed;
 
     //price
-    private int priceMin;
-    private int priceMax;
+    private Integer priceMin;
+    private Integer priceMax;
 
     //sorting
     boolean priceLowHigh;
