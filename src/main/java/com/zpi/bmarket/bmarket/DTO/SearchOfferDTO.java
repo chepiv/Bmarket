@@ -103,4 +103,11 @@ public class SearchOfferDTO {
         return conditions;
     }
 
+    public boolean hasNextSite(int index,long count,int limit){
+        return siteExists(index+1,count,limit);
+    }
+    public boolean siteExists(int whichSite,long count,int limit){
+        return whichSite <= count/limit;
+    }
+
 }

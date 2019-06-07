@@ -17,6 +17,7 @@ import java.util.List;
 public interface BookRepository extends CrudRepository<Book,Long> {
     List<Book> findAllByUserId(Long id);
     List<Book> findAllByBookConditionIn(List<BookCondition> bookCondition);
+    List<Book> findAllByBookConditionInAndCategory(List<BookCondition> bookCondition,Category category);
     List<Book> findAllByOffer(Offer offer);
     List<Book> findAllByCategory(Category category);
 }

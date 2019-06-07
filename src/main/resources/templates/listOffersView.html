@@ -129,7 +129,7 @@
                     <th>Cena</th>
                     </thead>
                     <tbody>
-                    <tr class="offer-row" style="" th:each="offer:${offers}">
+                    <tr class="offer-row" style="" th:each="offer:${offerPage.content}">
                         <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
                         </td>
                         <td style="">
@@ -183,11 +183,11 @@
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="page-item active"><a class="page-link" href="/offers/1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="/offers/2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="/offers/3">3</a></li>
+                        <li th:class="'page-item active'"><a class="page-link" href="/offers/1">1</a></li>
+                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" href="/offers/2">2</a></li>
+                        <li th:class="${3<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" href="/offers/3">3</a></li>
                         <li class="page-item">
-                            <a class="page-link" aria-label="Next" href="/offers/2">
+                            <a th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}" aria-label="Next" href="/offers/2">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -203,9 +203,9 @@
                                                  th:text="${index}-1"></a></li>
                         <li class="page-item active"><a class="page-link" th:href="'/offers/'+${index}"
                                                         th:text="${index}"></a></li>
-                        <li class="page-item"><a class="page-link" th:href="'/offers/'+${index+1}"
+                        <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" th:href="'/offers/'+${index+1}"
                                                  th:text="${index}+1"></a></li>
-                        <li class="page-item">
+                        <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
                             <a class="page-link" aria-label="Next" th:href="'/offers/'+${index+1}">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
