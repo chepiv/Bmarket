@@ -43,7 +43,7 @@ var postBuyOffer = {
     SUCCESS:{
         title: 'Transakcja powiodła się',
         message: 'Zakupiono książki. Znajdą się one na Twoim koncie po tym jak sprzedający potwierdzi odbiór płatności',
-        style: 'none'
+        style: 'success'
     }
 };
 
