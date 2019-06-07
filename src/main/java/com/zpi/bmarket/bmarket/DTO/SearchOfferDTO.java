@@ -46,7 +46,7 @@ public class SearchOfferDTO {
     Category category;
 
     //for pages
-    Pageable pageable;
+    int index = 1;
 
     public SearchOfferDTO() {
         isSale = true;

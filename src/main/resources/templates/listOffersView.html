@@ -6,7 +6,6 @@
     <!--/*/ <th:block th:include="html/head.html :: imports">
         </th:block> /*/-->
 </head>
-<body>
 <!-- CONTENT -->
 
 <nav th:replace="html/header.html :: navigation"></nav>
@@ -18,13 +17,13 @@
 </div>
 
 <div class="container subpage-content">
+    <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
+    <form th:method="get" th:action="@{'/offers/list'}" th:object="${searchOfferDTO}">
     <div>
         <!--form start-->
         <div class="row">
             <!--form left column start-->
             <div class="col-sm-3">
-                <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
-                <form th:method="get" th:action="@{'/offers/'+${index}}" th:object="${searchOfferDTO}">
                     <h5>Filtruj...</h5>
                     <div class="md-form">
                         <label for="search-query">Szukaj...</label>
@@ -117,7 +116,6 @@
                         <input type="text" id="price-max" class="form-control" th:field="*{priceMax}">
                     </div>
                     <button type="submit" class="btn btn-purple btn-book my-4">Filtruj</button>
-                </form>
             </div>
             <!--form left column end-->
             <!--form right column start-->
@@ -130,7 +128,8 @@
                     </thead>
                     <tbody>
                     <tr class="offer-row" style="" th:each="offer:${offerPage.content}">
-                        <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
+                        <td class="image-cell"><!--/*@thymesVar id="offer" type="com.zpi.bmarket.bmarket.domain.Offer"*/-->
+                        <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
                         </td>
                         <td style="">
                             <div class="row">
@@ -177,14 +176,14 @@
         <div class="row mt-35">
             <div class="col">
                 <nav>
-                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="*{searchOfferDTO.pageable.first() == searchOfferDTO.pageable}">
+                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${offerPage.first}">
                         <li class="page-item disabled">
                             <a class="page-link" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li th:class="'page-item active'"><a class="page-link" href="/offers/1">1</a></li>
-                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" href="/offers/2">2</a></li>
+                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><input class="page-link" type="text" th:field="*{index}" th:with="index=2"></li>
                         <li th:class="${3<=offerPage.totalPages?'page-item':'page-item disabled'}"><a class="page-link" href="/offers/3">3</a></li>
                         <li class="page-item">
                             <a th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}" aria-label="Next" href="/offers/2">
@@ -193,7 +192,7 @@
                         </li>
 
                     </ul>
-                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${searchOfferDTO.pageable.first() == searchOfferDTO.pageable}">
+                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${offerPage.first}">
                         <li class="page-item">
                             <a class="page-link" aria-label="Previous" th:href="'/offers/'+${index-1}">
                                 <span aria-hidden="true">&laquo;</span>
@@ -213,9 +212,11 @@
                     </ul>
                 </nav>
             </div>
+
         </div>
-        <!--form end-->
     </div>
+</form>
+        <!--form end-->
 </div>
 
 

@@ -83,12 +83,14 @@ public class OffersListController {
     @GetMapping("/offers")
     public String offerListStart(Model model) {
         return
-                "redirect:/offers/1?textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
+//                "redirect:/offers/list/1?textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
+                "redirect:/offers/list?index=1&textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
     }
 
-    @GetMapping("/offers/{index}")
+    @GetMapping("/offers/list")
     public String offerList(Model model
-            , @PathVariable("index") int index
+//            , @PathVariable("index") int index
+            , @RequestParam(value = "index", required = true) int index
             , @RequestParam(value = "query", required = false) String query
             , @RequestParam(value = "category", required = false) Integer catID
             , @RequestParam(value = "sale", required = false) Boolean typeS
@@ -113,7 +115,6 @@ public class OffersListController {
         if (priceMax != null)
             searchOfferDTO.setPriceMax(priceMax);
         Page<Offer> offerPage = getOffersByDTO(searchOfferDTO, index);
-        searchOfferDTO.setPageable(PageRequest.of(index - 1, limit));
 
         model.addAttribute("offerPage", offerPage);
         model.addAttribute("index", index);
