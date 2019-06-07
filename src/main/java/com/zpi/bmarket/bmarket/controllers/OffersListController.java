@@ -32,7 +32,7 @@ public class OffersListController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    private int limit = 3;
+    private static final int limit = 10;
 
     @ModelAttribute("conditions")
     public List<BookCondition> conditions() {
@@ -85,7 +85,6 @@ public class OffersListController {
         if(((PageRequest) pageable).previous() == pageable);
         pageable = pageable.next();
         return offers;
-
     }
 
     @GetMapping("/offers")

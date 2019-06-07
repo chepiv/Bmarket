@@ -36,6 +36,7 @@
             <br>
             <!-- IMIĘ I NAZWISKO -->
             <div>
+                <!--change to if null show empty-->
                 <h5 th:text="${user.name + ' ' + user.surname}"></h5>
             </div>
         </div>
@@ -63,16 +64,17 @@
                 <li th:each="book : ${user.books}">
                     <!-- OBRAZEK -->
                     <div class="img-container">
-                            <img class="book-cover" th:src="'../files/' + ${book.photoUrl}" >
+                        <img class="book-cover" th:src="'../files/' + ${book.photoUrl}" >
 
                     </div>
                     <!-- TYTUŁ -->
                     <div class="name-container"><h6 class="card-book-title" th:text="${book.title}"></h6></div>
                     <!-- BUTTONY -->
-                    
+
                     <div><form>
                         <input type="hidden" id="delId">
-                        <h6><button class="del-button-link" type="submit" onclick="return confirm('Czy napewno chcesz usunąć książkę?')">usuń</button></h6>
+                        <!--<h6><button th:href="'/postRemoveBookFromAccount/'+${book.id}" class="del-button-link" >usuń</button></h6>-->
+                        <div><h6><a th:href="'/postRemoveBookFromAccount/'+${book.id}">usuń</a> </h6></div>
                     </form></div>
                 </li>
 
@@ -100,7 +102,16 @@
 
         <div class="frame" id="frameTwo" style="overflow: hidden;">
             <ul class="clearfix" style="transform: translateZ(0px) translateX(0px); width: 6840px;">
-                <li th:each="offer : ${offers}">
+
+                <!-- klasa to-accept żeby zmienić styl na do potwierdznia, bez tej klasy nie ma ramki i div.accept-offer ma display:none-->
+                <!-- PRZYKLAD Z RAMKA I PRZYCISKIEM -->
+                <li class="to-accept" th:each="offer : ${offers}" th:class="${offer.status.id == 3?'to-accept':''}">
+
+                    <!--th:if="${offer.status.id == 3}" THEN NIEWIDOCZNE  -->
+                    <div class="accept-offer" th:if="${offer.status.id==3}">
+                        <i class="fas fa-check"></i>&nbsp;&nbsp;<span><a th:href="'/postConfirmBuyOffer/'+${offer.id}">zaakceptuj</a></span>
+                    </div>
+
                     <!-- OBRAZEK -->
                     <div class="img-container">
                         <a th:href="'/offerView/'+${offer.id}">
@@ -108,11 +119,15 @@
                         </a>
                     </div>
                     <!-- TYTUŁ -->
-                    <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}"></h6></div>
+                    <div class="name-container"><h6 class="card-book-title" th:text="${offer.title}">tyyuulul</h6></div>
                     <!-- BUTTONY -->
-                    <div><h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">edytuj</a> | <a href="#">usuń</a></h6></div>
+                    <div>
+                        <h6><a th:href="'/postRemoveOfferFromAccount/'+${offer.id}">usuń</a>
+                        </h6>
+                    </div>
 
                 </li>
+
             </ul>
         </div>
 

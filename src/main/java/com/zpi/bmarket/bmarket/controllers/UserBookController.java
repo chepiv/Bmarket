@@ -75,8 +75,6 @@ public class UserBookController {
             status = PostStatus.DATABASE_ERROR;
             logger.log(Level.WARNING, "Database Error", e);
         }
-
-
         model.addAttribute("status", status);
         return "redirect:/userAccount";
     }
@@ -93,9 +91,10 @@ public class UserBookController {
         if (!file.isEmpty()) {
             String base64Image = file.split(",")[1];
             byte[] bytes = Base64.decodeBase64(base64Image);
-            Path path = Paths.get(UPLOADED_FOLDER,title + String.valueOf(id)+ ".jpg");
+            Path path = Paths.get(UPLOADED_FOLDER,(title + String.valueOf(id)).hashCode()+ ".jpg");
             Files.write(path, bytes);
         }
-        return title + String.valueOf(id)+ ".jpg";
+        return (title + String.valueOf(id)).hashCode()+ ".jpg";
     }
+
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BMarket</title>
+    <!--/*/ <th:block th:include="html/head.html :: imports">
+        </th:block> /*/-->
+</head>
+<body>
+<!-- CONTENT -->
+<nav th:replace="html/header.html :: navigation"></nav>
+<div class="container mt-navigation">
+    <section>
+        <form method="post" th:action="@{/postChangeAddress}" th:object="${userDTO}">
+            <div class="form-group">
+
+                <div class="md-form">
+                    <input type="text" id="form1" class="black-text form-control input-purple" th:value="${user.address.city}" th:field="*{city}">
+                    <label for="form1" class="label-purple active">Miasto: </label>
+                </div>
+                <div class="md-form">
+                    <input type="text" id="form2" class="black-text form-control input-purple" th:value="${user.address.streetAddress}" th:field="*{streetAddress}">
+                    <label for="form2" class="label-purple active">Ulica: </label>
+                </div>
+                <div class="md-form">
+                    <input type="text" id="form3" class="black-text form-control input-purple" th:value="${user.address.zipCode}" th:field="*{zipCode}">
+                    <label for="form3" class="label-purple active">Kod pocztowy: </label>
+                </div>
+            </div>
+            <button class="btn btn-outline-purple" type="submit" value="Zmień">zmień adres</button>
+        </form>
+    </section>
+</div>
+
+<footer th:replace="html/footer.html :: footer"></footer>
+
+<!--/*/ <th:block th:include="html/js.html :: scripts">
+        </th:block> /*/-->
+
+</body>
+</html>
