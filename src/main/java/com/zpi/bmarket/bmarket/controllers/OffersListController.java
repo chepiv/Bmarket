@@ -87,14 +87,12 @@ public class OffersListController {
     public String offerListStart(Model model) {
         return
                 "redirect:/offers/list/1?textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
-//                "redirect:/offers/list?index=1&textQuery=&category=&order-by=on&sale=true&_sale=on&exchange=true&_exchange=on&free=true&_free=on&new=true&_new=on&used=true&_used=on&priceMin=0&priceMax=9999";
     }
 
     @GetMapping("/offers/list/{index}")
     public String offerList(Model model
             , @PathVariable("index") int index
-//            , @RequestParam(value = "index", required = true) int index
-            , @RequestParam(value = "query", required = false) String query
+            , @RequestParam(value = "textQuery", required = false) String query
             , @RequestParam(value = "category", required = false) Integer catID
             , @RequestParam(value = "sale", required = false) Boolean typeS
             , @RequestParam(value = "exchange", required = false) Boolean typeE
