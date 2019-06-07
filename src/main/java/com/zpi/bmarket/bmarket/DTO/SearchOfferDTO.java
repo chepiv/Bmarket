@@ -1,10 +1,12 @@
 package com.zpi.bmarket.bmarket.DTO;
 
 import com.zpi.bmarket.bmarket.domain.BookCondition;
+import com.zpi.bmarket.bmarket.domain.Category;
 import com.zpi.bmarket.bmarket.domain.OfferType;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +31,22 @@ public class SearchOfferDTO {
     private BookCondition conditionUsed;
 
     //price
-    private int priceMin;
-    private int priceMax;
+    private Integer priceMin;
+    private Integer priceMax;
 
     //sorting
     boolean priceLowHigh;
     boolean priceHighLow;
     boolean newestFirst;
+
+    //text query
+    String textQuery;
+
+    //Category
+    Category category;
+
+    //for pages
+    int index = 1;
 
     public SearchOfferDTO() {
         isSale = true;
@@ -72,6 +83,9 @@ public class SearchOfferDTO {
         priceLowHigh = false;
         priceHighLow = false;
         newestFirst = true;
+
+        //all categories
+        category = null;
     }
 
     public List<OfferType> getOfferTypes() {
@@ -87,6 +101,13 @@ public class SearchOfferDTO {
         if (isNew) conditions.add(conditionNew);
         if (isUsed) conditions.add(conditionUsed);
         return conditions;
+    }
+
+    public boolean hasNextSite(int index,long count,int limit){
+        return siteExists(index+1,count,limit);
+    }
+    public boolean siteExists(int whichSite,long count,int limit){
+        return whichSite <= count/limit;
     }
 
 }
