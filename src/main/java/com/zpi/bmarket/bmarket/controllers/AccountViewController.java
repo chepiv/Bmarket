@@ -53,7 +53,7 @@ public class AccountViewController {
                 usersOffers.addAll(allOffers.stream().
                         filter(x -> x.getBooks().stream().
                                 anyMatch(b -> b.getId() == bookId
-                                        && x.getStatus().getId() != 2)).//sprzedana
+                                        && x.getStatus() != null && x.getStatus().getId() != 2)).//sprzedana
                         collect(Collectors.toList()));
             }
             usersOffers = new ArrayList<>(new HashSet<>(usersOffers));
