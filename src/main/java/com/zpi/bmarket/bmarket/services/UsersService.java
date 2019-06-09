@@ -8,7 +8,8 @@ import javax.servlet.http.HttpSession;
 @Service
 public class UsersService {
     public static User getUser(Long id, UserRepository userRepository){
-        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        if(id == null)return null;
+        return userRepository.findById(id).orElse(null);
     }
     public static User getUser(HttpSession session, UserRepository userRepository){
         return getUser(getUserIdFromSession(session),userRepository);

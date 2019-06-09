@@ -37,6 +37,9 @@ public class AccountViewController {
     public String viewAccount(HttpSession session, Model model) {
         User user = UsersService.getUser(session, userRepository);
 
+        if(user == null)
+            return "redirect:/login";
+
         model.addAttribute("user", user);
         List<Offer> allOffers = Lists.newArrayList(offerRepository.findAll());
         List<Book> books = user.getBooks();
@@ -50,7 +53,7 @@ public class AccountViewController {
                 usersOffers.addAll(allOffers.stream().
                         filter(x -> x.getBooks().stream().
                                 anyMatch(b -> b.getId() == bookId
-                                        && x.getStatus().getId() != 2)).//sprzedana
+                                        && x.getStatus() != null && x.getStatus().getId() != 2)).//sprzedana
                         collect(Collectors.toList()));
             }
             usersOffers = new ArrayList<>(new HashSet<>(usersOffers));
@@ -62,7 +65,6 @@ public class AccountViewController {
 
     @GetMapping("/postRemoveBookFromAccount/{id}")
     public String removeBookFromAccount(HttpSession session, Model model, @PathVariable Long id) {
-        User user = UsersService.getUser(session, userRepository);
         //remove book from offer and from user
         Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
         UserAccount.removeBook(book);
@@ -72,8 +74,6 @@ public class AccountViewController {
 
     @GetMapping("/postRemoveOfferFromAccount/{id}")
     public String removeOfferFromAccount(HttpSession session, Model model, @PathVariable Long id) {
-        User user = UsersService.getUser(session, userRepository);
-
         UserAccount.removeBooksFromOffer(id, offerRepository, bookRepository);
 
 

@@ -38,11 +38,11 @@
                                 <!--Body-->
                                 <form th:action="@{/postLogin}" th:object="${login}" method="post" class="register-form">
                                     <div class="md-form">
-                                        <input type="text" id="form1" class="black-text form-control input-purple" th:field="*{username}">
+                                        <input type="text" id="form1" class="black-text form-control input-purple" th:field="*{username}"  minlength="3" required>
                                         <label for="form1" class="label-purple active">Login:</label>
                                     </div>
                                     <div class="md-form">
-                                        <input type="password" id="form2" class="black-text form-control input-purple" th:field="*{password}">
+                                        <input type="password" id="form2" class="black-text form-control input-purple" th:field="*{password}"  minlength="5" required>
                                         <label for="form2" class="label-purple active">Hasło:</label>
                                     </div>
                                     <div class="text-center mt-4">

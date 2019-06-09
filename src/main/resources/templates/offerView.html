@@ -23,26 +23,26 @@
             <h6>Książki w ofercie</h6>
             <table class="offer-list-table" style="">
                 <thead>
-                <th class="image-cell"><h6>Okładka</h6></th>
-                <th><h6>Szczegóły</h6></th>
+                <th class="image-cell col-img"><h6>Okładka</h6></th>
+                <th class="col-det"><h6>Szczegóły</h6></th>
                 </thead>
                 <tbody>
                 <tr class="offer-row" style="" th:each="book : ${offer.books}">
-                    <td class="image-cell"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+book.photoUrl} + ');'"></td>
-                    <td style="">
+                    <td class="image-cell col-img"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+book.photoUrl} + ');'"></td>
+                    <td class="col-det">
                         <!-- TITLE -->
-                        <div class="row">
-                            <h4 th:text="${book.title}"></h4>
+                        <div class="title-row">
+                            <h4 data-toggle="tooltip" th:title="${book.title}" th:text="${book.title}"></h4>
                         </div>
                         <!-- AUTHOR -->
-                        <div class="row">
+                        <div>
                             <span th:text="${book.authors}"></span>
                         </div>
-                        <br>
                         <!-- PUBLISHER -->
-                        <div class="row">
+                        <div>
                             <span th:text="${book.publisher}"></span>
-                        </div></td>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -58,7 +58,8 @@
             <span class="text-offer-details" th:text="${offer.city}"></span>
             <br><br>
             <h6>Cena</h6>
-            <span class="text-offer-price" th:text="${offer.price}"></span>
+            <span th:unless="${offer.offerType.id == 2}" class="text-offer-price" th:text="${offer.price}"></span>
+            <h2 th:if="${offer.offerType.id==2}"><strong><i class="fas fa-exchange-alt"></i></strong></h2>
             <br>
             <h6>Oferta nr <span th:text="${offer.id}"></span></h6>
         </div>

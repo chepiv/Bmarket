@@ -9,57 +9,91 @@
 <body>
 <!-- CONTENT -->
 <nav th:replace="html/header.html :: navigation"></nav>
-<div class="container mt-navigation">
-    <h1>Podsumowanie transakcji</h1>
-    <!-- <form th:action="@{/postBuyBook}" th:object="${offer}" method="post" class="register-form"> -->
-
-                <h4>Oferta</h4>
-                <div>
-                    <p th:text="'Tytuł oferty: ' + ${offer.title}"></p>
-                    <p th:text="'Opis: ' + ${offer.description}"></p>
-                    <p th:text="'Cena: ' + ${offer.price}"></p>
-                    <p th:text="'Miasto: ' + ${offer.city}"></p>
-                    <p>Książki:</p>
-                    <table th:each="book : ${offer.books}">
-                        <tr>
-                            <td><span th:text="${book.title}"> Tytuł </span></td>
-                        </tr>
-                        <tr>
-                            <td><span th:text="${book.authors}"> Autor </span></td>
-                        </tr>
-                        <tr>
-                            <td><span th:text="${book.publisher}"> Wydawnictwo </span></td>
-                        </tr>
-                        <tr>
-                            <td><span th:text="${book.getBookCondition()}"> Stan książki </span></td>
-                        </tr>
-                    </table>
-                </div>
-
-
-                    <h4>Sprzedający</h4>
-
-                    <div>
-                        <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
-                        <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
-                        <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
-                    </div>
-        <div><h6><a th:href="'/postBuyOffer/'+${offer.id}">Potwierdź</a></h6></div>
-                <!--
-                   <div><h6><a th:href="'/postBuyBook/'+${offer.id}">Potwierdź</a></h6></div>
-
-
-
-        <div class="text-center mt-4">
-            <button class="btn btn-purple" type="submit" value="accept">Potwierdź</button>
-        </div>
-    <!-- </form> -->
-     <footer th:replace="html/footer.html :: footer"></footer>
-
-
-     <!--/*/ <th:block th:include="html/js.html :: scripts">
-             </th:block> /*/-->
-
+<div class="subpage-header">
+    <div class="container">
+        <h2>Potwierdzenie transakcji</h2>
+    </div>
 </div>
+
+<div class="container summary">
+    <br>
+    <div class="row" style="margin-left: -3px;">
+        <h4><p th:text="${offer.title}">Tyyulululu</p></h4>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <h5>Książki:</h5>
+            <!--
+            <table th:each="book : ${offer.books}">
+                <thead>
+                    <th>Tytuł</th>
+                    <th>Tytuł</th>
+                    <th>Tytuł</th>
+                    <th>Tytuł</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span th:text="${book.title}"> Tytuł </span></td>
+                    </tr>
+                    <tr>
+                        <td><span th:text="${book.authors}"> Autor </span></td>
+                    </tr>
+                    <tr>
+                        <td><span th:text="${book.publisher}"> Wydawnictwo </span></td>
+                    </tr>
+                    <tr>
+                        <td><span th:text="${book.getBookCondition()}"> Stan książki </span></td>
+                    </tr>
+                </tbody>
+            </table>
+            -->
+            <ol class="books-to-buy-list">
+                <table>
+                    <tr th:each="book : ${offer.books}">
+                    <td><li></li></td>
+                    <td>
+                        <div th:text="${book.title}"></div>
+                        <div th:text="${book.authors}"></div>
+                        <div th:text="${book.publisher}"></div>
+                        <div th:text="${book.getBookCondition()}"></div>
+                    </td>
+                    </tr>
+                </table>
+            </ol>
+
+            <h5>Opis oferty</h5>
+            <p th:text="${offer.description}">gdfgdf</p>
+            <h5>Lokalizacja</h5>
+            <p th:text="${offer.city}">gfdgdf</p>
+            <h5>Cena</h5>
+            <p class="text-summary-price" th:text="${offer.price}">gfdgdf</p>
+        </div>
+
+        <div class="col-md-5">
+            <h5>Sprzedający</h5>
+            <div>
+                <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
+                <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
+                <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-35">
+        <div class="col text-center">
+            <a th:href="'/postBuyOffer/'+${offer.id}"><button class="btn btn-purple btn-book loading-icon">POTWIERDŹ</button></a>
+            <p class="info">Potwierdzenie transakcji wiąże się z obowiązkiem zakupu</p>
+        </div>
+    </div>
+    <br><br><br><br>
+</div>
+
+ <footer th:replace="html/footer.html :: footer"></footer>
+
+
+ <!--/*/ <th:block th:include="html/js.html :: scripts">
+         </th:block> /*/-->
+
+
 </body>
 </html>
