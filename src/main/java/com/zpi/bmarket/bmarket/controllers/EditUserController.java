@@ -6,6 +6,7 @@ import com.zpi.bmarket.bmarket.domain.Address;
 import com.zpi.bmarket.bmarket.domain.User;
 import com.zpi.bmarket.bmarket.repositories.AddressRepository;
 import com.zpi.bmarket.bmarket.repositories.UserRepository;
+import com.zpi.bmarket.bmarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -41,8 +42,9 @@ public class EditUserController {
     @GetMapping("/userEdit")
     public String userEdit(HttpSession session, Model model) {
 
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
         UserDTO userDTO = new UserDTO();
         userDTO.getCurrentDataUser(user);
 
@@ -56,8 +58,9 @@ public class EditUserController {
     public String postUserEdit(HttpSession session, UserDTO userDTO, Model model) {
 
         PostStatus status = PostStatus.ERROR;
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
 
         try {
             userDTO.setNameSurnamePhoneAvatar(user);
@@ -78,8 +81,9 @@ public class EditUserController {
     @GetMapping("/changePassword")
     public String changePassword(HttpSession session, Model model) {
 
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
         UserDTO userDTO = new UserDTO();
         userDTO.getCurrentDataUser(user);
 
@@ -118,8 +122,9 @@ public class EditUserController {
     @GetMapping("/changeAddress")
     public String changeaddress(HttpSession session, Model model) {
 
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
         UserDTO userDTO = new UserDTO();
         userDTO.getCurrentDataUser(user);
         userDTO.setAddressString(user.getAddress());
@@ -133,9 +138,9 @@ public class EditUserController {
 
     @RequestMapping(value = "/postChangeAddress", method = RequestMethod.POST)
     public String postChangeAddress(Model model, UserDTO userDTO, HttpSession session) {
-        Long id = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
-
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
         PostStatus status = PostStatus.ERROR;
         try {
             if (addressRepository.existsByCityAndAndStreetAddressAndZipCode(userDTO.getCity(), userDTO.getStreetAddress(), userDTO.getZipCode())) {

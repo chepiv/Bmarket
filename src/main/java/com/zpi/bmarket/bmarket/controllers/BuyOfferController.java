@@ -32,7 +32,8 @@ public class BuyOfferController {
     public String buyBook(HttpSession session, Model model, @PathVariable Long offerId) {
 
         User buyer = UsersService.getUser(session,userRepository);
-
+        if(buyer == null)
+            return "redirect:/login";
         //kupujący, oferta, sprzedający
         //wyświetlić dane oferty i sprzedającego
         //zmienić typ oferty i powiadomić sprzedającego o kupnie
@@ -55,6 +56,8 @@ public class BuyOfferController {
         PostStatus status = PostStatus.ERROR;
 
         User buyer = UsersService.getUser(session,userRepository);
+        if(buyer == null)
+            return "redirect:/login";
         Offer offer = offerRepository.findById(offerId).orElseThrow(() -> new IllegalArgumentException("id: " + offerId));
 
         Long statusID = 3L;//w trakcie
@@ -64,15 +67,6 @@ public class BuyOfferController {
         status = PostStatus.SUCCESS;
 
         model.addAttribute("status", status);
-
-        //alert używając alertManager.js
-        //trzeba w RedirectAttributes podać skąd przekierowanie i jaki status
-        //dostępny na każdej podstronie
-        //te 2 atrybuty wypełniają pola ukrytego div (w html/js.html), resztę robi skrypt
-        //identycznie działają alerty przy logowaniu
-
-        //TODO: test alerts
-        //nie moge przetestowac bo wszystkie oferty są vhyba bez sprzedającego i dostaje errory na buyOffer
 
         ra.addFlashAttribute("redirectFrom", "postBuyOffer");
         ra.addFlashAttribute("status", status);

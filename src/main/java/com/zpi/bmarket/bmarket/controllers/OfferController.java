@@ -39,7 +39,8 @@ public class OfferController {
 
         AddOfferDTO addOfferDTO = new AddOfferDTO();
         User user = UsersService.getUser(session,userRepository);
-//        List<Book> books = bookRepository.findAllByUserId(id);
+        if(user == null)
+            return "redirect:/login";
 
         model.addAttribute("addOfferDTO", addOfferDTO);
         model.addAttribute("offerTypes", offerTypeRepository.findAll());
@@ -53,9 +54,9 @@ public class OfferController {
     public String postAddOffer(@ModelAttribute AddOfferDTO offerDTO, Model model, HttpSession session) {
 
         PostStatus status = PostStatus.ERROR;
-        Long id = (Long) session.getAttribute("userId");
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: " + id));
-
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
         Long statusId = 1L;
         offerDTO.setStatus(statusRepository.findById(statusId).orElseThrow(() -> new IllegalArgumentException("id: " + statusId)));  // TODO: jakie statusy - ustawić że oferta jest aktywna
         offerDTO.setPublishDate(new Date());
@@ -89,8 +90,9 @@ public class OfferController {
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid offer Id:" + id));
 
-        Long userId = ((Long) session.getAttribute("userId")).longValue();
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user Id: " + userId));
+        User user = UsersService.getUser(session,userRepository);
+        if(user == null)
+            return "redirect:/login";
 
         model.addAttribute("offer", offer);
         model.addAttribute("userBooks", user.getBooks());
