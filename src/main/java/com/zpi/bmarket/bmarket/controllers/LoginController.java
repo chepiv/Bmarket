@@ -53,10 +53,12 @@ public class LoginController {
     }
 
     @GetMapping(value = "/logout")
-    public String logout(Model model, HttpSession session){
+    public String logout(Model model, HttpSession session, RedirectAttributes ra){
         session.removeAttribute("userId");
         session.invalidate();
-        return "logout";
+        ra.addFlashAttribute("redirectFrom", "postLogout");
+        return "redirect:/";
+        //return "logout";
     }
 
 }
