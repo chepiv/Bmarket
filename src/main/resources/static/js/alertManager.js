@@ -68,6 +68,11 @@ else if(type == "postBuyOffer"){
     message = postBuyOffer[data]['message'];
     style = postBuyOffer[data]['style'];
 }
+else if(type == "postLogout"){
+    title = 'Wylogowano';
+    message = 'Pomyślnie wylogowano z serwisu';
+    style = 'success';
+}
 if(title != undefined) {
     if (style == "warning" || style == "error" || style == "success") {
         let alert_id = 'alert';//+alerts.length.toString();
