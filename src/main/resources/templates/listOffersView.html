@@ -19,11 +19,11 @@
 <div class="container subpage-content">
     <!--/*@thymesVar id="searchOfferDTO" type="com.zpi.bmarket.bmarket.DTO.SearchOfferDTO"*/-->
     <form th:method="get" th:action="@{'/offers/list/'+${offerPage.number+1}}" th:object="${searchOfferDTO}">
-    <div>
-        <!--form start-->
-        <div class="row">
-            <!--form left column start-->
-            <div class="col-sm-3">
+        <div>
+            <!--form start-->
+            <div class="row">
+                <!--form left column start-->
+                <div class="col-sm-3">
                     <h5>Filtruj...</h5>
                     <div class="md-form">
                         <label for="search-query">Szukaj...</label>
@@ -109,125 +109,126 @@
                     </div>
                     <div class="md-form">
                         <label for="price-min">Cena od</label>
-                        <input type="text" id="price-min" class="form-control" th:field="*{priceMin}">
+                        <input type="number" id="price-min" class="form-control" th:field="*{priceMin}" min="0" max="9999.99" step="0.01" >
                     </div>
                     <div class="md-form">
                         <label for="price-max">Cena do</label>
-                        <input type="text" id="price-max" class="form-control" th:field="*{priceMax}">
+                        <input type="number" id="price-max" class="form-control" th:field="*{priceMax}" min="0" max="9999.99" step="0.01" >
                     </div>
                     <button type="submit" class="btn btn-purple btn-book my-4">Filtruj</button>
-            </div>
-            <!--form left column end-->
-            <!--form right column start-->
-            <div class="col-sm-9">
-                <table class="offer-list-table" style="">
-                    <thead>
-                    <th class="image-cell">Okładka</th>
-                    <th>Szczegóły</th>
-                    <th>Cena</th>
-                    </thead>
-                    <tbody>
-                    <tr class="offer-row" style="" th:each="offer:${offerPage.content}">
-                        <td class="image-cell"><!--/*@thymesVar id="offer" type="com.zpi.bmarket.bmarket.domain.Offer"*/-->
-                        <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
-                        </td>
-                        <td style="">
+                </div>
+                <!--form left column end-->
+                <!--form right column start-->
+                <div class="col-sm-9">
+                    <table class="offer-list-table" style="">
+                        <thead>
+                        <th class="image-cell col-img">Okładka</th>
+                        <th class="col-det">Szczegóły</th>
+                        <th class="col-pri">Cena</th>
+                        </thead>
+                        <tbody>
+                        <tr class="offer-row" style="" th:each="offer:${offerPage.content}">
+                            <td class="image-cell"><!--/*@thymesVar id="offer" type="com.zpi.bmarket.bmarket.domain.Offer"*/-->
+                                <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
+                            </td>
+                            <td class="col-det cell-details">
+                                <div>
+                                    <a th:href="${'../offerView/' + offer.id}"><h4 th:text="${offer.title}"><strong></strong></h4></a>
+                                </div>
+                                <div><span th:text="${offer.books[0].authors}"></span>
+                                </div>
+                                <div><span th:text="${offer.books[0].publisher}"></span>
+                                </div>
+                            </td>
+                            <td class="col-pri"><h2 th:text="${offer.price} + zł"></h2></td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                    <!--
+                    <div class="row book-entity" th:each="offer:${offers}">
+                        <div class="col col-auto">
+                            <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
+                        </div>
+                        <div class="col align-self-center">
                             <div class="row">
-                                <a th:href="${'../offerView/' + offer.id}"><h4 th:text="${offer.title}"><strong></strong></h4></a>
+                                <h4 th:text="${offer.title}"><strong></strong></h4>
                             </div>
-                            <div class="row"><span th:text="${offer.books[0].authors}"></span>
+                            <div class="row" th:text="${offer.books[0].authors}">
                             </div>
                             <br>
-                            <div class="row"><span th:text="${offer.books[0].publisher}"></span>
+                            <div class="row" th:text="${offer.books[0].publisher}">
                             </div>
-                        </td>
-                        <td style=""><h2 th:text="${offer.price} + zł"><strong></strong></h2></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!--
-                <div class="row book-entity" th:each="offer:${offers}">
-                    <div class="col col-auto">
-                        <img class="book-cover" src="https://www.engine-house.co.uk/wp-content/uploads/2016/03/MrMercedes_2.gif">
-                    </div>
-                    <div class="col align-self-center">
-                        <div class="row">
-                            <h4 th:text="${offer.title}"><strong></strong></h4>
                         </div>
-                        <div class="row" th:text="${offer.books[0].authors}">
-                        </div>
-                        <br>
-                        <div class="row" th:text="${offer.books[0].publisher}">
+                        <div class="col col-auto align-self-center pos-ab-rg">
+                            <h2 th:text="${offer.price} + zł"><strong></strong></h2>
                         </div>
                     </div>
-                    <div class="col col-auto align-self-center pos-ab-rg">
-                        <h2 th:text="${offer.price} + zł"><strong></strong></h2>
+
+                        <div class="col col-auto align-self-center pos-ab-rg">
+                            <h2><strong><i class="fas fa-exchange-alt"></i></strong></h2>
+                        </div>
                     </div>
+                   -->
+                    <!--form right column end-->
+                </div>
+            </div>
+            <div class="row mt-35">
+                <div class="col">
+                    <nav>
+                        <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${offerPage.first}">
+                            <li class="page-item disabled">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li th:class="'page-item active'"><button class="page-link" type="submit" th:formaction="'/offers/list/2'">1</button></li>
+                            <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><button class="page-link" type="submit" th:formaction="'/offers/list/2'">2</button></li>
+                            <li th:class="${3<=offerPage.totalPages?'page-item':'page-item disabled'}"><button class="page-link" type="submit" th:formaction="'/offers/list/3'">3</button></li>
+                            <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}">
+                                <button class="page-link" aria-label="Next" type="submit" th:formaction="'/offers/list/2'">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </button>
+                            </li>
+
+                        </ul>
+                        <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${offerPage.first}">
+                            <!--previous-->
+                            <li class="page-item">
+                                <button class="page-link" aria-label="Previous" type="submit" th:formaction="'/offers/list/'+${index-1}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </button>
+                            </li>
+                            <!--index - 1-->
+                            <li class="page-item">
+                                <button class="page-link" type="submit" th:formaction="'/offers/list/'+${index-1}"
+                                        th:text="${index}-1"></button>
+                            </li>
+                            <!--index(current)-->
+                            <li class="page-item active"><button class="page-link" type="submit" th:formaction="'/offers/list/'+${index}"
+                                                                 th:text="${index}"></button>
+                            </li>
+                            <!--index + 1-->
+                            <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
+                                <button class="page-link" type="submit" th:formaction="'/offers/list/'+${index+1}"
+                                        th:text="${index}+1">
+                                </button>
+                            </li>
+                            <!--next-->
+                            <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
+                                <button class="page-link" aria-label="Next" type="submit" th:formaction="'/offers/list/'+${index+1}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
 
-                    <div class="col col-auto align-self-center pos-ab-rg">
-                        <h2><strong><i class="fas fa-exchange-alt"></i></strong></h2>
-                    </div>
-                </div>
-               -->
-                <!--form right column end-->
             </div>
         </div>
-        <div class="row mt-35">
-            <div class="col">
-                <nav>
-                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:if="${offerPage.first}">
-                        <li class="page-item disabled">
-                            <a class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li th:class="'page-item active'"><button class="page-link" type="submit" th:formaction="'/offers/list/2'">1</button></li>
-                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}"><button class="page-link" type="submit" th:formaction="'/offers/list/2'">2</button></li>
-                        <li th:class="${3<=offerPage.totalPages?'page-item':'page-item disabled'}"><button class="page-link" type="submit" th:formaction="'/offers/list/3'">3</button></li>
-                        <li th:class="${2<=offerPage.totalPages?'page-item':'page-item disabled'}">
-                            <button class="page-link" aria-label="Next" type="submit" th:formaction="'/offers/list/2'">
-                                <span aria-hidden="true">&raquo;</span>
-                            </button>
-                        </li>
-
-                    </ul>
-                    <ul class="pagination pg-blue justify-content-center pagination-lg" th:unless="${offerPage.first}">
-                        <!--previous-->
-                        <li class="page-item">
-                            <button class="page-link" aria-label="Previous" type="submit" th:formaction="'/offers/list/'+${index-1}">
-                                <span aria-hidden="true">&laquo;</span>
-                            </button>
-                        </li>
-                        <!--index - 1-->
-                        <li class="page-item">
-                            <button class="page-link" type="submit" th:formaction="'/offers/list/'+${index-1}"
-                                    th:text="${index}-1"></button>
-                        </li>
-                        <!--index(current)-->
-                        <li class="page-item active"><button class="page-link" type="submit" th:formaction="'/offers/list/'+${index}"
-                                    th:text="${index}"></button>
-                        </li>
-                        <!--index + 1-->
-                        <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
-                            <button class="page-link" type="submit" th:formaction="'/offers/list/'+${index+1}"
-                                    th:text="${index}+1">
-                            </button>
-                        </li>
-                        <!--next-->
-                        <li th:class="${index+1<=offerPage.totalPages?'page-item':'page-item disabled'}">
-                            <button class="page-link" aria-label="Next" type="submit" th:formaction="'/offers/list/'+${index+1}">
-                                <span aria-hidden="true">&raquo;</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-        </div>
-    </div>
-</form>
-        <!--form end-->
+    </form>
+    <!--form end-->
 </div>
 
 

@@ -68,7 +68,7 @@
                     <!--title-->
                     <div class="md-form">
                         <label for="title">Tytuł</label>
-                        <input type="text" id="title" class="form-control" th:field="*{title}">
+                        <input type="text" id="title" class="form-control" th:field="*{title}" required>
                     </div>
                     <!--author-->
                     <div class="md-form">
@@ -125,7 +125,7 @@
                         <div class="col col-auto">
                             <span class="">Stan</span>
                         </div>
-                        <div class="col">
+                        <div class="col" id="conditions-radio">
                             <div class="custom-control custom-radio" th:each="condition : ${conditions}">
                                 <input type="radio" class="custom-control-input" th:id="${condition.id}" th:field="*{bookCondition}" th:value="${condition.id}"  name="condition">
                                 <label class="custom-control-label" th:for="${condition.id}" th:text="${condition.value}"></label>
@@ -143,7 +143,7 @@
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <button class="btn btn-purple btn-book my-4" type="submit">Dodaj książkę</button>
+                    <button class="btn btn-purple btn-book my-4 loading-icon" type="submit">Dodaj książkę</button>
                 </div>
             </div>
         </form>
@@ -208,6 +208,11 @@
         readURL(this);
     });
 
+</script>
+
+
+<script type="text/javascript">
+    $("#1").attr('checked', true);
 </script>
 
 </body>
