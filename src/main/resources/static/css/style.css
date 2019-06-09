@@ -421,7 +421,7 @@ footer {
 .books-to-buy-list table tr div{
     margin-left: 10px;
     overflow: hidden;
-    white-space: normal;
+    word-break: break-word;
 }
 
 .books-to-buy-list table tr:first-child div:first-child{

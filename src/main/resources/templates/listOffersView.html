@@ -122,34 +122,33 @@
             <div class="col-sm-9">
                 <table class="offer-list-table" style="">
                     <thead>
-                    <th class="image-cell">Okładka</th>
-                    <th>Szczegóły</th>
-                    <th>Cena</th>
+                    <th class="image-cell col-img">Okładka</th>
+                    <th class="col-det">Szczegóły</th>
+                    <th class="col-pri">Cena</th>
                     </thead>
                     <tbody>
-                    <!--/*@thymesVar id="offer" type="com.zpi.bmarket.bmarket.domain.Offer"*/-->
-                    <tr class="offer-row" style="" th:each="offer:${offerPage.content}" th:unless="${offerPage.isEmpty()}">
-                        <td class="image-cell">
-                        <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
+                    <tr class="offer-row" style="" th:each="offer:${offerPage.content}">
+                        <td class="image-cell"><!--/*@thymesVar id="offer" type="com.zpi.bmarket.bmarket.domain.Offer"*/-->
+                            <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
                         </td>
-                        <td style="">
-                            <div class="row">
-                                <a th:href="${'/offerView/' + offer.id}"><h4 th:text="${offer.title}"><strong></strong></h4></a>
+                        <td class="col-det cell-details">
+                            <div class="title-row">
+                                <a data-toggle="tooltip" th:title="${offer.title}" th:href="${'../offerView/' + offer.id}"><h4 th:text="${offer.title}"><strong></strong></h4></a>
                             </div>
-                            <div class="row"><span th:text="${offer.books[0].authors}"></span>
+                            <div><span th:text="${offer.books[0].authors}"></span>
                             </div>
-                            <br>
-                            <div class="row"><span th:text="${offer.books[0].publisher}"></span>
+                            <div><span th:text="${offer.books[0].publisher}"></span>
                             </div>
                         </td>
-                        <td style="">
+                        <td class="col-pri">
                             <h2 th:unless="${offer.offerType.id==2}" th:text="${offer.price} + zł"><strong></strong></h2>
-
                             <h2 th:if="${offer.offerType.id==2}"><strong><i class="fas fa-exchange-alt"></i></strong></h2>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+
                 <!--
                 <div class="row book-entity" th:each="offer:${offers}">
                     <div class="col col-auto">
