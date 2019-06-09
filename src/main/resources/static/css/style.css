@@ -437,6 +437,22 @@ p.info{
     color: gray;
 }
 
+.empty-info{
+    display: none;
+}
+
+.empty-wrap .frame{
+    display: none;
+}
+
+.empty-wrap .pages{
+    display: none;
+}
+
+.empty-wrap .empty-info{
+    display: block;
+}
+
 
 
 .book-cover {
