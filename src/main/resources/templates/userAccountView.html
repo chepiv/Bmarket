@@ -164,7 +164,15 @@
         }
     });
 
-    
+
+    $( document ).ready(function() {
+        if ( $('.book-wrap div ul li').length < 1 ) {
+            $('.book-wrap').addClass('empty-wrap');
+        }
+        if ( $('.offer-wrap div ul li').length < 1 ) {
+            $('.offer-wrap').addClass('empty-wrap');
+        }
+    });
 </script>
 <script type="text/javascript" src="/js/sly.min.js"></script>
 <script type="text/javascript" src="/js/frameController.js"></script>
