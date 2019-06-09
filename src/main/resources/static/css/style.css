@@ -453,7 +453,9 @@ p.info{
     display: block;
 }
 
-
+.tooltip-inner {
+    white-space:pre-wrap;
+}
 
 .book-cover {
     width: 110px;

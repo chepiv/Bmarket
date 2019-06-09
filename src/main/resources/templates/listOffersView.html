@@ -132,8 +132,8 @@
                                 <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
                             </td>
                             <td class="col-det cell-details">
-                                <div>
-                                    <a th:href="${'../offerView/' + offer.id}"><h4 th:text="${offer.title}"><strong></strong></h4></a>
+                                <div class="title-row">
+                                    <a data-toggle="tooltip" th:title="${offer.title}" th:href="${'../offerView/' + offer.id}"><h4 th:text="${offer.title}"><strong></strong></h4></a>
                                 </div>
                                 <div><span th:text="${offer.books[0].authors}"></span>
                                 </div>

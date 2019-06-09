@@ -31,8 +31,8 @@
                     <td class="image-cell col-img"><img class="book-cover" th:style="'background-image:url(' + ${'../files/'+book.photoUrl} + ');'"></td>
                     <td class="col-det">
                         <!-- TITLE -->
-                        <div>
-                            <h4 th:text="${book.title}"></h4>
+                        <div class="title-row">
+                            <h4 data-toggle="tooltip" th:title="${book.title}" th:text="${book.title}"></h4>
                         </div>
                         <!-- AUTHOR -->
                         <div>
