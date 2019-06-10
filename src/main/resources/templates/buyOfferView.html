@@ -55,7 +55,7 @@
                         <div th:text="${book.title}"></div>
                         <div th:text="${book.authors}"></div>
                         <div th:text="${book.publisher}"></div>
-                        <div th:text="${book.getBookCondition()}"></div>
+                        <div th:text="${book.bookCondition.value}"></div>
                     </td>
                     </tr>
                 </table>
@@ -74,7 +74,8 @@
             <div>
                 <p th:text="'Imię i nazwisko: ' + ${seller.name} + ' ' + ${seller.surname}"></p>
                 <p th:text="'Numer telefonu: ' + ${seller.phoneNumber}"></p>
-                <p>Numer konta: 345436464 (hardcode - dodać pole do bazy)</p>
+                <p th:text="'Email: ' + ${seller.email}"></p>
+                <p>Numer konta: 345436464 </p>
             </div>
         </div>
     </div>
