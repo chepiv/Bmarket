@@ -37,7 +37,7 @@
             <!-- IMIĘ I NAZWISKO -->
             <div>
                 <!--change to if null show empty-->
-                <h5 th:text="${user.name + ' ' + user.surname}"></h5>
+                <h5 th:text="${user.login}"></h5>
             </div>
         </div>
         <div class="col-sm-2">
@@ -45,7 +45,7 @@
 
             <!-- BUTTON EDYCJI PROFILU -->
             <div class="text-center">
-                <a href="/userEdit"><button class="btn btn-purple">edytuj profil</button></a>
+                <a href="#"><button class="btn btn-purple" disabled>edytuj profil</button></a>
             </div>
         </div>
     </div>
