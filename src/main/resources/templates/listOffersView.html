@@ -129,7 +129,7 @@
                     <tbody>
                     <tr class="offer-row" style="" th:each="offer:${offerPage.content}">
                         <td class="image-cell"><!--/*@thymesVar id="offer" type="com.zpi.bmarket.bmarket.domain.Offer"*/-->
-                            <img class="book-cover" th:style="'background-image:url(' + ${'../files/'+offer.books[0].photoUrl} + ');'">
+                            <img class="book-cover" th:style="'background-image:url(' + ${'/files/'+offer.books[0].photoUrl} + ');'">
                         </td>
                         <td class="col-det cell-details">
                             <div class="title-row">
