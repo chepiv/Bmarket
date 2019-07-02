@@ -1,4 +1,4 @@
-# Bmarket
+![Bmarket](https://github.com/chepiv/Bmarket/blob/master/src/main/resources/static/img/logo_final.png)
 ##### A web based application for exchanging, selling and buying used books.
 ##### Application is available here: [156.17.130.129:8080]()
 #### Technology stack:
