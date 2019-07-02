@@ -16,7 +16,9 @@
 * Personal account
 [![Web-1920-10.png](https://i.postimg.cc/0QxmqVrS/Web-1920-10.png)](https://postimg.cc/nsRM4Y4V)
 * Offers list
+
 [![Web-1920-11.png](https://i.postimg.cc/cCCvs2Wv/Web-1920-11.png)](https://postimg.cc/tn0qkrYb)
+
 * Book view
 [![Web-1920-12.png](https://i.postimg.cc/c1vYGtLX/Web-1920-12.png)](https://postimg.cc/SjpjWs8M)
 * Add book view
